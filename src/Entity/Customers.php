@@ -38,13 +38,13 @@ class Customers
     #[ORM\Column(length: 255)]
     private ?string $social_reason = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $customer_note = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updateAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'customers')]
@@ -156,7 +156,7 @@ class Customers
         return $this->customer_note;
     }
 
-    public function setCustomerNote(string $customer_note): self
+    public function setCustomerNote(?string $customer_note): self
     {
         $this->customer_note = $customer_note;
 
@@ -180,7 +180,7 @@ class Customers
         return $this->updateAt;
     }
 
-    public function setUpdateAt(\DateTimeInterface $updateAt): self
+    public function setUpdateAt(?\DateTimeInterface $updateAt): self
     {
         $this->updateAt = $updateAt;
 
@@ -197,5 +197,10 @@ class Customers
         $this->id_user = $id_user;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
     }
 }

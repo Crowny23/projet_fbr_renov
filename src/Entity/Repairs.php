@@ -54,10 +54,16 @@ class Repairs
     #[ORM\OneToMany(mappedBy: 'repair', targetEntity: RepairsImages::class)]
     private Collection $image_repair;
 
+    public function __toString()
+    {
+        return $this->name_repair;
+    }
+
     public function __construct()
     {
         $this->rental_repair = new ArrayCollection();
         $this->image_repair = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

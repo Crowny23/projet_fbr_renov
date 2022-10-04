@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RepairsImages index{% endblock %}
+
+{% block body %}
+    <h1>RepairsImages index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom du dépannage</th>
+                <th>Non d'image</th>
+                <th>Taille</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for repairs_image in repairs_images %}
+            <tr>
+                <td>{{ repairs_image.repair }}</td>
+                <td>{{ repairs_image.imageRepairsImages }}</td>
+                <td>{{ repairs_image.imageSize }} ko</td>
+                <td><img src="{{ vich_uploader_asset(repairs_image) }}" alt="" width="200"></td>
+                <td>
+                    <a href="{{ path('app_repairs_images_show', {'id': repairs_image.id}) }}">voir</a>
+                    <a href="{{ path('app_repairs_images_edit', {'id': repairs_image.id}) }}">editer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucune image</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_repairs_images_new') }}">Ajouter une image</a>
+{% endblock %}
