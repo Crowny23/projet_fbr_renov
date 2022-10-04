@@ -54,6 +54,10 @@ class Repairs
     #[ORM\OneToMany(mappedBy: 'repair', targetEntity: RepairsImages::class)]
     private Collection $image_repair;
 
+    #[ORM\ManyToOne(inversedBy: 'repairs')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Customers $client = null;
+
     public function __construct()
     {
         $this->rental_repair = new ArrayCollection();
@@ -253,6 +257,18 @@ class Repairs
                 $imageRepair->setRepair(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getClient(): ?Customers
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Customers $client): self
+    {
+        $this->client = $client;
 
         return $this;
     }
