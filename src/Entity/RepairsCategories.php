@@ -63,7 +63,7 @@ class RepairsCategories
         return $this;
     }
 
-    public function __construc()
+    public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
     }

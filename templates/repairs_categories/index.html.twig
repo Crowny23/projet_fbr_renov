@@ -3,37 +3,31 @@
 {% block title %}RepairsCategories index{% endblock %}
 
 {% block body %}
-    <h1>RepairsCategories index</h1>
+    <h1>Catégories des dépannages</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name_repairs_category</th>
-                <th>Created_at</th>
-                <th>Updated_at</th>
+                <th>Categorie</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for repairs_category in repairs_categories %}
             <tr>
-                <td>{{ repairs_category.id }}</td>
                 <td>{{ repairs_category.nameRepairsCategory }}</td>
-                <td>{{ repairs_category.createdAt ? repairs_category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ repairs_category.updatedAt ? repairs_category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_repairs_categories_show', {'id': repairs_category.id}) }}">show</a>
-                    <a href="{{ path('app_repairs_categories_edit', {'id': repairs_category.id}) }}">edit</a>
+                    <a href="{{ path('app_repairs_categories_show', {'id': repairs_category.id}) }}">Voir</a>
+                    <a href="{{ path('app_repairs_categories_edit', {'id': repairs_category.id}) }}">Éditer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucune catégorie</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_repairs_categories_new') }}">Create new</a>
+    <a href="{{ path('app_repairs_categories_new') }}">Ajouter une catégorie</a>
 {% endblock %}

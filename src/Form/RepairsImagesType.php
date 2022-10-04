@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Repairs;
 use App\Entity\RepairsImages;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +16,10 @@ class RepairsImagesType extends AbstractType
     {
         $builder
             ->add('file', FileType::class, ['label' => 'Image'])
-            ->add('repair')
+            ->add('repair', EntityType::class, [
+                'class' => Repairs::class,
+                'label' => 'Dépannage'
+            ])
         ;
     }
 
