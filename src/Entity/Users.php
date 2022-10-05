@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[ORM\HasLifecycleCallbacks]
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -139,6 +140,12 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->createdAt = new \DateTime();
         $this->customers = new ArrayCollection();
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTime();
     }
 
     /**

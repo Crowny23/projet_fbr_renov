@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Repairs{% endblock %}
+
+{% block body %}
+    <h1>Repairs</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ repair.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom dépannage</th>
+                <td>{{ repair.nameRepair }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ repair.cityRepair }}</td>
+            </tr>
+            <tr>
+                <th>Code postal</th>
+                <td>{{ repair.cpRepair }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ repair.adressRepair }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ repair.priceRepair }}</td>
+            </tr>
+            <tr>
+                <th>Reference</th>
+                <td>{{ repair.referenceRepair }}</td>
+            </tr>
+            <tr>
+                <th>Horaire</th>
+                <td>{{ repair.scheduleRepair }}</td>
+            </tr>
+            <tr>
+                <th>Distance</th>
+                <td>{{ repair.travelDistanceRepair }}</td>
+            </tr>
+            <tr>
+                <th>Note</th>
+                <td>{{ repair.noteAdminRepair }}</td>
+            </tr>
+            <tr>
+                <th>Créé le</th>
+                <td>{{ repair.createdAt ? repair.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Modifié le</th>
+                <td>{{ repair.updatedAt ? repair.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Images</th>
+                <td>
+                    {% for image in images %}
+                    <img src="{{ vich_uploader_asset(image) }}" alt="" width="200">
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_repairs_index') }}">retour à la liste</a>
+
+    <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}">éditer</a>
+
+    {{ include('repairs/_delete_form.html.twig') }}
+{% endblock %}

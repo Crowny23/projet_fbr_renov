@@ -39,6 +39,17 @@ class RepairsImagesRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByIdRepairs(int $value): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.repair = :id')
+            ->setParameter('id', $value)
+            ->orderBy('r.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return RepairsImages[] Returns an array of RepairsImages objects
 //     */

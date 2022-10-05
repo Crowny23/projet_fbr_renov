@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les dépannages{% endblock %}
+
+{% block body %}
+    <h1>Les dépannages</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom dépannage</th>
+                <th>Ville</th>
+                <th>Code Postal</th>
+                <th>Adresse</th>
+                <th>Prix</th>
+                <th>Reference</th>
+                <th>Horaire</th>
+                <th>Distance</th>
+                <th>Note</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for repair in repairs %}
+            <tr>
+                <td>{{ repair.nameRepair }}</td>
+                <td>{{ repair.cityRepair }}</td>
+                <td>{{ repair.cpRepair }}</td>
+                <td>{{ repair.adressRepair }}</td>
+                <td>{{ repair.priceRepair }}</td>
+                <td>{{ repair.referenceRepair }}</td>
+                <td>{{ repair.scheduleRepair }}</td>
+                <td>{{ repair.travelDistanceRepair }}</td>
+                <td>{{ repair.noteAdminRepair }}</td>
+                <td>
+                    <a href="{{ path('app_repairs_show', {'id': repair.id}) }}">voir</a>
+                    <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}">editer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">Aucun dépannage trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_repairs_new') }}">Ajouter un dépannage</a>
+{% endblock %}

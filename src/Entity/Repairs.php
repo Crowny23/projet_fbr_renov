@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RepairsRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Repairs
 {
     #[ORM\Id]
@@ -54,14 +55,28 @@ class Repairs
     #[ORM\OneToMany(mappedBy: 'repair', targetEntity: RepairsImages::class)]
     private Collection $image_repair;
 
+
+    public function __toString()
+    {
+        return $this->name_repair;
+    }
+
     #[ORM\ManyToOne(inversedBy: 'repairs')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Customers $client = null;
+
 
     public function __construct()
     {
         $this->rental_repair = new ArrayCollection();
         $this->image_repair = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

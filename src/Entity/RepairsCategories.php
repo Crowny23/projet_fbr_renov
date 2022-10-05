@@ -6,6 +6,7 @@ use App\Repository\RepairsCategoriesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RepairsCategoriesRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class RepairsCategories
 {
     #[ORM\Id]
@@ -61,5 +62,16 @@ class RepairsCategories
         $this->updated_at = $updated_at;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTimeImmutable();
     }
 }

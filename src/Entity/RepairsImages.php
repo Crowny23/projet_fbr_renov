@@ -3,8 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\RepairsImagesRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+#[Vich\Uploadable()]
 #[ORM\Entity(repositoryClass: RepairsImagesRepository::class)]
 class RepairsImages
 {
@@ -13,12 +18,22 @@ class RepairsImages
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[Vich\UploadableField(mapping: "repairs", fileNameProperty: "image_repairs_images", size: "imageSize")]
+    private ?File $file = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $image_repairs_images = null;
 
     #[ORM\ManyToOne(inversedBy: 'image_repair')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Repairs $repair = null;
+
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
 
     public function getId(): ?int
     {
@@ -45,6 +60,48 @@ class RepairsImages
     public function setRepair(?Repairs $repair): self
     {
         $this->repair = $repair;
+
+        return $this;
+    }
+
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
+    }
+
+    public function setImageSize(?int $imageSize): self
+    {
+        $this->imageSize = $imageSize;
+
+        return $this;
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function setFile(?File $file): self
+    {
+        $this->file = $file;
+
+        if ($file instanceof UploadedFile)
+        {
+            $this->updatedAt = new \DateTime();
+        }
 
         return $this;
     }
