@@ -30,8 +30,12 @@ class Materials
     public function __construct()
     {
         $this->rental_material = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
     }
-
+    public function __toString()
+    {
+        return $this->name_material;
+    }
     public function getId(): ?int
     {
         return $this->id;

@@ -51,6 +51,12 @@ class Renter
     public function __construct()
     {
         $this->rentals_renter = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
+    }
+
+    public function __toString()
+    {
+        return $this->name_renter;
     }
 
     public function getId(): ?int

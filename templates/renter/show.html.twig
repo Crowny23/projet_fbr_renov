@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Locatiers{% endblock %}
+
+{% block body %}
+    <h1>Locatiers</h1>
+
+    <table class="table">
+        <tbody>
+            {# <tr>
+                <th>Id</th>
+                <td>{{ renter.id }}</td>
+            </tr> #}
+            <tr>
+                <th>Nom</th>
+                <td>{{ renter.nameRenter }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ renter.cityRenter }}</td>
+            </tr>
+            <tr>
+                <th>Code Postale</th>
+                <td>{{ renter.cpRenter }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ renter.adressRenter }}</td>
+            </tr>
+            <tr>
+                <th>Site Internet</th>
+                <td>{{ renter.websiteRenter }}</td>
+            </tr>
+            <tr>
+                <th>E-mail</th>
+                <td>{{ renter.emailRenter }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ renter.phoneRenter }}</td>
+            </tr>
+            <tr>
+                <th>Note</th>
+                <td>{{ renter.noteAdminRenter }}</td>
+            </tr>
+            <tr>
+                <th>Créé</th>
+                <td>{{ renter.createdAt ? renter.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Modifié</th>
+                <td>{{ renter.updatedAt ? renter.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_renter_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('app_renter_edit', {'id': renter.id}) }}">Modifier</a>
+
+    {{ include('renter/_delete_form.html.twig') }}
+{% endblock %}

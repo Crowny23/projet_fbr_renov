@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier Location{% endblock %}
+
+{% block body %}
+    <h1>Modifier Location</h1>
+
+    {{ include('rentals/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_rentals_index') }}">Retour à la liste</a>
+
+    {{ include('rentals/_delete_form.html.twig') }}
+{% endblock %}

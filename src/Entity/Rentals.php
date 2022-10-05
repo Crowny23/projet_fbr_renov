@@ -39,6 +39,11 @@ class Rentals
     #[ORM\ManyToOne(inversedBy: 'rental_repair')]
     private ?Repairs $repair_rental = null;
 
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Location{% endblock %}
+
+{% block body %}
+    <h1>Location</h1>
+
+    <table class="table">
+        <tbody>
+            {# <tr>
+                <th>Id</th>
+                <td>{{ rental.id }}</td>
+            </tr> #}
+            <tr>
+                <th>Quantité</th>
+                <td>{{ rental.quantityRental }}</td>
+            </tr>
+            <tr>
+                <th>Prix Unitaire</th>
+                <td>{{ rental.unitPrice }}</td>
+            </tr>
+            <tr>
+                <th>Créé</th>
+                <td>{{ rental.createdAt ? rental.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Modifié</th>
+                <td>{{ rental.updatedAt ? rental.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_rentals_index') }}">Retour à la liste </a>
+
+    <a href="{{ path('app_rentals_edit', {'id': rental.id}) }}">Modifier</a>
+
+    {{ include('rentals/_delete_form.html.twig') }}
+{% endblock %}
