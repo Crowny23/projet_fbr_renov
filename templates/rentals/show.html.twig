@@ -7,10 +7,10 @@
 
     <table class="table">
         <tbody>
-            {# <tr>
-                <th>Id</th>
-                <td>{{ rental.id }}</td>
-            </tr> #}
+            <tr>
+                <th>Matériel</th>
+                <td>{{ rental.getMaterialsRental().nameMaterial }}</td>
+            </tr>
             <tr>
                 <th>Quantité</th>
                 <td>{{ rental.quantityRental }}</td>

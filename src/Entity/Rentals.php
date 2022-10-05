@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\RentalsRepository;
+use App\Repository\MaterialsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RentalsRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Rentals
 {
     #[ORM\Id]
@@ -42,6 +44,17 @@ class Rentals
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTimeImmutable();
+    }
+
+    public function __toString()
+    {
+        return $this->materials_rental;
     }
 
     public function getId(): ?int

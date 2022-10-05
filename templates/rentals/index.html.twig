@@ -8,22 +8,19 @@
     <table class="table">
         <thead>
             <tr>
-                {# <th>Id</th> #}
+                <th>Matériel</th>
                 <th>Qauantité</th>
                 <th>Prix Unitaire</th>
-                {# <th>Créé</th>
-                <th>Modifié</th> #}
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for rental in rentals %}
             <tr>
-                {# <td>{{ rental.id }}</td> #}
+                <td>{{ rental.getMaterialsRental().nameMaterial }}</td>
                 <td>{{ rental.quantityRental }}</td>
                 <td>{{ rental.unitPrice }}</td>
-                {# <td>{{ rental.createdAt ? rental.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ rental.updatedAt ? rental.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
+
                 <td>
                     <a href="{{ path('app_rentals_show', {'id': rental.id}) }}">Voir</a>
                     <a href="{{ path('app_rentals_edit', {'id': rental.id}) }}">Modifier</a>

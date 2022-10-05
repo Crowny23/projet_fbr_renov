@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Rentals;
+use App\Entity\Materials;
 use App\Form\RentalsType;
 use App\Repository\RentalsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

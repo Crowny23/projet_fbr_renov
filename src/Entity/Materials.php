@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MaterialsRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Materials
 {
     #[ORM\Id]
@@ -32,6 +33,13 @@ class Materials
         $this->rental_material = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
     }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTimeImmutable();
+    }
+
     public function __toString()
     {
         return $this->name_material;
