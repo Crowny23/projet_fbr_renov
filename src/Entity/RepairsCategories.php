@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RepairsCategoriesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RepairsCategoriesRepository::class)]
@@ -22,6 +24,14 @@ class RepairsCategories
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updated_at = null;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Repairs::class)]
+    private Collection $repairs;
+
+    public function __toString()
+    {
+        return $this->name_repairs_category;
+    }
 
     public function getId(): ?int
     {
@@ -67,11 +77,42 @@ class RepairsCategories
     public function __construct()
     {
         $this->created_at = new \DateTimeImmutable();
+        $this->repairs = new ArrayCollection();
     }
 
     #[ORM\PreUpdate]
     public function onPreUpdate()
     {
         $this->updated_at = new \DateTimeImmutable();
+    }
+
+    /**
+     * @return Collection<int, Repairs>
+     */
+    public function getRepairs(): Collection
+    {
+        return $this->repairs;
+    }
+
+    public function addRepair(Repairs $repair): self
+    {
+        if (!$this->repairs->contains($repair)) {
+            $this->repairs->add($repair);
+            $repair->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRepair(Repairs $repair): self
+    {
+        if ($this->repairs->removeElement($repair)) {
+            // set the owning side to null (unless already changed)
+            if ($repair->getCategory() === $this) {
+                $repair->setCategory(null);
+            }
+        }
+
+        return $this;
     }
 }

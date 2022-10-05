@@ -65,6 +65,9 @@ class Repairs
     #[ORM\JoinColumn(nullable: false)]
     private ?Customers $client = null;
 
+    #[ORM\ManyToOne(inversedBy: 'repairs')]
+    private ?RepairsCategories $category = null;
+
 
     public function __construct()
     {
@@ -284,6 +287,18 @@ class Repairs
     public function setClient(?Customers $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getCategory(): ?RepairsCategories
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?RepairsCategories $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

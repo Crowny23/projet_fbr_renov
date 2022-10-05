@@ -48,6 +48,14 @@
                 <td>{{ repair.noteAdminRepair }}</td>
             </tr>
             <tr>
+                <th>Client</th>
+                <td>{{ repair.client }}</td>
+            </tr>
+            <tr>
+                <th>Catégorie</th>
+                <td>{{ repair.category }}</td>
+            </tr>
+            <tr>
                 <th>Créé le</th>
                 <td>{{ repair.createdAt ? repair.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>

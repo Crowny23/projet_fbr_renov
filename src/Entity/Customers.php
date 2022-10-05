@@ -59,10 +59,16 @@ class Customers
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Repairs::class)]
     private Collection $repairs;
 
+    public function __toString()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
     public function __construct()
     {
         $this->worksite_customer = new ArrayCollection();
         $this->repairs = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -212,11 +218,6 @@ class Customers
         $this->id_user = $id_user;
 
         return $this;
-    }
-
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime();
     }
 
     #[ORM\PreUpdate]

@@ -31,6 +31,8 @@ class RepairsType extends AbstractType
             ])
             ->add('travel_distance_repair', IntegerType::class, ['label' => 'Distance'])
             ->add('note_admin_repair', TextType::class, ['label' => 'petite note'])
+            ->add('client')
+            ->add('category')
         ;
     }
 

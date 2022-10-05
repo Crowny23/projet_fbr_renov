@@ -286,7 +286,7 @@ class Worksites
     {
         if (!$this->images_worksite->contains($imagesWorksite)) {
             $this->images_worksite->add($imagesWorksite);
-            $imagesWorksite->addWorksite($this);
+            $imagesWorksite->setWorksite($this);
         }
 
         return $this;
@@ -295,7 +295,10 @@ class Worksites
     public function removeImagesWorksite(WorksiteImages $imagesWorksite): self
     {
         if ($this->images_worksite->removeElement($imagesWorksite)) {
-            $imagesWorksite->removeWorksite($this);
+            if ($imagesWorksite->getWorksite() === $this)
+            {
+                $imagesWorksite->setWorksite(null);
+            }
         }
 
         return $this;

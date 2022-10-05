@@ -17,6 +17,8 @@
                 <th>Horaire</th>
                 <th>Distance</th>
                 <th>Note</th>
+                <th>Client</th>
+                <th>catégorie</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -32,6 +34,8 @@
                 <td>{{ repair.scheduleRepair }}</td>
                 <td>{{ repair.travelDistanceRepair }}</td>
                 <td>{{ repair.noteAdminRepair }}</td>
+                <td>{{ repair.client }}</td>
+                <td>{{ repair.category }}</td>
                 <td>
                     <a href="{{ path('app_repairs_show', {'id': repair.id}) }}">voir</a>
                     <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}">editer</a>
