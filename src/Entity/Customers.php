@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CustomersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -50,6 +52,18 @@ class Customers
 
     #[ORM\ManyToOne(inversedBy: 'customers')]
     private ?Users $id_user = null;
+
+    #[ORM\OneToMany(mappedBy: 'client_worksite', targetEntity: Worksites::class)]
+    private Collection $worksite_customer;
+
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Repairs::class)]
+    private Collection $repairs;
+
+    public function __construct()
+    {
+        $this->worksite_customer = new ArrayCollection();
+        $this->repairs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -209,5 +223,65 @@ class Customers
     public function onPreUpdate()
     {
         $this->updated_at = new \DateTime();
+    }
+    
+    /**
+     * @return Collection<int, Worksites>
+     */
+    public function getWorksiteCustomer(): Collection
+    {
+        return $this->worksite_customer;
+    }
+
+    public function addWorksiteCustomer(Worksites $worksiteCustomer): self
+    {
+        if (!$this->worksite_customer->contains($worksiteCustomer)) {
+            $this->worksite_customer->add($worksiteCustomer);
+            $worksiteCustomer->setClientWorksite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorksiteCustomer(Worksites $worksiteCustomer): self
+    {
+        if ($this->worksite_customer->removeElement($worksiteCustomer)) {
+            // set the owning side to null (unless already changed)
+            if ($worksiteCustomer->getClientWorksite() === $this) {
+                $worksiteCustomer->setClientWorksite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Repairs>
+     */
+    public function getRepairs(): Collection
+    {
+        return $this->repairs;
+    }
+
+    public function addRepair(Repairs $repair): self
+    {
+        if (!$this->repairs->contains($repair)) {
+            $this->repairs->add($repair);
+            $repair->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRepair(Repairs $repair): self
+    {
+        if ($this->repairs->removeElement($repair)) {
+            // set the owning side to null (unless already changed)
+            if ($repair->getClient() === $this) {
+                $repair->setClient(null);
+            }
+        }
+
+        return $this;
     }
 }

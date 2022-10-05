@@ -77,6 +77,10 @@ class Worksites
     #[ORM\OneToMany(mappedBy: 'worksite', targetEntity: WorksiteImages::class)]
     private Collection $image_worksite;
 
+    #[ORM\ManyToOne(inversedBy: 'worksite_customer')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Customers $client_worksite = null;
+
     public function __construct()
     {
         $this->images_worksite = new ArrayCollection();
@@ -400,6 +404,18 @@ class Worksites
                 $imageWorksite->setWorksite(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getClientWorksite(): ?Customers
+    {
+        return $this->client_worksite;
+    }
+
+    public function setClientWorksite(?Customers $client_worksite): self
+    {
+        $this->client_worksite = $client_worksite;
 
         return $this;
     }
