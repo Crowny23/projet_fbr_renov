@@ -1,34 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}RepairsImages{% endblock %}
+{% block title %}Image{% endblock %}
 
 {% block body %}
-    <h1>RepairsImages</h1>
+    <h1>Image</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ repairs_image.id }}</td>
-            </tr>
-            <tr>
-                <th>Image_repairs_images</th>
+                <th>Nom de l'image</th>
                 <td>{{ repairs_image.imageRepairsImages }}</td>
             </tr>
             <tr>
-                <th>UpdatedAt</th>
+                <th>Modifié le</th>
                 <td>{{ repairs_image.updatedAt ? repairs_image.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>ImageSize</th>
-                <td>{{ repairs_image.imageSize }}</td>
+                <th>Taille de l'image</th>
+                <td>{{ repairs_image.imageSize }} ko</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_repairs_images_index') }}">back to list</a>
+    <a href="{{ path('app_repairs_images_index') }}">retour à la liste</a>
 
-    <a href="{{ path('app_repairs_images_edit', {'id': repairs_image.id}) }}">edit</a>
+    <a href="{{ path('app_repairs_images_edit', {'id': repairs_image.id}) }}">Modifier</a>
 
     {{ include('repairs_images/_delete_form.html.twig') }}
 {% endblock %}

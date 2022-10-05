@@ -12,47 +12,47 @@
                 <td>{{ repair.id }}</td>
             </tr>
             <tr>
-                <th>Name_repair</th>
+                <th>Nom dépannage</th>
                 <td>{{ repair.nameRepair }}</td>
             </tr>
             <tr>
-                <th>City_repair</th>
+                <th>Ville</th>
                 <td>{{ repair.cityRepair }}</td>
             </tr>
             <tr>
-                <th>Cp_repair</th>
+                <th>Code postal</th>
                 <td>{{ repair.cpRepair }}</td>
             </tr>
             <tr>
-                <th>Adress_repair</th>
+                <th>Adresse</th>
                 <td>{{ repair.adressRepair }}</td>
             </tr>
             <tr>
-                <th>Price_repair</th>
+                <th>Prix</th>
                 <td>{{ repair.priceRepair }}</td>
             </tr>
             <tr>
-                <th>Reference_repair</th>
+                <th>Reference</th>
                 <td>{{ repair.referenceRepair }}</td>
             </tr>
             <tr>
-                <th>Schedule_repair</th>
+                <th>Horaire</th>
                 <td>{{ repair.scheduleRepair }}</td>
             </tr>
             <tr>
-                <th>Travel_distance_repair</th>
+                <th>Distance</th>
                 <td>{{ repair.travelDistanceRepair }}</td>
             </tr>
             <tr>
-                <th>Note_admin_repair</th>
+                <th>Note</th>
                 <td>{{ repair.noteAdminRepair }}</td>
             </tr>
             <tr>
-                <th>Created_at</th>
+                <th>Créé le</th>
                 <td>{{ repair.createdAt ? repair.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Updated_at</th>
+                <th>Modifié le</th>
                 <td>{{ repair.updatedAt ? repair.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
@@ -66,9 +66,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_repairs_index') }}">back to list</a>
+    <a href="{{ path('app_repairs_index') }}">retour à la liste</a>
 
-    <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}">edit</a>
+    <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}">éditer</a>
 
     {{ include('repairs/_delete_form.html.twig') }}
 {% endblock %}

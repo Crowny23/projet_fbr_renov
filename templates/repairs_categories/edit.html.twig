@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit RepairsCategories{% endblock %}
+{% block title %}Editer Categorie dépannage{% endblock %}
 
 {% block body %}
-    <h1>Edit RepairsCategories</h1>
+    <h1>Editer Categorie dépannage</h1>
 
-    {{ include('repairs_categories/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('repairs_categories/_form.html.twig', {'button_label': 'modifier'}) }}
 
-    <a href="{{ path('app_repairs_categories_index') }}">back to list</a>
+    <a href="{{ path('app_repairs_categories_index') }}">retour à la liste</a>
 
     {{ include('repairs_categories/_delete_form.html.twig') }}
 {% endblock %}

@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CustomersRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Customers
 {
     #[ORM\Id]
@@ -202,5 +203,11 @@ class Customers
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTime();
     }
 }

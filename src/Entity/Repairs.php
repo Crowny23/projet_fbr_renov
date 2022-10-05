@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RepairsRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Repairs
 {
     #[ORM\Id]
@@ -64,6 +65,12 @@ class Repairs
         $this->rental_repair = new ArrayCollection();
         $this->image_repair = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
