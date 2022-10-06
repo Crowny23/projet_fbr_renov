@@ -83,6 +83,11 @@ class Worksites
         $this->created_at = new \DateTimeImmutable();
     }
 
+    public function __toString()
+    {
+        return $this->name_worksite;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
