@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégories de chantiers{% endblock %}
+
+{% block body %}
+    <h1>Liste des catégories de chantiers</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom de la catégorie</th>
+                <th>Date de création</th>
+                <th>Date de dernière modification</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for worksite_category in worksite_categories %}
+            <tr>
+                <td>{{ worksite_category.id }}</td>
+                <td>{{ worksite_category.nameWorksiteCategories }}</td>
+                <td>{{ worksite_category.createdAt ? worksite_category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ worksite_category.updatedAt ? worksite_category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_worksite_categories_show', {'id': worksite_category.id}) }}">Voir</a>
+                    <a href="{{ path('app_worksite_categories_edit', {'id': worksite_category.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucune catégorie existante</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_worksite_categories_new') }}">Créer une nouvelle catégorie</a>
+{% endblock %}

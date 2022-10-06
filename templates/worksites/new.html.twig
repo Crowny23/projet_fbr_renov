@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau chantier{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau chantier</h1>
+
+    {{ include('worksites/_form.html.twig') }}
+
+    <a href="{{ path('app_worksites_index') }}">Retour à la liste des chantiers</a>
+{% endblock %}

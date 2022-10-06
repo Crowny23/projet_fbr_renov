@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RepairsImagesRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RepairsImagesRepository::class)]
@@ -19,6 +20,11 @@ class RepairsImages
     #[ORM\ManyToOne(inversedBy: 'image_repair')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Repairs $repair = null;
+
+    public function __construct()
+    {
+        $this->created_at = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

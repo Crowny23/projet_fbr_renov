@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RepairsCategoriesRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RepairsCategoriesRepository::class)]
@@ -21,6 +22,11 @@ class RepairsCategories
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updated_at = null;
+
+    public function __construct()
+    {
+        $this->created_at = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

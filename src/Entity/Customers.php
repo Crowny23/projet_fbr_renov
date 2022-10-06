@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CustomersRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -49,6 +50,11 @@ class Customers
 
     #[ORM\ManyToOne(inversedBy: 'customers')]
     private ?Users $id_user = null;
+
+    public function __construct()
+    {
+        $this->created_at = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

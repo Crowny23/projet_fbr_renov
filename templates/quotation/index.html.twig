@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des devis{% endblock %}
+
+{% block body %}
+    <h1>Liste des devis</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Reference du devis</th>
+                <th>Prix</th>
+                <th>Statut</th>
+                <th>Montant de l'accompte</th>
+                <th>Montant du paiement intermédiaire</th>
+                <th>Montant du paiement final</th>
+                <th>Date de création</th>
+                <th>Date de dernière modification</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for quotation in quotations %}
+            <tr>
+                <td>{{ quotation.id }}</td>
+                <td>{{ quotation.referenceQuotation }}</td>
+                <td>{{ quotation.priceQuotation }}</td>
+                <td>{{ quotation.statusQuotation }}</td>
+                <td>{{ quotation.depositQuotation }}</td>
+                <td>{{ quotation.intermediatePaymentQuotation }}</td>
+                <td>{{ quotation.finalPaymentQuotation }}</td>
+                <td>{{ quotation.createdAt ? quotation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ quotation.updatedAt ? quotation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_quotation_show', {'id': quotation.id}) }}">Voir</a>
+                    <a href="{{ path('app_quotation_edit', {'id': quotation.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">Pas de devis existant</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_quotation_new') }}">Créer un nouveau devis</a>
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RentalsRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RentalsRepository::class)]
@@ -38,6 +39,11 @@ class Rentals
 
     #[ORM\ManyToOne(inversedBy: 'rental_repair')]
     private ?Repairs $repair_rental = null;
+
+    public function __construct()
+    {
+        $this->created_at = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
