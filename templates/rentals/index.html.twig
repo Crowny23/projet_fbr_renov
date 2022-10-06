@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Location{% endblock %}
+
+{% block body %}
+    <h1>Location</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Matériel</th>
+                <th>Qauantité</th>
+                <th>Prix Unitaire</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rental in rentals %}
+            <tr>
+                <td>{{ rental.getMaterialsRental().nameMaterial }}</td>
+                <td>{{ rental.quantityRental }}</td>
+                <td>{{ rental.unitPrice }}</td>
+
+                <td>
+                    <a href="{{ path('app_rentals_show', {'id': rental.id}) }}">Voir</a>
+                    <a href="{{ path('app_rentals_edit', {'id': rental.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_rentals_new') }}">Créer</a>
+{% endblock %}

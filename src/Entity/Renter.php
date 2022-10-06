@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use App\Repository\RenterRepository;
 use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RenterRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Renter
 {
     #[ORM\Id]
@@ -52,7 +54,22 @@ class Renter
     public function __construct()
     {
         $this->rentals_renter = new ArrayCollection();
-        $this->created_at = new DateTimeImmutable();
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->created_at = $date->setTimezone($timezone);
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->updated_at = $date->setTimezone($timezone);
+    }
+
+    public function __toString()
+    {
+        return $this->name_renter;
     }
 
     public function getId(): ?int

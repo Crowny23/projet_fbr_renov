@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\RentalsRepository;
 use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RentalsRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Rentals
 {
     #[ORM\Id]
@@ -42,7 +44,22 @@ class Rentals
 
     public function __construct()
     {
-        $this->created_at = new DateTimeImmutable();
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->created_at = $date->setTimezone($timezone);
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->updated_at = $date->setTimezone($timezone);
+    }
+
+    public function __toString()
+    {
+        return $this->materials_rental;
     }
 
     public function getId(): ?int
