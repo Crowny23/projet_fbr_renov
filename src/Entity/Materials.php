@@ -33,7 +33,6 @@ class Materials
     public function __construct()
     {
         $this->rental_material = new ArrayCollection();
-        
         $date = new DateTimeImmutable();
         $timezone = new DateTimeZone('Europe/Paris');
         $this->created_at = $date->setTimezone($timezone);

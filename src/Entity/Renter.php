@@ -54,7 +54,6 @@ class Renter
     public function __construct()
     {
         $this->rentals_renter = new ArrayCollection();
-        
         $date = new DateTimeImmutable();
         $timezone = new DateTimeZone('Europe/Paris');
         $this->created_at = $date->setTimezone($timezone);

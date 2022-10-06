@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\RepairsRepository;
+use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RepairsRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Repairs
 {
     #[ORM\Id]
@@ -54,10 +57,36 @@ class Repairs
     #[ORM\OneToMany(mappedBy: 'repair', targetEntity: RepairsImages::class)]
     private Collection $image_repair;
 
+
+    public function __toString()
+    {
+        return $this->name_repair;
+    }
+
+    #[ORM\ManyToOne(inversedBy: 'repairs')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Customers $client = null;
+
+    #[ORM\ManyToOne(inversedBy: 'repairs')]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
+    private ?RepairsCategories $category = null;
+
+
     public function __construct()
     {
         $this->rental_repair = new ArrayCollection();
         $this->image_repair = new ArrayCollection();
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->created_at = $date->setTimezone($timezone);
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->updated_at = $date->setTimezone($timezone);
     }
 
     public function getId(): ?int
@@ -253,6 +282,30 @@ class Repairs
                 $imageRepair->setRepair(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getClient(): ?Customers
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Customers $client): self
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getCategory(): ?RepairsCategories
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?RepairsCategories $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des chantiers{% endblock %}
+
+{% block body %}
+    <h1>Liste des chantiers</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom du chantier</th>
+                <th>Ville</th>
+                <th>Code Postal</th>
+                <th>Adresse</th>
+                <th>Date de début</th>
+                <th>Durée des travaux (en jours)</th>
+                <th>Travaux supplémentaires (en heures)</th>
+                <th>Distance</th>
+                <th>Note du client</th>
+                <th>Note personelle</th>
+                <th>Urgent</th>
+                <th>Statut</th>
+                <th>Date de création</th>
+                <th>Date de dernière modification</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for worksite in worksites %}
+            <tr>
+                <td>{{ worksite.id }}</td>
+                <td>{{ worksite.nameWorksite }}</td>
+                <td>{{ worksite.cityWorksite }}</td>
+                <td>{{ worksite.cpWorksite }}</td>
+                <td>{{ worksite.adressWorksite }}</td>
+                <td>{{ worksite.startAt ? worksite.startAt|date('Y-m-d') : '' }}</td>
+                <td>{{ worksite.durationWorksite }}</td>
+                <td>{{ worksite.supplementWorksite }}</td>
+                <td>{{ worksite.travelDistanceWorksite }}</td>
+                <td>{{ worksite.noteClientWorksite }}</td>
+                <td>{{ worksite.noteAdminWorksite }}</td>
+                <td>{{ worksite.isUrgent ? 'Oui' : 'Non' }}</td>
+                <td>{{ worksite.statusWorksite }}</td>
+                <td>{{ worksite.createdAt ? worksite.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ worksite.updatedAt ? worksite.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_worksites_show', {'id': worksite.id}) }}">Voir</a>
+                    <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="16">Aucun chantier existant</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_worksites_new') }}">Créer un chantier</a>
+{% endblock %}

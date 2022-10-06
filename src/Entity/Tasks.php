@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TasksRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TasksRepository::class)]
@@ -25,6 +26,11 @@ class Tasks
     #[ORM\ManyToOne(inversedBy: 'task_worksite')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Worksites $worksite = null;
+
+    public function __construct()
+    {
+        $this->created_at = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

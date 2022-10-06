@@ -3,10 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\CustomersRepository;
+use DateTime;
+use DateTimeZone;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CustomersRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Customers
 {
     #[ORM\Id]
@@ -38,17 +43,37 @@ class Customers
     #[ORM\Column(length: 255)]
     private ?string $social_reason = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $customer_note = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updateAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'customers')]
     private ?Users $id_user = null;
+
+    #[ORM\OneToMany(mappedBy: 'client_worksite', targetEntity: Worksites::class)]
+    private Collection $worksite_customer;
+
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Repairs::class)]
+    private Collection $repairs;
+
+    public function __toString()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+    public function __construct()
+    {
+        $this->worksite_customer = new ArrayCollection();
+        $this->repairs = new ArrayCollection();
+        $date = new DateTime();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->created_at = $date->setTimezone($timezone);
+    }
 
     public function getId(): ?int
     {
@@ -156,7 +181,7 @@ class Customers
         return $this->customer_note;
     }
 
-    public function setCustomerNote(string $customer_note): self
+    public function setCustomerNote(?string $customer_note): self
     {
         $this->customer_note = $customer_note;
 
@@ -180,7 +205,7 @@ class Customers
         return $this->updateAt;
     }
 
-    public function setUpdateAt(\DateTimeInterface $updateAt): self
+    public function setUpdateAt(?\DateTimeInterface $updateAt): self
     {
         $this->updateAt = $updateAt;
 
@@ -195,6 +220,74 @@ class Customers
     public function setIdUser(?Users $id_user): self
     {
         $this->id_user = $id_user;
+
+        return $this;
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $date = new DateTime();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->updated_at = $date->setTimezone($timezone);
+    }
+    
+    /**
+     * @return Collection<int, Worksites>
+     */
+    public function getWorksiteCustomer(): Collection
+    {
+        return $this->worksite_customer;
+    }
+
+    public function addWorksiteCustomer(Worksites $worksiteCustomer): self
+    {
+        if (!$this->worksite_customer->contains($worksiteCustomer)) {
+            $this->worksite_customer->add($worksiteCustomer);
+            $worksiteCustomer->setClientWorksite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorksiteCustomer(Worksites $worksiteCustomer): self
+    {
+        if ($this->worksite_customer->removeElement($worksiteCustomer)) {
+            // set the owning side to null (unless already changed)
+            if ($worksiteCustomer->getClientWorksite() === $this) {
+                $worksiteCustomer->setClientWorksite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Repairs>
+     */
+    public function getRepairs(): Collection
+    {
+        return $this->repairs;
+    }
+
+    public function addRepair(Repairs $repair): self
+    {
+        if (!$this->repairs->contains($repair)) {
+            $this->repairs->add($repair);
+            $repair->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRepair(Repairs $repair): self
+    {
+        if ($this->repairs->removeElement($repair)) {
+            // set the owning side to null (unless already changed)
+            if ($repair->getClient() === $this) {
+                $repair->setClient(null);
+            }
+        }
 
         return $this;
     }

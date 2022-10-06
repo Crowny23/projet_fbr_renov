@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégorie dépannage{% endblock %}
+
+{% block body %}
+    <h1>Catégorie dépannage</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Nom de la catégorie</th>
+                <td>{{ repairs_category.nameRepairsCategory }}</td>
+            </tr>
+            <tr>
+                <th>Créé le</th>
+                <td>{{ repairs_category.createdAt ? repairs_category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Modifié le</th>
+                <td>{{ repairs_category.updatedAt ? repairs_category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_repairs_categories_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('app_repairs_categories_edit', {'id': repairs_category.id}) }}">éditer</a>
+
+    {{ include('repairs_categories/_delete_form.html.twig') }}
+{% endblock %}

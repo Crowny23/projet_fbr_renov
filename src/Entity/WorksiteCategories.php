@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\WorksiteCategoriesRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: WorksiteCategoriesRepository::class)]
@@ -21,6 +22,16 @@ class WorksiteCategories
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updated_at = null;
+
+    public function __toString()
+    {
+        return $this->name_worksite_categories;
+    }
+
+    public function __construct()
+    {
+        $this->created_at = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -58,6 +69,9 @@ class WorksiteCategories
 
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
+        $timezone = new \DateTimeZone('Europe/Paris');
+        $updated_at->setTimezone($timezone);
+        
         $this->updated_at = $updated_at;
 
         return $this;

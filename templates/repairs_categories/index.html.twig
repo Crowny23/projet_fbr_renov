@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégories des dépannages{% endblock %}
+
+{% block body %}
+    <h1>Catégories des dépannages</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Categorie</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for repairs_category in repairs_categories %}
+            <tr>
+                <td>{{ repairs_category.nameRepairsCategory }}</td>
+                <td>
+                    <a href="{{ path('app_repairs_categories_show', {'id': repairs_category.id}) }}">Voir</a>
+                    <a href="{{ path('app_repairs_categories_edit', {'id': repairs_category.id}) }}">Éditer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucune catégorie</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_repairs_categories_new') }}">Ajouter une catégorie</a>
+{% endblock %}

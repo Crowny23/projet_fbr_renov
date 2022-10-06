@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Devis{% endblock %}
+
+{% block body %}
+    <h1>Devis n°{{ quotation.referenceQuotation }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ quotation.id }}</td>
+            </tr>
+            <tr>
+                <th>Réference du devis</th>
+                <td>{{ quotation.referenceQuotation }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ quotation.priceQuotation }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ quotation.statusQuotation }}</td>
+            </tr>
+            <tr>
+                <th>Montant de l'accompte</th>
+                <td>{{ quotation.depositQuotation }}</td>
+            </tr>
+            <tr>
+                <th>Montant du paiement intermédiaire</th>
+                <td>{{ quotation.intermediatePaymentQuotation }}</td>
+            </tr>
+            <tr>
+                <th>Montant du paiement final</th>
+                <td>{{ quotation.finalPaymentQuotation }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{{ quotation.createdAt ? quotation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date de dernière modification</th>
+                <td>{{ quotation.updatedAt ? quotation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_quotation_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('app_quotation_edit', {'id': quotation.id}) }}">Modifier</a>
+
+    {{ include('quotation/_delete_form.html.twig') }}
+{% endblock %}
