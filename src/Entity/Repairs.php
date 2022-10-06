@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RepairsRepository;
+use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -66,6 +68,7 @@ class Repairs
     private ?Customers $client = null;
 
     #[ORM\ManyToOne(inversedBy: 'repairs')]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?RepairsCategories $category = null;
 
 
@@ -73,13 +76,18 @@ class Repairs
     {
         $this->rental_repair = new ArrayCollection();
         $this->image_repair = new ArrayCollection();
-        $this->created_at = new \DateTimeImmutable();
+
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->created_at = $date->setTimezone($timezone);
     }
 
     #[ORM\PreUpdate]
     public function onPreUpdate()
     {
-        $this->updated_at = new \DateTimeImmutable();
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->updated_at = $date->setTimezone($timezone);
     }
 
     public function getId(): ?int

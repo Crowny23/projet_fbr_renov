@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RepairsCategoriesRepository;
+use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -76,14 +78,18 @@ class RepairsCategories
 
     public function __construct()
     {
-        $this->created_at = new \DateTimeImmutable();
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->created_at = $date->setTimezone($timezone);
         $this->repairs = new ArrayCollection();
     }
 
     #[ORM\PreUpdate]
     public function onPreUpdate()
     {
-        $this->updated_at = new \DateTimeImmutable();
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->updated_at = $date->setTimezone($timezone);
     }
 
     /**

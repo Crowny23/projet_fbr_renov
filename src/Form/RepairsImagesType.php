@@ -15,7 +15,10 @@ class RepairsImagesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('file', FileType::class, ['label' => 'Image'])
+            ->add('file', FileType::class, [
+                'label' => 'Image',
+                'empty_data' => ''
+                ])
             ->add('repair', EntityType::class, [
                 'class' => Repairs::class,
                 'label' => 'Dépannage'

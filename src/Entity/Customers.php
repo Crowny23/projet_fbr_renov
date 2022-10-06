@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CustomersRepository;
+use DateTime;
+use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -68,7 +70,9 @@ class Customers
     {
         $this->worksite_customer = new ArrayCollection();
         $this->repairs = new ArrayCollection();
-        $this->createdAt = new \DateTime();
+        $date = new DateTime();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->created_at = $date->setTimezone($timezone);
     }
 
     public function getId(): ?int
@@ -223,7 +227,9 @@ class Customers
     #[ORM\PreUpdate]
     public function onPreUpdate()
     {
-        $this->updated_at = new \DateTime();
+        $date = new DateTime();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->updated_at = $date->setTimezone($timezone);
     }
     
     /**

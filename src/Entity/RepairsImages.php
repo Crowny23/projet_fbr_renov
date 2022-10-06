@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\RepairsImagesRepository;
+use DateTime;
+use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -25,7 +28,7 @@ class RepairsImages
     private ?string $image_repairs_images = null;
 
     #[ORM\ManyToOne(inversedBy: 'image_repair')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?Repairs $repair = null;
 
 
@@ -45,7 +48,7 @@ class RepairsImages
         return $this->image_repairs_images;
     }
 
-    public function setImageRepairsImages(string $image_repairs_images): self
+    public function setImageRepairsImages(?string $image_repairs_images): self
     {
         $this->image_repairs_images = $image_repairs_images;
 
@@ -100,7 +103,9 @@ class RepairsImages
 
         if ($file instanceof UploadedFile)
         {
-            $this->updatedAt = new \DateTime();
+            $date = new DateTime();
+            $timezone = new DateTimeZone('Europe/Paris');
+            $this->updatedAt = $date->setTimezone($timezone);
         }
 
         return $this;
