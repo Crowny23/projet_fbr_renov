@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\RepairsImagesRepository;
 use DateTime;
-use DateTimeImmutable;
 use DateTimeZone;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -30,7 +29,6 @@ class RepairsImages
     #[ORM\ManyToOne(inversedBy: 'image_repair')]
     #[ORM\JoinColumn(nullable: false, onDelete:"CASCADE")]
     private ?Repairs $repair = null;
-
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;

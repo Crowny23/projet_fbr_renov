@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ worksite.nameworksite }}{% endblock %}
+
+{% block body %}
+    <h1>Chantier : {{ worksite.nameWorksite }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ worksite.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom du chantier</th>
+                <td>{{ worksite.nameWorksite }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ worksite.cityWorksite }}</td>
+            </tr>
+            <tr>
+                <th>Code Postal</th>
+                <td>{{ worksite.cpWorksite }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ worksite.adressWorksite }}</td>
+            </tr>
+            <tr>
+                <th>Date de début</th>
+                <td>{{ worksite.startAt ? worksite.startAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Durée des travaux (en jours)</th>
+                <td>{{ worksite.durationWorksite ? worksite.durationWorksite|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Travaux supplémentaires (en heures)</th>
+                <td>{{ worksite.supplementWorksite ? worksite.supplementWorksite|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Distance</th>
+                <td>{{ worksite.travelDistanceWorksite }}</td>
+            </tr>
+            <tr>
+                <th>Note du client</th>
+                <td>{{ worksite.noteClientWorksite }}</td>
+            </tr>
+            <tr>
+                <th>Note personnelle</th>
+                <td>{{ worksite.noteAdminWorksite }}</td>
+            </tr>
+            <tr>
+                <th>Urgent</th>
+                <td>{{ worksite.isUrgent ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ worksite.statusWorksite }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{{ worksite.createdAt ? worksite.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date de dernière modification</th>
+                <td>{{ worksite.updatedAt ? worksite.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_worksites_index') }}">Retour à la liste des chantiers</a>
+
+    <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}">Modifier</a>
+
+    {{ include('worksites/_delete_form.html.twig') }}
+{% endblock %}

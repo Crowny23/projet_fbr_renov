@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau devis{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau devis</h1>
+
+    {{ include('quotation/_form.html.twig') }}
+
+    <a href="{{ path('app_quotation_index') }}">Retour à la liste</a>
+{% endblock %}

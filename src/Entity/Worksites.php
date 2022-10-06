@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\WorksitesRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -31,11 +32,11 @@ class Worksites
     #[ORM\Column]
     private ?\DateTimeImmutable $start_at = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $duration_worksite = null;
+    #[ORM\Column]
+    private ?int $duration_worksite = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $supplement_worksite = null;
+    #[ORM\Column]
+    private ?int $supplement_worksite = null;
 
     #[ORM\Column]
     private ?int $travel_distance_worksite = null;
@@ -46,7 +47,7 @@ class Worksites
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $note_admin_worksite = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $is_urgent = null;
 
     #[ORM\ManyToOne]
@@ -55,9 +56,6 @@ class Worksites
 
     #[ORM\Column(length: 255)]
     private ?string $status_worksite = null;
-
-    #[ORM\ManyToMany(targetEntity: WorksiteImages::class, mappedBy: 'worksite')]
-    private Collection $images_worksite;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -83,10 +81,15 @@ class Worksites
 
     public function __construct()
     {
-        $this->images_worksite = new ArrayCollection();
         $this->task_worksite = new ArrayCollection();
         $this->rental_worksite = new ArrayCollection();
         $this->image_worksite = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
+    }
+
+    public function __toString()
+    {
+        return $this->name_worksite;
     }
 
     public function getId(): ?int
@@ -154,24 +157,24 @@ class Worksites
         return $this;
     }
 
-    public function getDurationWorksite(): ?\DateTimeInterface
+    public function getDurationWorksite(): ?int
     {
         return $this->duration_worksite;
     }
 
-    public function setDurationWorksite(\DateTimeInterface $duration_worksite): self
+    public function setDurationWorksite(?int $duration_worksite): self
     {
         $this->duration_worksite = $duration_worksite;
 
         return $this;
     }
 
-    public function getSupplementWorksite(): ?\DateTimeInterface
+    public function getSupplementWorksite(): ?int
     {
         return $this->supplement_worksite;
     }
 
-    public function setSupplementWorksite(?\DateTimeInterface $supplement_worksite): self
+    public function setSupplementWorksite(?int $supplement_worksite): self
     {
         $this->supplement_worksite = $supplement_worksite;
 
@@ -214,15 +217,18 @@ class Worksites
         return $this;
     }
 
-    public function isIsUrgent(): ?bool
+    public function getIsUrgent(): ?bool
     {
         return $this->is_urgent;
     }
 
-    public function setIsUrgent(bool $is_urgent): self
+    public function setIsUrgent($is_urgent): self
     {
-        $this->is_urgent = $is_urgent;
-
+        if($is_urgent === null) {
+            $this->is_urgent = false;
+        } else {
+           $this->is_urgent = $is_urgent; 
+        }
         return $this;
     }
 
@@ -269,6 +275,9 @@ class Worksites
 
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
+        $timezone = new \DateTimeZone('Europe/Paris');
+        $updated_at->setTimezone($timezone);
+
         $this->updated_at = $updated_at;
 
         return $this;

@@ -76,7 +76,6 @@ class Repairs
     {
         $this->rental_repair = new ArrayCollection();
         $this->image_repair = new ArrayCollection();
-
         $date = new DateTimeImmutable();
         $timezone = new DateTimeZone('Europe/Paris');
         $this->created_at = $date->setTimezone($timezone);
