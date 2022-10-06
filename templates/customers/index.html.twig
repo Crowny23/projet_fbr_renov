@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customers index{% endblock %}
+
+{% block body %}
+    <h1>Customers index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Town</th>
+                <th>Postalcode</th>
+                <th>Address</th>
+                <th>Mail</th>
+                <th>Phone</th>
+                <th>Social_reason</th>
+                <th>Customer_note</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for customer in customers %}
+            <tr>
+                <td>{{ customer.id }}</td>
+                <td>{{ customer.firstname }}</td>
+                <td>{{ customer.lastname }}</td>
+                <td>{{ customer.Town }}</td>
+                <td>{{ customer.postalcode }}</td>
+                <td>{{ customer.address }}</td>
+                <td>{{ customer.mail }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.socialReason }}</td>
+                <td>{{ customer.customerNote }}</td>
+                <td>
+                    <a href="{{ path('app_customers_show', {'id': customer.id}) }}">show</a>
+                    <a href="{{ path('app_customers_edit', {'id': customer.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_customers_new') }}">Create new</a>
+{% endblock %}

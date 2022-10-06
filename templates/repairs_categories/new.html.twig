@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une catégorie dépannage{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une catégorie dépannage</h1>
+
+    {{ include('repairs_categories/_form.html.twig') }}
+
+    <a href="{{ path('app_repairs_categories_index') }}">retour à la liste</a>
+{% endblock %}

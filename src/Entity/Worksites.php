@@ -75,6 +75,10 @@ class Worksites
     #[ORM\OneToMany(mappedBy: 'worksite', targetEntity: WorksiteImages::class)]
     private Collection $image_worksite;
 
+    #[ORM\ManyToOne(inversedBy: 'worksite_customer')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Customers $client_worksite = null;
+
     public function __construct()
     {
         $this->task_worksite = new ArrayCollection();
@@ -287,6 +291,28 @@ class Worksites
         return $this->images_worksite;
     }
 
+    public function addImagesWorksite(WorksiteImages $imagesWorksite): self
+    {
+        if (!$this->images_worksite->contains($imagesWorksite)) {
+            $this->images_worksite->add($imagesWorksite);
+            $imagesWorksite->setWorksite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImagesWorksite(WorksiteImages $imagesWorksite): self
+    {
+        if ($this->images_worksite->removeElement($imagesWorksite)) {
+            if ($imagesWorksite->getWorksite() === $this)
+            {
+                $imagesWorksite->setWorksite(null);
+            }
+        }
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Tasks>
      */
@@ -390,6 +416,18 @@ class Worksites
                 $imageWorksite->setWorksite(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getClientWorksite(): ?Customers
+    {
+        return $this->client_worksite;
+    }
+
+    public function setClientWorksite(?Customers $client_worksite): self
+    {
+        $this->client_worksite = $client_worksite;
 
         return $this;
     }
