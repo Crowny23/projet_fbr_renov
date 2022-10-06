@@ -72,7 +72,8 @@ class Customers
         $this->repairs = new ArrayCollection();
         $date = new DateTime();
         $timezone = new DateTimeZone('Europe/Paris');
-        $this->created_at = $date->setTimezone($timezone);
+        $created_at =  $date->setTimezone($timezone);
+        $this->createdAt = $created_at;
     }
 
     public function getId(): ?int

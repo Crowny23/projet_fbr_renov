@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Customers;
 use App\Entity\Quotation;
 use App\Entity\WorksiteCategories;
 use App\Entity\Worksites;
@@ -28,6 +29,7 @@ class WorksitesType extends AbstractType
             ->add('city_worksite', TextType::class, ['label' => 'Ville'])
             ->add('cp_worksite', IntegerType::class, ['label' => 'Code Postal'])
             ->add('adress_worksite', TextType::class, ['label' => 'Adresse'])
+            ->add('client_worksite', EntityType::class, ['label' => 'Client', 'class' => Customers::class])
             ->add('start_at', DateTimeType::class, ['label' => 'Date de début', 'input' => 'datetime_immutable'])
             ->add('duration_worksite', IntegerType::class, ['label' => 'Durée des travaux (en jours)'])
             ->add('supplement_worksite', IntegerType::class, ['label' => 'Travaux supplémentaires (en heures)'])
