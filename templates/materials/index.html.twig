@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Matériaux{% endblock %}
+
+{% block body %}
+    <h1>Matériaux</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom Matériel</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for material in materials %}
+            <tr>
+                <td>{{ material.nameMaterial }}</td>
+                <td>
+                    <a href="{{ path('app_materials_show', {'id': material.id}) }}">Voir</a>
+                    <a href="{{ path('app_materials_edit', {'id': material.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_materials_new') }}">Créer Nouveau</a>
+{% endblock %}

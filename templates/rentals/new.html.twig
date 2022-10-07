@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Nouvelle Location{% endblock %}
+
+{% block body %}
+    <h1>Créer nouvelle location </h1>
+    {{ include('rentals/_form.html.twig') }}
+    
+    <a href="{{ path('app_rentals_index') }}">Retour à la liste</a>
+{% endblock %}
