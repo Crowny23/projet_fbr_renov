@@ -16,6 +16,10 @@
                 <td>{{ worksite.nameWorksite }}</td>
             </tr>
             <tr>
+                <th>Adresse</th>
+                <td>{{ worksite.adressWorksite }}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</td>
+            </tr>
+            {# <tr>
                 <th>Ville</th>
                 <td>{{ worksite.cityWorksite }}</td>
             </tr>
@@ -26,30 +30,30 @@
             <tr>
                 <th>Adresse</th>
                 <td>{{ worksite.adressWorksite }}</td>
-            </tr>
+            </tr> #}
             <tr>
                 <th>Date de début</th>
                 <td>{{ worksite.startAt ? worksite.startAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Durée des travaux (en jours)</th>
-                <td>{{ worksite.durationWorksite ? worksite.durationWorksite|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ worksite.durationWorksite }} jour(s)</td>
             </tr>
             <tr>
                 <th>Travaux supplémentaires (en heures)</th>
-                <td>{{ worksite.supplementWorksite ? worksite.supplementWorksite|date('H:i:s') : '' }}</td>
+                <td>{% if worksite.supplementWorksite is same as null %} Aucun {% else %} {{ worksite.supplementWorksite }} heure(s) {% endif %}</td>
             </tr>
             <tr>
                 <th>Distance</th>
-                <td>{{ worksite.travelDistanceWorksite }}</td>
+                <td>{{ worksite.travelDistanceWorksite }} km</td>
             </tr>
             <tr>
                 <th>Note du client</th>
-                <td>{{ worksite.noteClientWorksite }}</td>
+                <td>{% if worksite.noteClientWorksite is same as null %} Aucune {% else %} {{ worksite.noteClientWorksite }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Note personnelle</th>
-                <td>{{ worksite.noteAdminWorksite }}</td>
+                <td>{% if worksite.noteAdminWorksite is same as null %} Aucune {% else %} {{ worksite.noteAdminWorksite }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Urgent</th>
@@ -61,11 +65,19 @@
             </tr>
             <tr>
                 <th>Date de création</th>
-                <td>{{ worksite.createdAt ? worksite.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ worksite.createdAt ? worksite.createdAt|date('d M Y H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Date de dernière modification</th>
-                <td>{{ worksite.updatedAt ? worksite.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ worksite.updatedAt ? worksite.updatedAt|date('d M Y H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Photos</th>
+                <td>
+                    {% for image in images %}
+                    <img src="{{ vich_uploader_asset(image) }}" alt="" width="200">
+                    {% endfor %}
+                </td>
             </tr>
         </tbody>
     </table>

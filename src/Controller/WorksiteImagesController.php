@@ -30,6 +30,7 @@ class WorksiteImagesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $worksiteImagesRepository->save($worksiteImage, true);
+            $worksiteImage->setFile($request->files->get('worksite_images')['file']);
 
             return $this->redirectToRoute('app_worksite_images_index', [], Response::HTTP_SEE_OTHER);
         }

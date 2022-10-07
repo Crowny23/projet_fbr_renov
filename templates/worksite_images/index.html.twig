@@ -18,9 +18,10 @@
         <tbody>
         {% for worksite_image in worksite_images %}
             <tr>
-                <td>{{ worksite_image.repair }}</td>
-                <td>{{ worksite_image.imageRepairsImages }}</td>
+                <td>{{ worksite_image.worksite }}</td>
+                <td>{{ worksite_image.imageWorksiteImages }}</td>
                 <td>{{ worksite_image.imageSize }} ko</td>
+                <td><img src="{{ vich_uploader_asset(worksite_image) }}" alt="" width="200"></td>
                 <td>
                     <a href="{{ path('app_worksite_images_show', {'id': worksite_image.id}) }}">show</a>
                     <a href="{{ path('app_worksite_images_edit', {'id': worksite_image.id}) }}">edit</a>

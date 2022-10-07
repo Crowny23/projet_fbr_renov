@@ -39,7 +39,6 @@ class WorksitesType extends AbstractType
             ->add('is_urgent', CheckboxType::class, ['label' => 'Urgent', 'mapped' => false, 'required' => false])
             ->add('status_worksite', ChoiceType::class, ['label' => 'Statut', 'choices' => ['Non commencé' => 'Non commencé', 'En cours' => 'En cours', 'Terminé' => 'Terminé']])
             ->add('category_worksite', EntityType::class, ['label' => 'Catégorie', 'class' => WorksiteCategories::class])
-            // ->add('images_worksite', EntityType::class, ['label' => 'Images', 'class' => WorksiteImages::class])
             ->add('quotation_worksite', EntityType::class, ['label' => 'Devis', 'class' => Quotation::class])
             ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
