@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit WorksiteImages{% endblock %}
+
+{% block body %}
+    <h1>Edit WorksiteImages</h1>
+
+    {{ include('worksite_images/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_worksite_images_index') }}">back to list</a>
+
+    {{ include('worksite_images/_delete_form.html.twig') }}
+{% endblock %}

@@ -44,7 +44,7 @@ class RepairsController extends AbstractController
     #[Route('/{id}', name: 'app_repairs_show', methods: ['GET'])]
     public function show(Repairs $repair, RepairsImagesRepository $repairsImagesRepository): Response
     {
-        $repairImages = $repairsImagesRepository->findByIdRepairs($repair->getId());
+        $repairImages = $repairsImagesRepository->findByRepair($repair->getId());
         return $this->render('repairs/show.html.twig', [
             'repair' => $repair,
             'images' => $repairImages,
