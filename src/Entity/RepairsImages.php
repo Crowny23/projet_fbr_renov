@@ -65,7 +65,6 @@ class RepairsImages
         return $this;
     }
 
-
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
