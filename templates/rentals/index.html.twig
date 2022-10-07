@@ -5,8 +5,8 @@
 {% block body %}
     <h1>Location</h1>
 
-    <table class="table">
-        <thead>
+    <table class="table table-hover">
+        <thead class="table">
             <tr>
                 <th>Matériel</th>
                 <th>Qauantité</th>
@@ -22,8 +22,8 @@
                 <td>{{ rental.unitPrice }}</td>
 
                 <td>
-                    <a href="{{ path('app_rentals_show', {'id': rental.id}) }}">Voir</a>
-                    <a href="{{ path('app_rentals_edit', {'id': rental.id}) }}">Modifier</a>
+                    <a href="{{ path('app_rentals_show', {'id': rental.id}) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_rentals_edit', {'id': rental.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -34,5 +34,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_rentals_new') }}">Créer</a>
+    <a href="{{ path('app_rentals_new') }}" class="btn btn-primary">Créer</a>
 {% endblock %}

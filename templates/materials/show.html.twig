@@ -7,10 +7,6 @@
 
     <table class="table">
         <tbody>
-            {# <tr>
-                <th>Id</th>
-                <td>{{ material.id }}</td>
-            </tr> #}
             <tr>
                 <th>Nom Matériel</th>
                 <td>{{ material.nameMaterial }}</td>
@@ -26,9 +22,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_materials_index') }}">Retour à la liste</a>
-
-    <a href="{{ path('app_materials_edit', {'id': material.id}) }}">Modifier</a>
+    <a href="{{ path('app_materials_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
+    <a href="{{ path('app_materials_edit', {'id': material.id}) }}" class="btn btn-primary mb-3">Modifier</a>
 
     {{ include('materials/_delete_form.html.twig') }}
+     
 {% endblock %}

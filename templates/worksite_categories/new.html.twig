@@ -3,9 +3,11 @@
 {% block title %}Nouvelle catégorie{% endblock %}
 
 {% block body %}
-    <h1>Créer une nouvelle catégorie de chantier</h1>
+    <a href="{{ path('app_worksite_categories_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
 
-    {{ include('worksite_categories/_form.html.twig') }}
-
-    <a href="{{ path('app_worksite_categories_index') }}">Retour à la liste des catégories</a>
+    <h1 class="row mb-3 mt-2 container col-4 mx-auto">Créer une nouvelle catégorie de chantier</h1>
+    <div class="row mb-3 container col-4 ps-0 mt-5 mx-auto">
+        {{ include('worksite_categories/_form.html.twig') }}
+    </div>
+    
 {% endblock %}

@@ -5,10 +5,9 @@
 {% block body %}
     <h1>Users index</h1>
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Email</th>
                 <th>Roles</th>
                 <th>Password</th>
@@ -20,15 +19,14 @@
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.password }}</td>
                 <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_users_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_users_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('app_users_show', {'id': user.id}) }}"><i class="fa-sharp fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_users_edit', {'id': user.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
             </tr>
         {% else %}

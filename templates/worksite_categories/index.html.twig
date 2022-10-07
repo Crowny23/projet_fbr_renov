@@ -5,10 +5,9 @@
 {% block body %}
     <h1>Liste des catégories de chantiers</h1>
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom de la catégorie</th>
                 <th>Date de création</th>
                 <th>Date de dernière modification</th>
@@ -18,13 +17,12 @@
         <tbody>
         {% for worksite_category in worksite_categories %}
             <tr>
-                <td>{{ worksite_category.id }}</td>
                 <td>{{ worksite_category.nameWorksiteCategories }}</td>
                 <td>{{ worksite_category.createdAt ? worksite_category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ worksite_category.updatedAt ? worksite_category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_worksite_categories_show', {'id': worksite_category.id}) }}">Voir</a>
-                    <a href="{{ path('app_worksite_categories_edit', {'id': worksite_category.id}) }}">Modifier</a>
+                    <a href="{{ path('app_worksite_categories_show', {'id': worksite_category.id}) }}"><i class="fa-sharp fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_worksite_categories_edit', {'id': worksite_category.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_worksite_categories_new') }}">Créer une nouvelle catégorie</a>
+    <a href="{{ path('app_worksite_categories_new') }}" class="btn btn-primary">Créer une nouvelle catégorie</a>
 {% endblock %}
