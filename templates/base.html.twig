@@ -10,7 +10,14 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                {% include "sidebar/sidebar.html.twig" %}
+                <div class="col py-3">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+        </div>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

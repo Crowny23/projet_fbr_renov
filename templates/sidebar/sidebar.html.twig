@@ -1,0 +1,99 @@
+<nav id="sidebar" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+  <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+    <a href="/" class="d-flex align-items-center pb-3 me-md-auto text-white text-decoration-none">
+      <span class="fs-5 d-none d-sm-inline">FBR renovation</span>
+    </a>
+    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+      <li class="nav-item">
+        <a href="#submenuClient" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+          <i class="fa fa-users"></i>
+          <span class="ms-1 d-none d-sm-inline">Clients</span>
+        </a>
+        <ul class="collapse nav flex-column ms-1" id="submenuClient" data-bs-parent="#menu">
+          <li class="w-100 ms-3">
+            <a href="{{path('app_customers_index')}}" class="nav-link px-0"><i class="fa fa-user"></i><span class="d-none ms-1 d-sm-inline">Voir</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_customers_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="#submenuWorksite" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+          <i class="fa fa-building"></i>
+          <span class="ms-1 d-none d-sm-inline">Chantiers</span>
+        </a>
+        <ul class="collapse nav flex-column ms-1" id="submenuWorksite" data-bs-parent="#menu">
+          <li class="w-100 ms-3">
+            <a href="{{path('app_worksites_index')}}" class="nav-link px-0"><i class="fa fa-building"></i><span class="d-none ms-1 d-sm-inline">Voir</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_worksite_categories_index')}}" class="nav-link px-0"><i class="fa fa-list-alt"></i><span class="d-none ms-1 d-sm-inline">Catégories</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="#" class="nav-link px-0"><i class="fa fa-images"></i><span class="d-none ms-1 d-sm-inline">Images</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_quotation_index')}}" class="nav-link px-0"><i class="fa fa-calculator"></i><span class="d-none ms-1 d-sm-inline">Devis</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_worksites_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="#submenuRepair" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+          <i class="fa fa-person-digging"></i>
+          <span class="ms-1 d-none d-sm-inline">Dépannages</span>
+        </a>
+        <ul class="collapse nav flex-column ms-1" id="submenuRepair" data-bs-parent="#menu">
+          <li class="w-100 ms-3">
+            <a href="{{path('app_repairs_index')}}" class="nav-link px-0"><i class="fa fa-person-digging"></i><span class="d-none ms-1 d-sm-inline">Voir</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_repairs_categories_index')}}" class="nav-link px-0"><i class="fa fa-list-alt"></i><span class="d-none ms-1 d-sm-inline">Catégories</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_repairs_images_index')}}" class="nav-link px-0"><i class="fa fa-images"></i><span class="d-none ms-1 d-sm-inline">Images</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_repairs_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="#submenuRental" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+          <i class="fa fa-truck-moving"></i>
+          <span class="ms-1 d-none d-sm-inline">Locatiers</span>
+        </a>
+        <ul class="collapse nav flex-column ms-1" id="submenuRental" data-bs-parent="#menu">
+          <li class="w-100 ms-3">
+            <a href="{{path('app_renter_index')}}" class="nav-link px-0"><i class="fa fa-truck-moving"></i><span class="d-none ms-1 d-sm-inline">Voir</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_rentals_index')}}" class="nav-link px-0"><i class="fa fa-right-to-bracket"></i><span class="d-none ms-1 d-sm-inline">Locations</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_materials_index')}}" class="nav-link px-0"><i class="fa fa-screwdriver-wrench"></i><span class="d-none ms-1 d-sm-inline">Matériels</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_renter_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link align-middle px-0">
+          <i class="fa fa-chart-simple"></i><span class="s-none ms-1 d-sm-inline">Statistique</span>
+        </a>
+      </li>
+    </ul>
+    <div class="dropdown pb-4">
+      <a href="" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUserCo" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa fa-user"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUserCo">
+        <li><a href="{{path('app_logout')}}" class="dropdown-item">Déconnexion</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
