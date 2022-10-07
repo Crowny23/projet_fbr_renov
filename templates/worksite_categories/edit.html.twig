@@ -3,11 +3,12 @@
 {% block title %}Modification de catégorie{% endblock %}
 
 {% block body %}
-    <h1>Modifier la catégorie</h1>
+    <a href="{{ path('app_worksite_categories_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
 
-    {{ include('worksite_categories/_form.html.twig', {'button_label': 'Modifier'}) }}
-
-    <a href="{{ path('app_worksite_categories_index') }}">Retour à la liste des catégories</a>
-
-    {{ include('worksite_categories/_delete_form.html.twig') }}
+    <h1 class="mb-3 mt-2 ps-4 container col-4 mx-auto">Modifier la catégorie</h1>
+    <div class="row mb-3 container col-4 mx-auto">
+        {{ include('worksite_categories/_form.html.twig', {'button_label': 'Modifier'}) }}
+        {{ include('worksite_categories/_delete_form.html.twig') }}
+    </div>
+    
 {% endblock %}

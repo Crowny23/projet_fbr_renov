@@ -5,10 +5,9 @@
 {% block body %}
     <h1>Locatiers</h1>
 
-    <table class="table">
-        <thead>
+    <table class="table table-hover">
+        <thead class="table">
             <tr>
-                {# <th>Id</th> #}
                 <th>Nom Locatiers</th>
                 <th>Ville</th>
                 <th>Code Postale</th>
@@ -17,15 +16,12 @@
                 <th>E-mail</th>
                 <th>Téléphone</th>
                 <th>Note</th>
-                {# <th>Créé</th>
-                <th>Modifié</th> #}
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for renter in renters %}
             <tr>
-                {# <td>{{ renter.id }}</td> #}
                 <td>{{ renter.nameRenter }}</td>
                 <td>{{ renter.cityRenter }}</td>
                 <td>{{ renter.cpRenter }}</td>
@@ -34,11 +30,11 @@
                 <td>{{ renter.emailRenter }}</td>
                 <td>{{ renter.phoneRenter }}</td>
                 <td>{{ renter.noteAdminRenter }}</td>
-                {# <td>{{ renter.createdAt ? renter.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ renter.updatedAt ? renter.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_renter_show', {'id': renter.id}) }}">Voir</a>
-                    <a href="{{ path('app_renter_edit', {'id': renter.id}) }}">Modifier</a>
+                    <a href="{{ path('app_renter_show', {'id': renter.id}) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_renter_edit', {'id': renter.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                    
+                    
                 </td>
             </tr>
         {% else %}
@@ -49,5 +45,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_renter_new') }}">Créer</a>
+    <a href="{{ path('app_renter_new') }}" class="btn btn-primary">Créer</a>
 {% endblock %}

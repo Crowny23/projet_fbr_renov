@@ -3,9 +3,12 @@
 {% block title %}Nouveau Locatier{% endblock %}
 
 {% block body %}
-    <h1>Créer Nouveau Locatier</h1>
-
-    {{ include('renter/_form.html.twig') }}
-
-    <a href="{{ path('app_renter_index') }}">Retour à la liste</a>
+<div>
+    <a href="{{ path('app_renter_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
+    <h1 class="row mb-3 mt-2 container col-4 mx-auto">Créer Nouveau Locatier</h1>
+    <div class="row mb-3 container col-4 ps-0 mt-5 mx-auto">
+        {{ include('renter/_form.html.twig') }}
+    </div>
+    
+</div>
 {% endblock %}

@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Les dépannages</h1>
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Nom dépannage</th>
@@ -37,8 +37,8 @@
                 <td>{{ repair.client }}</td>
                 <td>{{ repair.category }}</td>
                 <td>
-                    <a href="{{ path('app_repairs_show', {'id': repair.id}) }}">voir</a>
-                    <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}">editer</a>
+                    <a href="{{ path('app_repairs_show', {'id': repair.id}) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
             </tr>
         {% else %}

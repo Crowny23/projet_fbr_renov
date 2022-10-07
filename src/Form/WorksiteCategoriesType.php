@@ -15,8 +15,6 @@ class WorksiteCategoriesType extends AbstractType
     {
         $builder
             ->add('name_worksite_categories', TextType::class, ['label' => 'Nom de la catégorie'])
-            // ->add('created_at')
-            // ->add('updated_at')
             ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
     }

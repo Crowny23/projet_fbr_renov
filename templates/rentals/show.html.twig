@@ -30,9 +30,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_rentals_index') }}">Retour à la liste </a>
+    <a href="{{ path('app_rentals_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_rentals_edit', {'id': rental.id}) }}">Modifier</a>
+    <a href="{{ path('app_rentals_edit', {'id': rental.id}) }}" class="btn btn-primary mb-3">Modifier</a>
 
     {{ include('rentals/_delete_form.html.twig') }}
 {% endblock %}

@@ -4,10 +4,10 @@
 
 {% block body %}
     <h1>Modifier le chantier</h1>
-
-    {{ include('worksites/_form.html.twig', {'button_label': 'Modifier'}) }}
-
-    <a href="{{ path('app_worksites_index') }}">Retour à la liste des chantiers</a>
+    <div class="row mb-3 container col-4">
+        {{ include('worksites/_form.html.twig', {'button_label': 'Modifier'}) }}
+    </div>
+    <a href="{{ path('app_worksites_index') }}">Retour</a>
 
     {{ include('worksites/_delete_form.html.twig') }}
 {% endblock %}
