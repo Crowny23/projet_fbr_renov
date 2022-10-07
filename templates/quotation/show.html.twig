@@ -36,6 +36,10 @@
                 <td>{{ quotation.finalPaymentQuotation }}</td>
             </tr>
             <tr>
+                <th>Chantier</th>
+                <td>{{ quotation.worksite }}</td>
+            </tr>
+            <tr>
                 <th>Date de création</th>
                 <td>{{ quotation.createdAt ? quotation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>

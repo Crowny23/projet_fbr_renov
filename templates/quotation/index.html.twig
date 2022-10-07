@@ -34,6 +34,7 @@
                 <td>{{ quotation.updatedAt ? quotation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_quotation_show', {'id': quotation.id}) }}">Voir</a>
+                    <a href="{{ path('app_pdf_generator', {'id': quotation.id}) }}">Pdf</a>
                     <a href="{{ path('app_quotation_edit', {'id': quotation.id}) }}">Modifier</a>
                 </td>
             </tr>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devis</title>
+</head>
+<body> 
+    <div style="float: left; margin-top: 20px;">
+        <p>FBR Renovation Immobilière <br>
+        984 Route de Romanèche <br>
+        01270 COLIGNY <br>
+        Tel : 06.14.22.29.86</p>
+    </div>
+    <div style="float: right;">
+        <div style="border: black solid 1px; padding: 5px; margin-bottom: 20px; border-radius: 5px;">
+            <p><span style="text-decoration: underline;">DEVIS:</span> <span>N° {{ reference }}</span></p>
+            <p>Date: {{ "now"|date("d/m/Y") }}</p>
+        </div>
+        <div style="border: black solid 1px; padding: 5px; border-radius: 5px;">
+            <p>
+                {{firstname}} {{lastname}} <br>
+                {{address}} <br>
+                {{cp}} {{city}}
+            </p>
+        </div>
+    </div>
+    <div style="margin: 0 auto; width: 700px; margin-top: 300px;">
+        <table style="width: 100%;" border="1">
+            <tr>
+                <td>
+                    Chantier
+                </td>
+                <td>
+                    {{ worksite }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Reference
+                </td>
+                <td>
+                    {{ deposit }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    prix
+                </td>
+                <td>
+                    {{ price }}
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
