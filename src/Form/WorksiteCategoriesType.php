@@ -14,8 +14,8 @@ class WorksiteCategoriesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name_worksite_categories', TextType::class, ['label' => 'Nom de la catégorie'])
-            ->add('submit', SubmitType::class, ['label' => 'Valider'])
+            ->add('name_worksite_categories', TextType::class, ['label' => 'Nom de la catégorie', 'label_attr' => ['class' => 'mb-2']])
+            ->add('submit', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'mt-3 btn btn-success']])
         ;
     }
 

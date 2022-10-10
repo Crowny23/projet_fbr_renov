@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Editer un dépannage{% endblock %}
+{% block title %}Modifier dépannage{% endblock %}
 
 {% block body %}
-    <h1>Editer un dépannage</h1>
-    <div class="row mb-3 container col-4">
-        {{ include('repairs/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+    <a href="{{ path('app_repairs_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
+    <h1 class="mb-3 mt-2 ps-4 container col-4 mx-auto">Modifier dépannage</h1>
+    <div class="row mb-3 container col-4 mx-auto">
+        {{ include('repairs/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+        {{ include('repairs/_delete_form.html.twig') }}
     </div>
-    <a href="{{ path('app_repairs_index') }}">Retour</a>
+    
 
-    {{ include('repairs/_delete_form.html.twig') }}
+    
 {% endblock %}

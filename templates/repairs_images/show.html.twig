@@ -12,7 +12,7 @@
                 <td>{{ repairs_image.imageRepairsImages }}</td>
             </tr>
             <tr>
-                <th>Modifié le</th>
+                <th>Date de modification</th>
                 <td>{{ repairs_image.updatedAt ? repairs_image.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
@@ -20,7 +20,7 @@
                 <td>{{ repairs_image.imageSize }} ko</td>
             </tr>
             <tr>
-                <th>l'image</th>
+                <th>L'image</th>
                 <td><img src="{{ vich_uploader_asset(repairs_image) }}" alt="" width="200"></td>
             </tr>
         </tbody>

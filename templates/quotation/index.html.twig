@@ -14,8 +14,8 @@
                 <th>Montant de l'accompte</th>
                 <th>Montant du paiement intermédiaire</th>
                 <th>Montant du paiement final</th>
-                <th>Date de création</th>
-                <th>Date de dernière modification</th>
+                {# <th>Date de création</th>
+                <th>Date de dernière modification</th> #}
                 <th>Actions</th>
             </tr>
         </thead>
@@ -28,8 +28,8 @@
                 <td>{{ quotation.depositQuotation }}</td>
                 <td>{{ quotation.intermediatePaymentQuotation }}</td>
                 <td>{{ quotation.finalPaymentQuotation }}</td>
-                <td>{{ quotation.createdAt ? quotation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ quotation.updatedAt ? quotation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                {# <td>{{ quotation.createdAt ? quotation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ quotation.updatedAt ? quotation.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
                     <a href="{{ path('app_quotation_show', {'id': quotation.id}) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-eye"></i></a>
                     <a href="{{ path('app_quotation_edit', {'id': quotation.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -43,5 +43,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_quotation_new') }}" class="btn btn-primary">Créer un nouveau devis</a>
+    <a href="{{ path('app_quotation_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Créer un nouveau devis</a>
 {% endblock %}
