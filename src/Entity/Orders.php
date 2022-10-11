@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\OrdersRepository;
 use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -43,7 +44,10 @@ class Orders
     public function __construct()
     {
         $this->raw_material_ordered = new ArrayCollection();
-        $this->created_at = new DateTimeImmutable();
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $created_at =  $date->setTimezone($timezone);
+        $this->created_at = $created_at;
     }
 
     public function getId(): ?int

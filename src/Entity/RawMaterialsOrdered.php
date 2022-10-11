@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RawMaterialsOrderedRepository;
 use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RawMaterialsOrderedRepository::class)]
@@ -33,7 +34,10 @@ class RawMaterialsOrdered
 
     public function __construct()
     {
-        $this->created_at = new DateTimeImmutable();
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $created_at =  $date->setTimezone($timezone);
+        $this->created_at = $created_at;
     }
 
     public function getId(): ?int

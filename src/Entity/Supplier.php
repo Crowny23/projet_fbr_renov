@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SupplierRepository;
+use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -36,9 +38,21 @@ class Supplier
     #[ORM\OneToMany(mappedBy: 'supplier', targetEntity: Orders::class)]
     private Collection $orders;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $created_at =  $date->setTimezone($timezone);
+        $this->created_at = $created_at;
+    }
+
+    public function __toString()
+    {
+        return $this->name_supplier;
     }
 
     public function getId(): ?int
@@ -144,6 +158,18 @@ class Supplier
                 $order->setSupplier(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }

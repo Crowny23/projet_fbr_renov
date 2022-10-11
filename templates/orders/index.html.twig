@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orders index{% endblock %}
+
+{% block body %}
+    <h1>Orders index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom de la commande</th>
+                <th>Numéro de la commande</th>
+                <th>Prix total HT (A titre indicatif)</th>
+                <th>Date de création</th>
+                <th>Date de dernière modification</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.nameOrder }}</td>
+                <td>{{ order.reference }}</td>
+                <td>{{ order.totalPrice }}</td>
+                <td>{{ order.createdAt ? order.createdAt|date('d M Y H:i:s') : '' }}</td>
+                <td>{{ order.updatedAt ? order.updatedAt|date('d M Y H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_orders_show', {'id': order.id}) }}">Voir</a>
+                    <a href="{{ path('app_orders_edit', {'id': order.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Pas de commande existante</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_orders_new') }}">Créer une nouvelle commande</a>
+{% endblock %}

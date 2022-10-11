@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RawMaterialsCategoriesRepository;
 use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,7 +29,10 @@ class RawMaterialsCategories
     public function __construct()
     {
         $this->rawMaterials = new ArrayCollection();
-        $this->created_at =  new DateTimeImmutable();
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $created_at =  $date->setTimezone($timezone);
+        $this->created_at = $created_at;
     }
 
     public function __toString()

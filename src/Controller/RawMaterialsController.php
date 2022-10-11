@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\RawMaterials;
 use App\Form\RawMaterialsType;
+use App\Form\SearchFormType;
 use App\Repository\RawMaterialsRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +17,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class RawMaterialsController extends AbstractController
 {
     #[Route('/', name: 'app_raw_materials_index', methods: ['GET'])]
-    public function index(RawMaterialsRepository $rawMaterialsRepository): Response
+    public function index(RawMaterialsRepository $rawMaterialsRepository, Request $request): Response
     {
-        return $this->render('raw_materials/index.html.twig', [
-            'raw_materials' => $rawMaterialsRepository->findAll(),
+        $rawMaterial = new RawMaterials();
+        $searchForm = $this->createForm(SearchFormType::class, $rawMaterial, ['method' => 'GET']);
+        $searchForm->handleRequest($request);
+
+        $list = $rawMaterialsRepository->findAll();
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+            $search = $searchForm->getViewData()->getNameRawMaterial();
+            $category = $searchForm->getViewData()->getCategory();
+            $list = $rawMaterialsRepository->findByNameAndCategory($search, $category);
+        }
+
+        return $this->renderForm('raw_materials/index.html.twig', [
+            'raw_materials' => $list,
+            'searchForm' => $searchForm
         ]);
     }
 

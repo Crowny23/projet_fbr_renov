@@ -5,6 +5,12 @@
 {% block body %}
     <h1>Liste des matériaux</h1>
 
+    {{ form_start(searchForm) }}
+        {{ form_widget(searchForm) }}
+    {{ form_end(searchForm) }}
+
+    <a href="{{ path('app_raw_materials_index')}}">Afficher tous les matériaux</a>
+
     <table class="table">
         <thead>
             <tr>

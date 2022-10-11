@@ -39,20 +39,42 @@ class RawMaterialsRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return RawMaterials[] Returns an array of RawMaterials objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return RawMaterials[] Returns an array of RawMaterials objects
+    */
+    public function findByNameAndCategory($search, $category): array
+    {
+        if($category === null) {
+            return $this->createQueryBuilder('r')
+                ->andWhere('r.name_raw_material LIKE :search')
+                ->setParameter('search', '%' . $search . '%')
+                ->orderBy('r.id', 'ASC')
+                ->setMaxResults(50)
+                ->getQuery()
+                ->getResult()
+            ;
+        } else if ($search === null) {
+            return $this->createQueryBuilder('r')
+                ->andWhere('r.category = :cat')
+                ->setParameter('cat', $category)
+                ->orderBy('r.id', 'ASC')
+                ->setMaxResults(50)
+                ->getQuery()
+                ->getResult()
+            ;
+        } else {
+            return $this->createQueryBuilder('r')
+                ->where('r.category = :cat')
+                ->setParameter('cat', $category)
+                ->andWhere('r.name_raw_material LIKE :search')
+                ->setParameter('search', '%' . $search . '%')
+                ->orderBy('r.id', 'ASC')
+                ->setMaxResults(50)
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+    }
 
 //    public function findOneBySomeField($value): ?RawMaterials
 //    {
