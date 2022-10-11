@@ -40,6 +40,8 @@ class PdfGeneratorController extends AbstractController
         $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
         $dompdf->render();
+        $font = $dompdf->getFontMetrics()->get_font("helvetica", "bold");
+        $dompdf->getCanvas()->page_text(575, 775, "{PAGE_NUM} / {PAGE_COUNT}", $font, 10, array(0,0,0));
 
         return new Response(
             $dompdf->stream('devis'.$quotation->getReferenceQuotation() , ["Attachment" => false]),
