@@ -13,7 +13,7 @@ class RepairsCategoriesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name_repairs_category', TextType::class, ['label' => 'Nom de la catégorie'])
+            ->add('name_repairs_category', TextType::class, ['label' => 'Nom de la catégorie', 'label_attr' => ['class' => 'mb-1']])
         ;
     }
 

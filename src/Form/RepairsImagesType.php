@@ -17,11 +17,13 @@ class RepairsImagesType extends AbstractType
         $builder
             ->add('file', FileType::class, [
                 'label' => 'Image',
-                'empty_data' => ''
+                'empty_data' => '',
+                'label_attr' => ['class' => 'mb-1, mt-2']
                 ])
             ->add('repair', EntityType::class, [
                 'class' => Repairs::class,
-                'label' => 'Dépannage'
+                'label' => 'Dépannage',
+                'label_attr' => ['class' => 'mb-1, mt-2']
             ])
         ;
     }

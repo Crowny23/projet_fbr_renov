@@ -17,15 +17,15 @@ class CustomersType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname', TextType::class, ['label' => 'Prenom'])
-            ->add('lastname', TextType::class, ['label' => 'Nom'])
-            ->add('Town', TextType::class, ['label' => 'Ville'])
-            ->add('postalcode', NumberType::class, ['label' => 'Code Postale'])
-            ->add('address', TextType::class, ['label' => 'Addresse'])
-            ->add('mail', EmailType::class, ['label' => 'E-mail'])
-            ->add('phone', TelType::class, ['label' => 'Téléphone'])
-            ->add('social_reason', TextType::class, ['label' => 'Raison Sociale'])
-            ->add('customer_note', TextType::class, ['label' => 'Note'])
+            ->add('firstname', TextType::class, ['label' => 'Prenom', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('lastname', TextType::class, ['label' => 'Nom', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('Town', TextType::class, ['label' => 'Ville', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('postalcode', NumberType::class, ['label' => 'Code Postale', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('address', TextType::class, ['label' => 'Addresse', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('mail', EmailType::class, ['label' => 'E-mail', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('phone', TelType::class, ['label' => 'Téléphone', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('social_reason', TextType::class, ['label' => 'Raison Sociale', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('customer_note', TextType::class, ['label' => 'Note', 'label_attr' => ['class' => 'mb-1, mt-2']])
         ;
     }
 

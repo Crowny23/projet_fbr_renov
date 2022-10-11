@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Repairs{% endblock %}
+{% block title %}Dépannage{% endblock %}
 
 {% block body %}
-    <h1>Repairs</h1>
+    <h1>Dépannage</h1>
 
     <table class="table">
         <tbody>
@@ -52,11 +52,11 @@
                 <td>{{ repair.category }}</td>
             </tr>
             <tr>
-                <th>Créé le</th>
+                <th>Date de création</th>
                 <td>{{ repair.createdAt ? repair.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Modifié le</th>
+                <th>Date de modification</th>
                 <td>{{ repair.updatedAt ? repair.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
@@ -70,9 +70,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_repairs_index') }}">retour à la liste</a>
+    <a href="{{ path('app_repairs_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}">éditer</a>
+    <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}"class="btn btn-primary mb-3">Modifier</a>
 
     {{ include('repairs/_delete_form.html.twig') }}
 {% endblock %}

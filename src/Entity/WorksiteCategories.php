@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use App\Repository\WorksiteCategoriesRepository;
 use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: WorksiteCategoriesRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+
 class WorksiteCategories
 {
     #[ORM\Id]
@@ -30,7 +33,18 @@ class WorksiteCategories
 
     public function __construct()
     {
-        $this->created_at = new DateTimeImmutable();
+        
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->created_at = $date->setTimezone($timezone);
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $date = new DateTimeImmutable();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->updated_at = $date->setTimezone($timezone);
     }
 
     public function getId(): ?int

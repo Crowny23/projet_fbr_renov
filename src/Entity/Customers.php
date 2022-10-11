@@ -72,8 +72,15 @@ class Customers
         $this->repairs = new ArrayCollection();
         $date = new DateTime();
         $timezone = new DateTimeZone('Europe/Paris');
-        $created_at =  $date->setTimezone($timezone);
-        $this->createdAt = $created_at;
+        $this->createdAt = $date->setTimezone($timezone);
+    }
+    
+    #[ORM\PreUpdate]
+    public function onPreUpdate()
+    {
+        $date = new DateTime();
+        $timezone = new DateTimeZone('Europe/Paris');
+        $this->updated_at = $date->setTimezone($timezone);
     }
 
     public function getId(): ?int
@@ -225,13 +232,6 @@ class Customers
         return $this;
     }
 
-    #[ORM\PreUpdate]
-    public function onPreUpdate()
-    {
-        $date = new DateTime();
-        $timezone = new DateTimeZone('Europe/Paris');
-        $this->updated_at = $date->setTimezone($timezone);
-    }
     
     /**
      * @return Collection<int, Worksites>
