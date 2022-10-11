@@ -3,9 +3,12 @@
 {% block title %}Nouveau Matériel{% endblock %}
 
 {% block body %}
-    <h1>Créer Nouveau Matériel</h1>
-
-    {{ include('materials/_form.html.twig') }}
-
-    <a href="{{ path('app_materials_index') }}">Retour à la liste</a>
+    <a href="{{ path('app_materials_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
+    <h1  class="row mb-3 mt-2 container col-4 mx-auto">Créer Nouveau Matériel</h1>
+    <div class="row mb-3 container col-4 ps-0 mt-5 mx-auto ">
+        {{ include('materials/_form.html.twig') }}
+    </div>
+    
+    
+    
 {% endblock %}

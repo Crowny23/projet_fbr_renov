@@ -3,8 +3,10 @@
 {% block title %} Nouvelle Location{% endblock %}
 
 {% block body %}
-    <h1>Créer nouvelle location </h1>
-    {{ include('rentals/_form.html.twig') }}
+    <a href="{{ path('app_rentals_index') }}"  class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
+    <h1 class="row mb-3 mt-2 container col-4 mx-auto">Créer nouvelle location </h1>
+    <div class="row mb-3 container col-4 ps-0 mt-5 mx-auto ">
+        {{ include('rentals/_form.html.twig') }}
+    </div>
     
-    <a href="{{ path('app_rentals_index') }}">Retour à la liste</a>
 {% endblock %}

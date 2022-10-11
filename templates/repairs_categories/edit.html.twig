@@ -3,11 +3,12 @@
 {% block title %}Editer Categorie dépannage{% endblock %}
 
 {% block body %}
-    <h1>Editer Categorie dépannage</h1>
+    <a href="{{ path('app_repairs_categories_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
 
-    {{ include('repairs_categories/_form.html.twig', {'button_label': 'modifier'}) }}
-
-    <a href="{{ path('app_repairs_categories_index') }}">retour à la liste</a>
-
-    {{ include('repairs_categories/_delete_form.html.twig') }}
+    <h1 class="mb-3 mt-2 ps-4 container col-4 mx-auto">Editer Categorie dépannage</h1>
+    <div class="row mb-3 container col-4 mx-auto">
+        {{ include('repairs_categories/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+        {{ include('repairs_categories/_delete_form.html.twig') }}
+    </div>
+    
 {% endblock %}

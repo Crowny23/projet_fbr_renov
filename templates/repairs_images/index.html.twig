@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Les images dépannages</h1>
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Nom du dépannage</th>
@@ -23,8 +23,8 @@
                 <td>{{ repairs_image.imageSize }} ko</td>
                 <td><img src="{{ vich_uploader_asset(repairs_image) }}" alt="" width="200"></td>
                 <td>
-                    <a href="{{ path('app_repairs_images_show', {'id': repairs_image.id}) }}">voir</a>
-                    <a href="{{ path('app_repairs_images_edit', {'id': repairs_image.id}) }}">editer</a>
+                    <a href="{{ path('app_repairs_images_show', {'id': repairs_image.id}) }}"><i class="fa-sharp fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_repairs_images_edit', {'id': repairs_image.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_repairs_images_new') }}">Ajouter une image</a>
+    <a href="{{ path('app_repairs_images_new') }}" class="btn btn-primary">Ajouter une image</a>
 {% endblock %}

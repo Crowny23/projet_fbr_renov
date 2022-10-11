@@ -3,9 +3,11 @@
 {% block title %}Nouveau devis{% endblock %}
 
 {% block body %}
-    <h1>Créer un nouveau devis</h1>
+    <a href="{{ path('app_quotation_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
+    <h1 class="row mb-3 mt-2 container col-4 mx-auto">Créer un nouveau devis</h1>
+    <div class="row mb-3 container col-4 ps-0 mt-5 mx-auto ">
+        {{ include('quotation/_form.html.twig') }}
+    </div>
 
-    {{ include('quotation/_form.html.twig') }}
-
-    <a href="{{ path('app_quotation_index') }}">Retour à la liste</a>
+    
 {% endblock %}
