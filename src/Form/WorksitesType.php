@@ -27,6 +27,7 @@ class WorksitesType extends AbstractType
         $builder
             ->add('name_worksite', TextType::class, ['label' => 'Nom du chantier', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('city_worksite', TextType::class, ['label' => 'Ville', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('client_worksite', EntityType::class, ['class' => Customers::class, 'label' => 'Client', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('cp_worksite', IntegerType::class, ['label' => 'Code Postal', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('adress_worksite', TextType::class, ['label' => 'Adresse', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('start_at', DateTimeType::class, ['label' => 'Date de début', 'input' => 'datetime_immutable', 'label_attr' => ['class' => 'mb-1, mt-2']])
