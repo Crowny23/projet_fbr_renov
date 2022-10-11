@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des matériaux{% endblock %}
+
+{% block body %}
+    <h1>Liste des matériaux</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom du matériau</th>
+                <th>Categorie</th>
+                <th>Unité</th>
+                <th>Prix HT (A titre indicatif)</th>
+                <th>Date de création</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for raw_material in raw_materials %}
+            <tr>
+                <td>{{ raw_material.id }}</td>
+                <td>{{ raw_material.nameRawMaterial }}</td>
+                <td>{{ raw_material.category }}</td>
+                <td>{{ raw_material.unit }}</td>
+                <td>{{ raw_material.price }}</td>
+                <td>{{ raw_material.createdAt ? raw_material.createdAt|date('d M Y H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_raw_materials_show', {'id': raw_material.id}) }}">Voir</a>
+                    <a href="{{ path('app_raw_materials_edit', {'id': raw_material.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Pas de matériaux existant</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_raw_materials_new') }}">Ajouter un nouveau matériau</a>
+{% endblock %}

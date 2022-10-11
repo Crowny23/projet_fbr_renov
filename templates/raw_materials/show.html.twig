@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ raw_material.nameRawMaterial }}{% endblock %}
+
+{% block body %}
+    <h1>{{ raw_material.nameRawMaterial }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ raw_material.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom du matériau</th>
+                <td>{{ raw_material.nameRawMaterial }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{{ raw_material.createdAt ? raw_material.createdAt|date('d M Y H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_raw_materials_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('app_raw_materials_edit', {'id': raw_material.id}) }}">Modifier</a>
+
+    {{ include('raw_materials/_delete_form.html.twig') }}
+{% endblock %}

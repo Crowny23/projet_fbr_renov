@@ -79,12 +79,16 @@ class Worksites
     #[ORM\JoinColumn(nullable: false)]
     private ?Customers $client_worksite = null;
 
+    #[ORM\OneToMany(mappedBy: 'worksite', targetEntity: Orders::class)]
+    private Collection $orders;
+
     public function __construct()
     {
         $this->task_worksite = new ArrayCollection();
         $this->rental_worksite = new ArrayCollection();
         $this->image_worksite = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
+        $this->orders = new ArrayCollection();
     }
 
     public function __toString()
@@ -428,6 +432,36 @@ class Worksites
     public function setClientWorksite(?Customers $client_worksite): self
     {
         $this->client_worksite = $client_worksite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Orders>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Orders $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setWorksite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Orders $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getWorksite() === $this) {
+                $order->setWorksite(null);
+            }
+        }
 
         return $this;
     }
