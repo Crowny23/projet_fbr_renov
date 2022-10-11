@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Customers;
 use App\Entity\Quotation;
 use App\Entity\WorksiteCategories;
 use App\Entity\Worksites;
@@ -38,7 +39,6 @@ class WorksitesType extends AbstractType
             ->add('status_worksite', ChoiceType::class, ['label' => 'Statut', 'choices' => ['Non commencé' => 'Non commencé', 'En cours' => 'En cours', 'Terminé' => 'Terminé'], 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('category_worksite', EntityType::class, ['label' => 'Catégorie', 'class' => WorksiteCategories::class, 'label_attr' => ['class' => 'mb-1, mt-2']])
             // ->add('images_worksite', EntityType::class, ['label' => 'Images', 'class' => WorksiteImages::class])
-            ->add('quotation_worksite', EntityType::class, ['label' => 'Devis', 'class' => Quotation::class, 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('submit', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn btn-success mt-3']])
         ;
     }

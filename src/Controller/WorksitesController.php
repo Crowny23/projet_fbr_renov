@@ -7,6 +7,7 @@ use App\Entity\Worksites;
 use App\Form\WorksiteCategoriesType;
 use App\Form\WorksitesType;
 use App\Repository\WorksiteCategoriesRepository;
+use App\Repository\WorksiteImagesRepository;
 use App\Repository\WorksitesRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,10 +46,12 @@ class WorksitesController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_worksites_show', methods: ['GET'])]
-    public function showWorksite(Worksites $worksite): Response
+    public function showWorksite(Worksites $worksite, WorksiteImagesRepository $worksiteImagesRepository): Response
     {
+        $worksiteImages = $worksiteImagesRepository->findByWorksite($worksite->getId());
         return $this->render('worksites/show.html.twig', [
             'worksite' => $worksite,
+            'images' => $worksiteImages
         ]);
     }
 

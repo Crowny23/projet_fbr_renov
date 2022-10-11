@@ -9,15 +9,14 @@
         <thead>
             <tr>
                 <th>Nom du chantier</th>
-                <th>Ville</th>
-                <th>Code Postal</th>
-                <th>Adresse</th>
+                <th>Adresse Complète</th>
+                <th>Client</th>
                 <th>Date de début</th>
                 {# <th>Durée des travaux (en jours)</th>
                 <th>Travaux supplémentaires (en heures)</th> #}
                 <th>Distance</th>
-                <th>Note du client</th>
-                <th>Note personelle</th>
+                {# <th>Note du client</th>
+                <th>Note personelle</th> #}
                 <th>Urgent</th>
                 <th>Statut</th>
                 {# <th>Date de création</th>
@@ -29,15 +28,14 @@
         {% for worksite in worksites %}
             <tr>
                 <td>{{ worksite.nameWorksite }}</td>
-                <td>{{ worksite.cityWorksite }}</td>
-                <td>{{ worksite.cpWorksite }}</td>
-                <td>{{ worksite.adressWorksite }}</td>
+                <td>{{ worksite.adressWorksite}}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</td>
+                <td>{{ worksite.clientWorksite }}</td>
                 <td>{{ worksite.startAt ? worksite.startAt|date('d M Y') : '' }}</td>
-                {# <td>{{ worksite.durationWorksite }}</td>
-                <td>{{ worksite.supplementWorksite }}</td> #}
+                <td>{{ worksite.durationWorksite }}</td>
+                <td>{{ worksite.supplementWorksite }}</td>
                 <td>{{ worksite.travelDistanceWorksite }}</td>
-                <td>{{ worksite.noteClientWorksite }}</td>
-                <td>{{ worksite.noteAdminWorksite }}</td>
+                {# <td>{{ worksite.noteClientWorksite }}</td>
+                <td>{{ worksite.noteAdminWorksite }}</td> #}
                 <td>{{ worksite.isUrgent ? 'Oui' : 'Non' }}</td>
                 <td>{{ worksite.statusWorksite }}</td>
                 {# <td>{{ worksite.createdAt ? worksite.createdAt|date('Y-m-d H:i:s') : '' }}</td>

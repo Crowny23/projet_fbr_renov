@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\QuotationRepository;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: QuotationRepository::class)]
@@ -42,9 +44,21 @@ class Quotation
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updated_at = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $object = null;
+
+    #[ORM\OneToMany(mappedBy: 'quotation', targetEntity: Designation::class)]
+    private Collection $designations;
+
+    public function __toString()
+    {
+        return $this->object;
+    }
+
     public function __construct()
     {
         $this->created_at = new DateTimeImmutable();
+        $this->designations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -156,6 +170,48 @@ class Quotation
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getObject(): ?string
+    {
+        return $this->object;
+    }
+
+    public function setObject(string $object): self
+    {
+        $this->object = $object;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Designation>
+     */
+    public function getDesignations(): Collection
+    {
+        return $this->designations;
+    }
+
+    public function addDesignation(Designation $designation): self
+    {
+        if (!$this->designations->contains($designation)) {
+            $this->designations->add($designation);
+            $designation->setQuotation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDesignation(Designation $designation): self
+    {
+        if ($this->designations->removeElement($designation)) {
+            // set the owning side to null (unless already changed)
+            if ($designation->getQuotation() === $this) {
+                $designation->setQuotation(null);
+            }
+        }
 
         return $this;
     }

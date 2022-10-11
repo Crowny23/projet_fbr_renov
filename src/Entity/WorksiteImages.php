@@ -4,9 +4,7 @@ namespace App\Entity;
 
 use App\Repository\WorksiteImagesRepository;
 use DateTime;
-use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use DateTimeZone;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -28,20 +26,15 @@ class WorksiteImages
     #[ORM\Column(length: 255)]
     private ?string $image_worksite_images = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
-
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'image_worksite')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Worksites $worksite = null;
 
-    public function __construct()
-    {
-        $this->created_at = new DateTimeImmutable();
-    }
+    #[ORM\Column(nullable: true)]
+    private ?int $imageSize = null;
 
     public function getId(): ?int
     {
@@ -56,18 +49,6 @@ class WorksiteImages
     public function setImageWorksiteImages(string $image_worksite_images): self
     {
         $this->image_worksite_images = $image_worksite_images;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
-    {
-        $this->created_at = $created_at;
 
         return $this;
     }
@@ -120,8 +101,7 @@ class WorksiteImages
         if ($file instanceof UploadedFile)
         {
             $date = new DateTime();
-            $timezone = new \DateTimeZone('Europe/Paris');
-        
+            $timezone = new DateTimeZone('Europe/Paris');
             $this->updated_at = $date->setTimezone($timezone);
         }
 
