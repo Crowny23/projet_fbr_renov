@@ -8,7 +8,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Objet</th>
                 <th>Reference du devis</th>
                 <th>Prix</th>
                 <th>Statut</th>
@@ -23,7 +23,7 @@
         <tbody>
         {% for quotation in quotations %}
             <tr>
-                <td>{{ quotation.id }}</td>
+                <td>{{ quotation.object }}</td>
                 <td>{{ quotation.referenceQuotation }}</td>
                 <td>{{ quotation.priceQuotation }}</td>
                 <td>{{ quotation.statusQuotation }}</td>

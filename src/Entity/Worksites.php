@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Nullable;
 
 #[ORM\Entity(repositoryClass: WorksitesRepository::class)]
 class Worksites
@@ -348,7 +349,7 @@ class Worksites
         return $this->quotation_worksite;
     }
 
-    public function setQuotationWorksite(Quotation $quotation_worksite): self
+    public function setQuotationWorksite(?Quotation $quotation_worksite): self
     {
         // set the owning side of the relation if necessary
         if ($quotation_worksite->getWorksite() !== $this) {
