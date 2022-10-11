@@ -28,6 +28,7 @@ class QuotationType extends AbstractType
             // ->add('created_at')
             // ->add('updated_at')
             ->add('worksite', EntityType::class, ['label' => 'Chantier', 'class' => Worksites::class])
+            ->add('object')
             ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
     }

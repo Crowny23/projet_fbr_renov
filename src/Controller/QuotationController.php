@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Quotation;
 use App\Form\QuotationType;
+use App\Repository\DesignationRepository;
 use App\Repository\QuotationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,10 +42,11 @@ class QuotationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_quotation_show', methods: ['GET'])]
-    public function show(Quotation $quotation): Response
+    public function show(Quotation $quotation, DesignationRepository $designationRepository): Response
     {
         return $this->render('quotation/show.html.twig', [
             'quotation' => $quotation,
+            'designations' => $designationRepository->findByIdQuotation($quotation->getId())
         ]);
     }
 

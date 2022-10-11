@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Designation index{% endblock %}
+
+{% block body %}
+    <h1>Designation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Unity</th>
+                <th>Quantity</th>
+                <th>Price_unitary_ht</th>
+                <th>Prix HT</th>
+                <th>Tva</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for designation in designations %}
+            <tr>
+                <td>{{ designation.id }}</td>
+                <td>{{ designation.name }}</td>
+                <td>{{ designation.unity }}</td>
+                <td>{{ designation.quantity }}</td>
+                <td>{{ designation.priceUnitaryHt }}</td>
+                <td>{{ designation.priceHt }}</td>
+                <td>{{ designation.tva }}</td>
+                <td>
+                    <a href="{{ path('app_designation_show', {'id': designation.id}) }}">show</a>
+                    <a href="{{ path('app_designation_edit', {'id': designation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_designation_new') }}">Create new</a>
+{% endblock %}
