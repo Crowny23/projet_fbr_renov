@@ -58,7 +58,7 @@ class DesignationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $designationRepository->save($designation, true);
 
-            return $this->redirectToRoute('app_designation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_quotation_show', ['id' => $request->get('designation')['quotation']], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('designation/edit.html.twig', [

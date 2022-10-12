@@ -13,7 +13,7 @@ class PdfGeneratorController extends AbstractController
     #[Route('/pdf/generator/{id}', name: 'app_pdf_generator', methods: 'GET')]
     public function index(Quotation $quotation): Response
     {
-        if (sizeof($quotation->getDesignations()) > 7 && sizeof($quotation->getDesignations()) < 10) {
+        if (sizeof($quotation->getDesignations()) > 7 && sizeof($quotation->getDesignations()) < 10 || sizeof($quotation->getDesignations()) > 21 && sizeof($quotation->getDesignations()) < 24) {
             $page_break = true;
         }else {
             $page_break = false;
