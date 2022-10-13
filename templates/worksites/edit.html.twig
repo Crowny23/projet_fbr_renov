@@ -3,11 +3,14 @@
 {% block title %}Modification de chantier{% endblock %}
 
 {% block body %}
-    <h1>Modifier le chantier</h1>
-    <div class="row mb-3 container col-4">
+    <div class="contain col-12" style=" display:flex; flex-direction: row; justify-content: space-between;">
+        <a href="{{ path('app_worksites_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
+        {{ include('worksites/_delete_form.html.twig') }}
+    </div>
+    <h1 class="mb-3 mt-2 ps-4 container col-5 mx-auto">Modifier le chantier</h1>
+    <div class="row mb-3 container col-5 mx-auto">
         {{ include('worksites/_form.html.twig', {'button_label': 'Modifier'}) }}
     </div>
-    <a href="{{ path('app_worksites_index') }}">Retour</a>
-
-    {{ include('worksites/_delete_form.html.twig') }}
+    
+    
 {% endblock %}

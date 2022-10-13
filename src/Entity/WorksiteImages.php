@@ -23,7 +23,7 @@ class WorksiteImages
     #[Vich\UploadableField(mapping: "worksites", fileNameProperty: "image_worksite_images", size: "imageSize")]
     private ?File $file = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $image_worksite_images = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -46,7 +46,7 @@ class WorksiteImages
         return $this->image_worksite_images;
     }
 
-    public function setImageWorksiteImages(string $image_worksite_images): self
+    public function setImageWorksiteImages(?string $image_worksite_images): self
     {
         $this->image_worksite_images = $image_worksite_images;
 

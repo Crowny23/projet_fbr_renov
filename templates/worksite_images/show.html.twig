@@ -13,22 +13,18 @@
             </tr>
             <tr>
                 <th>Image_worksite_images</th>
-                <td>{{ worksite_image.imageWorksiteImages }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ worksite_image.createdAt ? worksite_image.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td><img src="{{ vich_uploader_asset(worksite_image) }}" alt="Image du chantier" width="500"></td>
             </tr>
             <tr>
                 <th>Updated_at</th>
-                <td>{{ worksite_image.updatedAt }}</td>
+                <td>{{ worksite_image.updatedAt|date('Y-m-d H:i:s') }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_worksite_images_index') }}">back to list</a>
+    <a href="{{ path('app_worksite_images_index') }}" class="btn btn-primary mb-2"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_worksite_images_edit', {'id': worksite_image.id}) }}">edit</a>
+    <a href="{{ path('app_worksite_images_edit', {'id': worksite_image.id}) }}" class="btn btn-primary mb-2">Modifier</a>
 
     {{ include('worksite_images/_delete_form.html.twig') }}
 {% endblock %}

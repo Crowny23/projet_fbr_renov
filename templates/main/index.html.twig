@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper row flex col-10 mx-auto">
+    <h1>Accueil</h1>
+    <div class="col-4 rounded-4 ms-5 me-5 mt-3" style="background-color: white; width:450px; height: 300px;">
+        <h3 style="font-size: 1.2rem;">Calendrier</h3>
+        
+    </div>
+
+    <div class="rounded-4 col-4 ms-5 mt-3" style="background-color: white; width:450px; height: 300px;">
+        <h3 style="font-size: 1.2rem;">Statistiques</h3>
+    </div>
+
+    <div class="rounded-4 col-10 ms-5 mt-5" style="background-color: white; width:1000px; height: 300px;">
+        <h3 style="font-size: 1.2rem;" class="mt-2">Dépannages</h3>
+
+        <table class="table table-hover mt-4">
+            <thead>
+                <tr>
+                    <th>Nom dépannage</th>
+                    <th>Ville</th>
+                    <th>Code Postal</th>
+                    <th>Adresse</th>
+                    <th>Prix</th>
+                    <th>Distance</th>
+                    <th>Client</th>
+                    <th>Catégorie</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for repair in repairs %}
+                <tr>
+                    <td>{{ repair.nameRepair }}</td>
+                    <td>{{ repair.cityRepair }}</td>
+                    <td>{{ repair.cpRepair }}</td>
+                    <td>{{ repair.adressRepair }}</td>
+                    <td>{{ repair.priceRepair }}</td>
+                    <td>{{ repair.travelDistanceRepair }}</td>
+                    <td>{{ repair.client }}</td>
+                    <td>{{ repair.category }}</td>
+                    <td>
+                        <a href="{{ path('app_repairs_show', {'id': repair.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                        <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="13">Aucun dépannage trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="rounded-4 col-10 ms-5 mt-5 mb-5" style="background-color: white; width:1000px; height: 300px;">
+        <h3 style="font-size: 1.2rem;" class="mt-2">Chantiers</h3>
+        <table class="table table-hover mt-4">
+            <thead>
+                <tr>
+                    <th>Nom du chantier</th>
+                    <th>Adresse Complète</th>
+                    <th>Client</th>
+                    <th>Distance</th>
+                    <th>Urgent</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for worksite in worksites %}
+                <tr>
+                    <td>{{ worksite.nameWorksite }}</td>
+                    <td>{{ worksite.adressWorksite}}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</td>
+                    <td>{{ worksite.clientWorksite }}</td>
+                    <td>{{ worksite.travelDistanceWorksite }}</td>
+                    <td>{{ worksite.isUrgent ? 'Oui' : 'Non' }}</td>
+                    <td>{{ worksite.statusWorksite }}</td>
+                    <td>
+                        <a href="{{ path('app_worksites_show', {'id': worksite.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                        <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="16">Aucun chantier existant</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+{% endblock %}

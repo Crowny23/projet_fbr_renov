@@ -12,37 +12,37 @@
                 <th>Adresse Complète</th>
                 <th>Client</th>
                 <th>Date de début</th>
-                {# <th>Durée des travaux (en jours)</th>
-                <th>Travaux supplémentaires (en heures)</th> #}
                 <th>Distance</th>
-                {# <th>Note du client</th>
-                <th>Note personelle</th> #}
                 <th>Urgent</th>
                 <th>Statut</th>
-                {# <th>Date de création</th>
-                <th>Date de dernière modification</th> #}
                 <th>Actions</th>
+                <th> <a href="{{ path('app_worksites_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter </a></th>
             </tr>
         </thead>
         <tbody>
         {% for worksite in worksites %}
-            <tr>
+            <tr style="background-color: white;">
                 <td>{{ worksite.nameWorksite }}</td>
                 <td>{{ worksite.adressWorksite}}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</td>
                 <td>{{ worksite.clientWorksite }}</td>
                 <td>{{ worksite.startAt ? worksite.startAt|date('d M Y') : '' }}</td>
-                {# <td>{{ worksite.durationWorksite }}</td>
-                <td>{{ worksite.supplementWorksite }}</td> #}
                 <td>{{ worksite.travelDistanceWorksite }}</td>
-                {# <td>{{ worksite.noteClientWorksite }}</td>
-                <td>{{ worksite.noteAdminWorksite }}</td> #}
                 <td>{{ worksite.isUrgent ? 'Oui' : 'Non' }}</td>
                 <td>{{ worksite.statusWorksite }}</td>
-                {# <td>{{ worksite.createdAt ? worksite.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ worksite.updatedAt ? worksite.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_worksites_show', {'id': worksite.id}) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-eye"></i></a>
-                    <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="{{ path('app_worksites_show', {'id': worksite.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                </td>
+                <td>
+                    <div title="Add to Calendar" class="addeventatc btn btn-light" data-styling="none">
+                        <i class="fa fa-calendar"></i>
+                        <span class="start">10/27/2022 09:00 AM</span>
+                        <span class="end">10/27/2022 11:00 AM</span>
+                        <span class="timezone">Europe/Paris</span>
+                        <span class="title">Summary of the event</span>
+                        <span class="description">Description of the event</span>
+                        <span class="location">Location of the event</span>
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -53,5 +53,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_worksites_new') }}" class="btn btn-primary">Créer </a>
+   
 {% endblock %}

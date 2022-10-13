@@ -18,6 +18,7 @@
                 <th>Raison Sociale</th>
                 <th>Note</th>
                 <th>Actions</th>
+                <th><a href="{{ path('app_customers_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter</a></th>
             </tr>
         </thead>
         <tbody>
@@ -33,9 +34,11 @@
                 <td>{{ customer.socialReason }}</td>
                 <td>{{ customer.customerNote }}</td>
                 <td>
-                    <a href="{{ path('app_customers_show', {'id': customer.id}) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_customers_show', {'id': customer.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                     <a href="{{ path('app_customers_edit', {'id': customer.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
+                <td></td>
+                
             </tr>
         {% else %}
             <tr>
@@ -45,5 +48,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_customers_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Créer nouveau</a>
+    
 {% endblock %}
