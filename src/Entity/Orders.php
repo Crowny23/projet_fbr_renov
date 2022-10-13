@@ -26,7 +26,7 @@ class Orders
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updated_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'orders', targetEntity: RawMaterialsOrdered::class)]
+    #[ORM\OneToMany(mappedBy: 'orders', targetEntity: RawMaterialsOrdered::class, orphanRemoval: true)]
     private Collection $raw_material_ordered;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
@@ -48,6 +48,11 @@ class Orders
         $timezone = new DateTimeZone('Europe/Paris');
         $created_at =  $date->setTimezone($timezone);
         $this->created_at = $created_at;
+    }
+
+    public function __toString()
+    {
+        return $this->name_order;
     }
 
     public function getId(): ?int
@@ -86,7 +91,10 @@ class Orders
 
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
-        $this->updated_at = $updated_at;
+        $timezone = new DateTimeZone('Europe/Paris');
+        $newDate = $updated_at->setTimezone($timezone);
+
+        $this->updated_at = $newDate;
 
         return $this;
     }

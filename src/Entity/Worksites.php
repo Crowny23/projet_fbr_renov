@@ -30,7 +30,7 @@ class Worksites
     private ?string $adress_worksite = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $start_at = null;
+    private ?\DateTime $start_at = null;
 
     #[ORM\Column]
     private ?int $duration_worksite = null;
@@ -149,12 +149,12 @@ class Worksites
         return $this;
     }
 
-    public function getStartAt(): ?\DateTimeImmutable
+    public function getStartAt(): ?\DateTime
     {
         return $this->start_at;
     }
 
-    public function setStartAt(\DateTimeImmutable $start_at): self
+    public function setStartAt(\DateTime $start_at): self
     {
         $this->start_at = $start_at;
 
@@ -228,11 +228,11 @@ class Worksites
 
     public function setIsUrgent($is_urgent): self
     {
-        if($is_urgent === null) {
-            $this->is_urgent = false;
-        } else {
+        // if($is_urgent === null) {
+        //     $this->is_urgent = false;
+        // } else {
            $this->is_urgent = $is_urgent; 
-        }
+        // }
         return $this;
     }
 

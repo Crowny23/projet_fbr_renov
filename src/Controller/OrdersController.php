@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Orders;
 use App\Form\OrdersType;
 use App\Repository\OrdersRepository;
+use App\Repository\RawMaterialsOrderedRepository;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,10 +43,19 @@ class OrdersController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_orders_show', methods: ['GET'])]
-    public function show(Orders $order): Response
+    public function show(Orders $order, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
     {
+        // Get all rawMaterialsOrdered
+        $raw_materials_ordered = $rawMaterialsOrderedRepository->findBy(['orders' => $order]);
+
+        // foreach ($raw_materials_ordered as $raw_material_ordered) {
+        //     $raw_material = $raw_material_ordered->getRawMaterial();
+        //     $raw_material_id = $raw
+        // }
+        // dd($rawMaterialsOrdered);
         return $this->render('orders/show.html.twig', [
             'order' => $order,
+            'raw_materials_ordered' => $raw_materials_ordered
         ]);
     }
 
@@ -55,6 +66,10 @@ class OrdersController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $date = new DateTimeImmutable();
+
+            $order->setUpdatedAt($date);
+
             $ordersRepository->save($order, true);
 
             return $this->redirectToRoute('app_orders_index', [], Response::HTTP_SEE_OTHER);

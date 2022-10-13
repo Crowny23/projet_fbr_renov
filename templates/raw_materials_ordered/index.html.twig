@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RawMaterialsOrdered index{% endblock %}
+
+{% block body %}
+    <h1>RawMaterialsOrdered index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantity</th>
+                <th>Created_at</th>
+                <th>Total_price_raw_material</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for raw_materials_ordered in raw_materials_ordereds %}
+            <tr>
+                <td>{{ raw_materials_ordered.id }}</td>
+                <td>{{ raw_materials_ordered.quantity }}</td>
+                <td>{{ raw_materials_ordered.createdAt ? raw_materials_ordered.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ raw_materials_ordered.totalPriceRawMaterial }}</td>
+                <td>
+                    <a href="{{ path('app_raw_materials_ordered_show', {'id': raw_materials_ordered.id}) }}">show</a>
+                    <a href="{{ path('app_raw_materials_ordered_edit', {'id': raw_materials_ordered.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('app_raw_materials_ordered_new') }}">Create new</a> #}
+{% endblock %}

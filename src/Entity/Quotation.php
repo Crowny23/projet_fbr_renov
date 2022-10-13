@@ -47,6 +47,11 @@ class Quotation
         $this->created_at = new DateTimeImmutable();
     }
 
+    public function __toString()
+    {
+        return $this->reference_quotation;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

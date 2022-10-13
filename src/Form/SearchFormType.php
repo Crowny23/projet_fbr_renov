@@ -17,7 +17,7 @@ class SearchFormType extends AbstractType
     {
         $builder
             ->add('name_raw_material', TextType::class, ['label' => 'Rechercher un matériau', 'required' => false])
-            ->add('category', EntityType::class, ['class' => RawMaterialsCategories::class, 'label' => 'Catégorie', 'required' => false, 'placeholder' => 'Choose a category'])
+            ->add('category', EntityType::class, ['class' => RawMaterialsCategories::class, 'label' => 'Catégorie', 'required' => false, 'placeholder' => 'Choisissez une catégorie'])
             ->add('Submit', SubmitType::class, ['label' => '->'])
         ;
     }

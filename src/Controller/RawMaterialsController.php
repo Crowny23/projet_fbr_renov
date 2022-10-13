@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\RawMaterials;
 use App\Form\RawMaterialsType;
 use App\Form\SearchFormType;
+use App\Repository\OrdersRepository;
 use App\Repository\RawMaterialsRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RawMaterialsController extends AbstractController
 {
     #[Route('/', name: 'app_raw_materials_index', methods: ['GET'])]
-    public function index(RawMaterialsRepository $rawMaterialsRepository, Request $request): Response
+    public function index(RawMaterialsRepository $rawMaterialsRepository, Request $request, OrdersRepository $ordersRepository): Response
     {
         $rawMaterial = new RawMaterials();
         $searchForm = $this->createForm(SearchFormType::class, $rawMaterial, ['method' => 'GET']);
@@ -33,7 +34,8 @@ class RawMaterialsController extends AbstractController
 
         return $this->renderForm('raw_materials/index.html.twig', [
             'raw_materials' => $list,
-            'searchForm' => $searchForm
+            'searchForm' => $searchForm,
+            'orders' => $ordersRepository->findBy([], ['id' => 'DESC'], 10, 0)
         ]);
     }
 
@@ -78,7 +80,7 @@ class RawMaterialsController extends AbstractController
 
         return $this->renderForm('raw_materials/edit.html.twig', [
             'raw_material' => $rawMaterial,
-            'form' => $form,
+            'form' => $form
         ]);
     }
 

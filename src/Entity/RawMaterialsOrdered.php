@@ -21,7 +21,7 @@ class RawMaterialsOrdered
 
     #[ORM\ManyToOne(inversedBy: 'raw_material_ordered')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?RawMaterials $raw_material = null;
+    public ?RawMaterials $raw_material = null;
 
     #[ORM\Column]
     private ?int $quantity = null;

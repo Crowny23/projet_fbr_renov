@@ -3,7 +3,7 @@
 {% block title %}Orders{% endblock %}
 
 {% block body %}
-    <h1>Orders</h1>
+    <h1>Commande {{ order.nameOrder }}</h1>
 
     <table class="table">
         <tbody>
@@ -20,8 +20,16 @@
                 <td>{{ order.reference }}</td>
             </tr>
             <tr>
+                <th>Fournisseur</th>
+                <td>{{ order.supplier }}</td>
+            </tr>
+            <tr>
+                <th>Chantier</th>
+                <td>{{ order.worksite }}</td>
+            </tr>
+            <tr>
                 <th>Prix total HT</th>
-                <td>{{ order.totalPrice }}</td>
+                <td>{{ order.totalPrice }} €</td>
             </tr>
             <tr>
                 <th>Date de création</th>
@@ -39,4 +47,39 @@
     <a href="{{ path('app_orders_edit', {'id': order.id}) }}">Modifier</a>
 
     {{ include('orders/_delete_form.html.twig') }}
+
+    <h2>Details de la commande</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom du matériau</th>
+                <th>Quantité</th>
+                <th>Prix total pour ce matériau</th>
+                <th>Date d'ajout dans la commande</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for raw_material_ordered in raw_materials_ordered %}
+            <tr>
+                <td>{{ raw_material_ordered.raw_material }}</td>
+                <td>{{ raw_material_ordered.quantity }}</td>
+                <td>{{ raw_material_ordered.totalPriceRawMaterial }} €</td>
+                <td>{{ raw_material_ordered.createdAt ? raw_material_ordered.createdAt|date('d M Y H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_raw_materials_ordered_edit', {'id': raw_material_ordered.id}) }}">Modifier la quantité</a>
+                    <form method="post" action="{{ path('app_raw_materials_ordered_delete', {'id': raw_material_ordered.id}) }}" onsubmit="return confirm('Êtes vous sûr de vouloir supprimer ce matériau de votre commande ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ raw_material_ordered.id) }}">
+                        <button class="btn">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Pas de matériau ajouté à la commande</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

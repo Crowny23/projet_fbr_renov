@@ -6,17 +6,15 @@ use App\Entity\Customers;
 use App\Entity\Quotation;
 use App\Entity\WorksiteCategories;
 use App\Entity\Worksites;
-use Doctrine\DBAL\Types\DateTimeImmutableType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,13 +28,13 @@ class WorksitesType extends AbstractType
             ->add('cp_worksite', IntegerType::class, ['label' => 'Code Postal'])
             ->add('adress_worksite', TextType::class, ['label' => 'Adresse'])
             ->add('client_worksite', EntityType::class, ['label' => 'Client', 'class' => Customers::class])
-            ->add('start_at', DateTimeType::class, ['label' => 'Date de début', 'input' => 'datetime_immutable'])
+            ->add('start_at', DateType::class, ['label' => 'Date de début', 'widget' => 'single_text'])
             ->add('duration_worksite', IntegerType::class, ['label' => 'Durée des travaux (en jours)'])
             ->add('supplement_worksite', IntegerType::class, ['label' => 'Travaux supplémentaires (en heures)'])
             ->add('travel_distance_worksite', IntegerType::class, ['label' => 'Distance'])
             ->add('note_client_worksite', TextareaType::class, ['label' => 'Note du client', 'required' => false])
             ->add('note_admin_worksite', TextareaType::class, ['label' => 'Note personnelle', 'required' => false])
-            ->add('is_urgent', CheckboxType::class, ['label' => 'Urgent', 'mapped' => false, 'required' => false])
+            ->add('is_urgent', CheckboxType::class, ['label' => 'Urgent', 'required' => false])
             ->add('status_worksite', ChoiceType::class, ['label' => 'Statut', 'choices' => ['Non commencé' => 'Non commencé', 'En cours' => 'En cours', 'Terminé' => 'Terminé']])
             ->add('category_worksite', EntityType::class, ['label' => 'Catégorie', 'class' => WorksiteCategories::class])
             ->add('quotation_worksite', EntityType::class, ['label' => 'Devis', 'class' => Quotation::class])

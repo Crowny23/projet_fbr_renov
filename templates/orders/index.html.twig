@@ -11,6 +11,8 @@
                 <th>Id</th>
                 <th>Nom de la commande</th>
                 <th>Numéro de la commande</th>
+                <th>Fournisseur</th>
+                <th>Chantier</th>
                 <th>Prix total HT (A titre indicatif)</th>
                 <th>Date de création</th>
                 <th>Date de dernière modification</th>
@@ -23,7 +25,9 @@
                 <td>{{ order.id }}</td>
                 <td>{{ order.nameOrder }}</td>
                 <td>{{ order.reference }}</td>
-                <td>{{ order.totalPrice }}</td>
+                <td>{{ order.supplier }}</td>
+                <td>{{ order.worksite }}</td>
+                <td>{{ order.totalPrice ? order.totalPrice : 0 }} €</td>
                 <td>{{ order.createdAt ? order.createdAt|date('d M Y H:i:s') : '' }}</td>
                 <td>{{ order.updatedAt ? order.updatedAt|date('d M Y H:i:s') : '' }}</td>
                 <td>
