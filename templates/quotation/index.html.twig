@@ -5,16 +5,16 @@
 {% block body %}
     <h1>Liste des devis</h1>
 
-    <table class="table table-hover">
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th>Objet</th>
-                <th>Reference du devis</th>
-                <th>Prix</th>
-                <th>Statut</th>
-                <th>Montant de l'accompte</th>
-                <th>Montant du paiement intermédiaire</th>
-                <th>Montant du paiement final</th>
+                <th data-sortable="true" data-field="object">Objet</th>
+                <th data-sortable="true" data-field="quotation">Reference du devis</th>
+                <th data-sortable="true" data-field="price">Prix</th>
+                <th data-sortable="true" data-field="status">Statut</th>
+                <th data-sortable="true" data-field="deposit">Montant de l'accompte</th>
+                <th data-sortable="true" data-field="intermediate">Montant du paiement intermédiaire</th>
+                <th data-sortable="true" data-field="final">Montant du paiement final</th>
                 {# <th>Date de création</th>
                 <th>Date de dernière modification</th> #}
                 <th>Actions</th>

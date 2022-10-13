@@ -5,12 +5,12 @@
 {% block body %}
     <h1>Les images dépannages</h1>
 
-    <table class="table table-hover">
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th>Nom du dépannage</th>
-                <th>Non d'image</th>
-                <th>Taille</th>
+                <th data-sortable="true" data-field="repair_name">Nom du dépannage</th>
+                <th data-sortable="true" data-field="image_name_repair">Nom d'image</th>
+                <th data-sortable="true" data-field="weight">Taille</th>
                 <th>Image</th>
                 <th>actions</th>
             </tr>

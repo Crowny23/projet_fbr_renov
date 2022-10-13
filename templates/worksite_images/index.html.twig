@@ -5,12 +5,12 @@
 {% block body %}
     <h1>WorksiteImages index</h1>
 
-    <table class="table">
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th>Nom du dépannage</th>
-                <th>Non d'image</th>
-                <th>Taille</th>
+                <th data-sortable="true" data-field="worksite_name">Nom du chantiers</th>
+                <th data-sortable="true" data-field="image_name">Nom d'image</th>
+                <th data-sortable="true" data-field="weight">Taille</th>
                 <th>Image</th>
                 <th>actions</th>
             </tr>
@@ -21,6 +21,7 @@
                 <td>{{ worksite_image.worksite }}</td>
                 <td>{{ worksite_image.imageWorksiteImages }}</td>
                 <td>{{ worksite_image.imageSize }} ko</td>
+        </thead>
                 <td><img src="{{ vich_uploader_asset(worksite_image) }}" alt="" width="200"></td>
                 <td>
                     <a href="{{ path('app_worksite_images_show', {'id': worksite_image.id}) }}">show</a>

@@ -16,12 +16,8 @@
                 <td>{{ worksite_image.imageWorksiteImages }}</td>
             </tr>
             <tr>
-                <th>Created_at</th>
-                <td>{{ worksite_image.createdAt ? worksite_image.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
                 <th>Updated_at</th>
-                <td>{{ worksite_image.updatedAt }}</td>
+                <td>{{ worksite_image.updatedAt|date('Y-m-d H:i:s') }}</td>
             </tr>
         </tbody>
     </table>

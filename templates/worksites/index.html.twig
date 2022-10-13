@@ -5,20 +5,20 @@
 {% block body %}
     <h1>Liste des chantiers</h1>
 
-    <table class="table table-hover">
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th>Nom du chantier</th>
-                <th>Adresse Complète</th>
-                <th>Client</th>
-                <th>Date de début</th>
+                <th data-sortable="true" data-field="worksite_name">Nom du chantier</th>
+                <th data-sortable="true" data-field="address">Adresse Complète</th>
+                <th data-sortable="true" data-field="customer">Client</th>
+                <th data-sortable="true" data-field="date_start">Date de début</th>
                 {# <th>Durée des travaux (en jours)</th>
                 <th>Travaux supplémentaires (en heures)</th> #}
-                <th>Distance</th>
+                <th data-sortable="true" data-field="dist">Distance</th>
                 {# <th>Note du client</th>
                 <th>Note personelle</th> #}
-                <th>Urgent</th>
-                <th>Statut</th>
+                <th data-sortable="true" data-field="urgent">Urgent</th>
+                <th data-sortable="true" data-field="status">Statut</th>
                 {# <th>Date de création</th>
                 <th>Date de dernière modification</th> #}
                 <th>Actions</th>
@@ -31,8 +31,8 @@
                 <td>{{ worksite.adressWorksite}}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</td>
                 <td>{{ worksite.clientWorksite }}</td>
                 <td>{{ worksite.startAt ? worksite.startAt|date('d M Y') : '' }}</td>
-                <td>{{ worksite.durationWorksite }}</td>
-                <td>{{ worksite.supplementWorksite }}</td>
+                {# <td>{{ worksite.durationWorksite }}</td>
+                <td>{{ worksite.supplementWorksite }}</td> #}
                 <td>{{ worksite.travelDistanceWorksite }}</td>
                 {# <td>{{ worksite.noteClientWorksite }}</td>
                 <td>{{ worksite.noteAdminWorksite }}</td> #}

@@ -5,10 +5,10 @@
 {% block body %}
     <h1>Liste des catégories de chantiers</h1>
 
-    <table class="table table-hover">
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th>Nom de la catégorie</th>
+                <th data-sortable="true" data-field="category_name">Nom de la catégorie</th>
                 <th>Date de création</th>
                 <th>Date de dernière modification</th>
                 <th>Actions</th>
