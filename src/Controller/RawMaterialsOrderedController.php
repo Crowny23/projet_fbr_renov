@@ -102,23 +102,36 @@ class RawMaterialsOrderedController extends AbstractController
     #[Route('/{id}/edit', name: 'app_raw_materials_ordered_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, RawMaterialsOrdered $rawMaterialsOrdered, RawMaterialsRepository $rawMaterialsRepository, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
     {
+        // Get Order & Order id
         $order = $rawMaterialsOrdered->getOrders();
         $orderId = $order->getId();
 
+        // Get rawMaterialsOrdered & rawMaterialOrdered price
         $rawMaterial = $rawMaterialsOrdered->getRawMaterial();
         $rawMaterialPrice = $rawMaterial->getPrice();
-
-        // dd($rawMaterialPrice);
 
         $form = $this->createForm(RawMaterialsOrderedType::class, $rawMaterialsOrdered);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Get new quantity
             $qtty = $rawMaterialsOrdered->getQuantity();
-            $rawMaterialsOrderedPrice = $qtty * $rawMaterialPrice;
 
-            $rawMaterialsOrdered->setTotalPriceRawMaterial($rawMaterialsOrderedPrice);
+            // Get old rawMaterialOrdered total price
+            $oldRawMaterialOrderedPrice = $rawMaterialsOrdered->getTotalPriceRawMaterial();
 
+            // Calculate & Set rawMaterialsOrdered new price
+            $newRawMaterialsOrderedPrice = $qtty * $rawMaterialPrice;
+            $rawMaterialsOrdered->setTotalPriceRawMaterial($newRawMaterialsOrderedPrice);
+
+            // Get old Order total price
+            $oldOrderPrice = $order->getTotalPrice();
+
+            // Calculate & Set new Orders total price
+            $newOrderTotalPrice = $oldOrderPrice + ($newRawMaterialsOrderedPrice - $oldRawMaterialOrderedPrice);
+            $order->setTotalPrice($newOrderTotalPrice);
+
+            // Update in DB
             $rawMaterialsOrderedRepository->save($rawMaterialsOrdered, true);
 
             return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
@@ -132,12 +145,23 @@ class RawMaterialsOrderedController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_raw_materials_ordered_delete', methods: ['POST'])]
-    public function delete(Request $request, RawMaterialsOrdered $rawMaterialsOrdered, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
+    public function delete(Request $request,OrdersRepository $ordersRepository, RawMaterialsOrdered $rawMaterialsOrdered, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
     {
-        $order = $rawMaterialsOrdered->getOrders();
-        $orderId = $order->getId();
-
         if ($this->isCsrfTokenValid('delete'.$rawMaterialsOrdered->getId(), $request->request->get('_token'))) {
+            // Get order & orderId
+            $order = $rawMaterialsOrdered->getOrders();
+            $orderId = $order->getId();
+
+            // Get rawMaterialsOrdered & Order price
+            $rawMaterialsOrderedPrice = $rawMaterialsOrdered->getTotalPriceRawMaterial();
+            $orderPrice = $order->getTotalPrice();
+            
+            // Set Order new price
+            $newPrice = $orderPrice - $rawMaterialsOrderedPrice;
+            $order->setTotalPrice($newPrice);
+
+            // Update in DB (Order price & rawMaterialsOrdered delete)
+            $ordersRepository->save($order, true);
             $rawMaterialsOrderedRepository->remove($rawMaterialsOrdered, true);
         }
 

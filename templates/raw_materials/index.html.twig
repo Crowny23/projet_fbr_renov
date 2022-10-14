@@ -42,9 +42,9 @@
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h1 class="modal-title fs-6">A quelle commande et en quelle quantité voulez-vous ajouter : {{ raw_material.nameRawMaterial }} ?</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close ps-3 m-0" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
-                              <div class="modal-body">
+                              <div class="modal-body pb-0">
                                 <div>
                                     <label for="qtty">Quantité</label>
                                     <input id="input-qtty-{{ index }}" name="qtty" type="number" required>
@@ -53,8 +53,13 @@
                                     <a class="worksites-links-{{ index }}" href="{{ path('app_raw_materials_ordered_new', {'idOrder': order.id, 'idRawMaterial': raw_material.id, 'qtty': 0}) }}">{{ order.nameOrder }}</a>
                                     <br>
                                 {% endfor %}
+                                <br>
+                                <p class="mb-0">Ou créer une nouvelle commande :</p>
                               </div>
-                              <div class="modal-footer">
+                              <div class="modal-footer justify-content-between">
+                                <a href="{{ path('app_orders_new') }}">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Créer une nouvelle commande</button>
+                                </a>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                               </div>
                             </div>

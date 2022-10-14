@@ -48,11 +48,6 @@ class OrdersController extends AbstractController
         // Get all rawMaterialsOrdered
         $raw_materials_ordered = $rawMaterialsOrderedRepository->findBy(['orders' => $order]);
 
-        // foreach ($raw_materials_ordered as $raw_material_ordered) {
-        //     $raw_material = $raw_material_ordered->getRawMaterial();
-        //     $raw_material_id = $raw
-        // }
-        // dd($rawMaterialsOrdered);
         return $this->render('orders/show.html.twig', [
             'order' => $order,
             'raw_materials_ordered' => $raw_materials_ordered
