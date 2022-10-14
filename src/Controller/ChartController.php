@@ -23,7 +23,7 @@ class ChartController extends AbstractController
                     'label' => 'Chantier',
                     'backgroundColor' => 'rgb(255, 99, 132)',
                     'borderColor' => 'rgb(255, 99, 132)',
-                    'data' => 'quotation',
+                    'data' => [0, 10, 100, 1000, 10000, 100000, 1000000],
                     // récuperer le montant total du devis.
                     'yAxisID'=> 'y',
                 ],

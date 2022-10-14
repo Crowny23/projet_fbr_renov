@@ -8,15 +8,11 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ worksite_image.id }}</td>
-            </tr>
-            <tr>
-                <th>Image_worksite_images</th>
+                <th>Image</th>
                 <td><img src="{{ vich_uploader_asset(worksite_image) }}" alt="Image du chantier" width="500"></td>
             </tr>
             <tr>
-                <th>Updated_at</th>
+                <th>Date de modification</th>
                 <td>{{ worksite_image.updatedAt|date('Y-m-d H:i:s') }}</td>
             </tr>
         </tbody>

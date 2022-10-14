@@ -17,7 +17,7 @@
         </thead>
         <tbody>
         {% for worksite_category in worksite_categories %}
-            <tr>
+            <tr style="background-color: white;">
                 <td>{{ worksite_category.nameWorksiteCategories }}</td>
                 <td>{{ worksite_category.createdAt ? worksite_category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ worksite_category.updatedAt ? worksite_category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>

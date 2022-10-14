@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}WorksiteImages index{% endblock %}
+{% block title %}Images de Chantier{% endblock %}
 
 {% block body %}
-    <h1>WorksiteImages index</h1>
+    <h1>Images de Chantier</h1>
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Nom du dépannage</th>
@@ -18,7 +18,7 @@
         </thead>
         <tbody>
         {% for worksite_image in worksite_images %}
-            <tr>
+            <tr style="background-color: white;">
                 <td>{{ worksite_image.worksite }}</td>
                 <td>{{ worksite_image.imageWorksiteImages }}</td>
                 <td>{{ worksite_image.imageSize }} ko</td>
