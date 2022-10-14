@@ -3,14 +3,16 @@
 {% block title %}Modifier Locatier{% endblock %}
 
 {% block body %}
-    <a href="{{ path('app_renter_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
-
-    <h1 class="mb-3 mt-2 ps-4 container col-4 mx-auto">Modifier Locatier</h1>
-    <div class="row mb-3 container col-4 mx-auto">
+    <div class="contain col-12" style=" display:flex; flex-direction: row; justify-content: space-between;">
+        <a href="{{ path('app_renter_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
+        {{ include('renter/_delete_form.html.twig') }}
+    </div>
+    <h1 class="mb-3 mt-2 ps-4 container col-5 mx-auto">Modifier Locatier</h1>
+    <div class="row mb-3 container col-5 mx-auto">
         <div class="row">
             {{ include('renter/_form.html.twig', {'button_label': 'Enregistrer'}) }}
-            {{ include('renter/_delete_form.html.twig') }}
+            
         </div>
     </div>
-
+    
 {% endblock %}

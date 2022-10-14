@@ -3,12 +3,14 @@
 {% block title %}Modifier User{% endblock %}
 
 {% block body %}
-    <a href="{{ path('app_users_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
-
+    <div class="contain col-12" style=" display:flex; flex-direction: row; justify-content: space-between;">
+        <a href="{{ path('app_users_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
+        {{ include('users/_delete_form.html.twig') }}
+    </div>
     <h1 class="mb-3 mt-2 ps-4 container col-4 mx-auto">Modifier User</h1>
     <div  class="row mb-3 container col-4 mx-auto">
         {{ include('users/_form.html.twig', {'button_label': 'Enregistrer'}) }}
-        {{ include('users/_delete_form.html.twig') }}
+        
     </div>
     
 {% endblock %}

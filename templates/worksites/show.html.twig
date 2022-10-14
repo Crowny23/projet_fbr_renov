@@ -71,7 +71,19 @@
                 <th>Photos</th>
                 <td>
                     {% for image in images %}
+                    {% if image.mimeType != 'application/pdf' %}
                     <img src="{{ vich_uploader_asset(image) }}" alt="" width="200">
+                    {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Documents</th>
+                <td>
+                    {% for image in images %}
+                    {% if image.mimeType == 'application/pdf' %}
+                    <iframe src="{{ vich_uploader_asset(image) }}" frameborder="0" width="800" height="500"></iframe>
+                    {% endif %}
                     {% endfor %}
                 </td>
             </tr>
