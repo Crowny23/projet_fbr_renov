@@ -20,7 +20,7 @@ class WorksiteImages
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Vich\UploadableField(mapping: "worksites", fileNameProperty: "image_worksite_images", size: "imageSize")]
+    #[Vich\UploadableField(mapping: "worksites", fileNameProperty: "image_worksite_images", size: "imageSize", mimeType: 'mimeType')]
     private ?File $file = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -35,6 +35,9 @@ class WorksiteImages
 
     #[ORM\Column(nullable: true)]
     private ?int $imageSize = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $mimeType = null;
 
     public function getId(): ?int
     {
@@ -104,6 +107,18 @@ class WorksiteImages
             $timezone = new DateTimeZone('Europe/Paris');
             $this->updated_at = $date->setTimezone($timezone);
         }
+
+        return $this;
+    }
+
+    public function getMimeType(): ?string
+    {
+        return $this->mimeType;
+    }
+
+    public function setMimeType(?string $mimeType): self
+    {
+        $this->mimeType = $mimeType;
 
         return $this;
     }

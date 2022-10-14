@@ -8,6 +8,7 @@
     <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
+                <th>Actions</th>
                 <th data-sortable="true" data-field="firstname">Prenom</th>
                 <th data-sortable="true" data-field="lastname">Nom</th>
                 <th data-sortable="true" data-field="address">Addresse Complète</th>
@@ -15,23 +16,25 @@
                 <th data-sortable="true" data-field="phone">Téléphone</th>
                 <th data-sortable="true" data-field="social_reason">Raison Sociale</th>
                 <th>Note</th>
-                <th>Actions</th>
+                <th>
+                    <a href="{{ path('app_customers_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter</a>
+                </th>
             </tr>
         </thead>
         <tbody>
         {% for customer in customers %}
             <tr>
+                <td>
+                    <a href="{{ path('app_customers_show', {'id': customer.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('app_customers_edit', {'id': customer.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                </td>
                 <td>{{ customer.firstname }}</td>
                 <td>{{ customer.lastname }}</td>
                 <td>{{ customer.address }} {{ customer.postalcode }} {{ customer.Town }}</td>
                 <td>{{ customer.mail }}</td>
                 <td>0{{ customer.phone }}</td>
                 <td>{{ customer.socialReason }}</td>
-                <td>{{ customer.customerNote }}</td>
-                <td>
-                    <a href="{{ path('app_customers_show', {'id': customer.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('app_customers_edit', {'id': customer.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
+                <td colspan="2">{{ customer.customerNote }}</td>
             </tr>
         {% else %}
             <tr>
@@ -40,6 +43,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_customers_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Créer nouveau</a>
 {% endblock %}

@@ -8,8 +8,11 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ worksite_image.id }}</td>
+                {% if worksite_image.mimeType == 'application/pdf' %}
+                    <iframe src="{{ vich_uploader_asset(worksite_image) }}" frameborder="0" width="800" height="500"></iframe>
+                {% else %}
+                    <img src="{{ vich_uploader_asset(worksite_image) }}" alt="">
+                {% endif %}
             </tr>
             <tr>
                 <th>Image_worksite_images</th>

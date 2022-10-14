@@ -12,9 +12,9 @@
                 <th data-sortable="true" data-field="quotation">Reference du devis</th>
                 <th data-sortable="true" data-field="price">Prix</th>
                 <th data-sortable="true" data-field="status">Statut</th>
-                <th data-sortable="true" data-field="deposit">Montant de l'accompte</th>
+                {# <th data-sortable="true" data-field="deposit">Montant de l'accompte</th>
                 <th data-sortable="true" data-field="intermediate">Montant du paiement intermédiaire</th>
-                <th data-sortable="true" data-field="final">Montant du paiement final</th>
+                <th data-sortable="true" data-field="final">Montant du paiement final</th> #}
                 {# <th>Date de création</th>
                 <th>Date de dernière modification</th> #}
                 <th>Actions</th>
@@ -27,13 +27,13 @@
                 <td>{{ quotation.referenceQuotation }}</td>
                 <td>{{ quotation.priceQuotation }}</td>
                 <td>{{ quotation.statusQuotation }}</td>
-                <td>{{ quotation.depositQuotation }}</td>
+                {# <td>{{ quotation.depositQuotation }}</td>
                 <td>{{ quotation.intermediatePaymentQuotation }}</td>
-                <td>{{ quotation.finalPaymentQuotation }}</td>
+                <td>{{ quotation.finalPaymentQuotation }}</td> #}
                 {# <td>{{ quotation.createdAt ? quotation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ quotation.updatedAt ? quotation.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_pdf_generator', {'id': quotation.id}) }}"><i class="fa fa-file-pdf"></i></a>
+                    <a href="{{ path('app_pdf_generator_quotation', {'id': quotation.id}) }}"><i class="fa fa-file-pdf"></i></a>
                     <a href="{{ path('app_quotation_show', {'id': quotation.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                     <a href="{{ path('app_quotation_edit', {'id': quotation.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
