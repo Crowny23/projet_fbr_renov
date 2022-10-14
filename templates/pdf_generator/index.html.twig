@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Devis</title>
     <style>
+@page {
+    margin: 20px 25px !important;
+    @bottom-left {
+        content: counter(page) " sur " counter(pages) !important;
+    }
+}
  html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -50,9 +56,12 @@ table {
 }
     </style>
 </head>
-<body style="font-family: Arial, Helvetica, sans-serif; position: relative;"> 
+<body style="font-family: Arial, Helvetica, sans-serif;"> 
     {% set total = 0 %}
     {% set totalTva = 0 %}
+    <footer style="position: fixed; bottom: -10px; text-align: center; left: 0; right: 0; font-size: 0.6em; height: 10px;">
+        <p>FBR RENOVATION - SAS au Capital de 2000,00€ - SIRET 913 934 345 00012 - 913934 345 R.C.S Bourg-en-Bresse - <b>TVA Intracommunautaire FR77913934345</b> </p>
+    </footer>
     <div style="float: left; font-size: 0.75em;">
         <div>
             <img src="{{logo}}" style="width: 200px; margin-left: 90px;">
@@ -85,7 +94,7 @@ table {
         <p style="margin-top: 10px; font-size: 0.75em; text-align: right; margin-right: 30px;">{{'now'|date('d/m/Y')}}</p>
     </div>
 
-    <table style="margin: 0 auto;width: 750px;margin-top: 350px; border: 2px black solid; border-collapse: collapse;">
+    <table style="margin: 0 auto;width: 750px;margin-top: 350px; border: 2px black solid; border-collapse: collapse;" border="1">
         <thead style="background-color: rgb(217, 183, 182); color: white;">
             <tr>
                 <th style="border: 2px black solid;">Code</th>
@@ -100,13 +109,13 @@ table {
         <tbody>
             {% for designation in designations %}
             <tr style="font-size: 0.75em;">
-                <td style="border: 2px black solid; border-top: none; border-bottom: none; padding: 5px 0 50px 0; text-align: center;">{{ loop.index }}</td>
-                <td style="border: 2px black solid; border-top: none; border-bottom: none; padding: 5px 0 50px 0; text-align: center;">{{ designation.name }}</td>
-                <td style="border: 2px black solid; border-top: none; border-bottom: none; padding: 5px 0 50px 0; text-align: center;">{{ designation.unity }}</td>
-                <td style="border: 2px black solid; border-top: none; border-bottom: none; padding: 5px 0 50px 0; text-align: center;">{{ designation.quantity }}</td>
-                <td style="border: 2px black solid; border-top: none; border-bottom: none; padding: 5px 0 50px 0; text-align: center;">{{ designation.priceUnitaryHt|number_format(2) }}</td>
-                <td style="border: 2px black solid; border-top: none; border-bottom: none; padding: 5px 0 50px 0; text-align: center;">{{ designation.priceHt|number_format(2) }} {% set total = total + designation.priceHt %}</td>
-                <td style="border: 2px black solid; border-top: none; border-bottom: none; padding: 5px 0 50px 0; text-align: center;">{{ designation.tva }} {% set totalTva = totalTva + designation.priceHt * ( designation.tva * 0.01 ) %}</td>
+                <td style="border: 2px black solid; padding: 5px 0 50px 0; text-align: center;">{{ loop.index }}</td>
+                <td style="border: 2px black solid; padding: 5px 0 50px 0; text-align: center;">{{ designation.name }}</td>
+                <td style="border: 2px black solid; padding: 5px 0 50px 0; text-align: center;">{{ designation.unity }}</td>
+                <td style="border: 2px black solid; padding: 5px 0 50px 0; text-align: center;">{{ designation.quantity }}</td>
+                <td style="border: 2px black solid; padding: 5px 0 50px 0; text-align: center;">{{ designation.priceUnitaryHt|number_format(2) }}</td>
+                <td style="border: 2px black solid; padding: 5px 0 50px 0; text-align: center;">{{ designation.priceHt|number_format(2) }} {% set total = total + designation.priceHt %}</td>
+                <td style="border: 2px black solid; padding: 5px 0 50px 0; text-align: center;">{{ designation.tva }} {% set totalTva = totalTva + designation.priceHt * ( designation.tva * 0.01 ) %}</td>
             </tr>
             {% endfor %}   
         </tbody>
@@ -157,8 +166,5 @@ table {
                 </div>
             </div>
         </div>
-    <footer style="position: fixed; bottom: 5px; text-align: center; left: 0; right: 0; font-size: 0.6em;">
-        <p>FBR RENOVATION - SAS au Capital de 2000,00€ - SIRET 913 934 345 00012 - 913934 345 R.C.S Bourg-en-Bresse - <b>TVA Intracommunautaire FR77913934345</b> </p>
-    </footer>
 </body>
 </html>

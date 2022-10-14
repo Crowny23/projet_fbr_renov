@@ -8,8 +8,15 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Image</th>
-                <td><img src="{{ vich_uploader_asset(worksite_image) }}" alt="Image du chantier" width="500"></td>
+                {% if worksite_image.mimeType == 'application/pdf' %}
+                    <iframe src="{{ vich_uploader_asset(worksite_image) }}" frameborder="0" width="800" height="500"></iframe>
+                {% else %}
+                    <img src="{{ vich_uploader_asset(worksite_image) }}" alt="" width="500">
+                {% endif %}
+            </tr>
+            <tr>
+                <th>Image_worksite_images</th>
+                <td>{{ worksite_image.imageWorksiteImages }}</td>
             </tr>
             <tr>
                 <th>Date de modification</th>

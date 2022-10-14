@@ -10,10 +10,10 @@ use Dompdf\Dompdf;
 
 class PdfGeneratorController extends AbstractController
 {
-    #[Route('/pdf/generator/{id}', name: 'app_pdf_generator', methods: 'GET')]
+    #[Route('/pdf/generator/{id}', name: 'app_pdf_generator_quotation', methods: 'GET')]
     public function index(Quotation $quotation): Response
     {
-        if (sizeof($quotation->getDesignations()) > 7 && sizeof($quotation->getDesignations()) < 10) {
+        if (sizeof($quotation->getDesignations()) > 7 && sizeof($quotation->getDesignations()) < 10 || sizeof($quotation->getDesignations()) > 21 && sizeof($quotation->getDesignations()) < 24) {
             $page_break = true;
         }else {
             $page_break = false;
@@ -40,6 +40,8 @@ class PdfGeneratorController extends AbstractController
         $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
         $dompdf->render();
+        $font = $dompdf->getFontMetrics()->get_font("helvetica", "bold");
+        $dompdf->getCanvas()->page_text(575, 775, "{PAGE_NUM} / {PAGE_COUNT}", $font, 10, array(0,0,0));
 
         return new Response(
             $dompdf->stream('devis'.$quotation->getReferenceQuotation() , ["Attachment" => false]),

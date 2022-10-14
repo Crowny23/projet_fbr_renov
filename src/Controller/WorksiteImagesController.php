@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/worksite-images')]
+#[Route('/chantiers-images')]
 class WorksiteImagesController extends AbstractController
 {
     #[Route('/', name: 'app_worksite_images_index', methods: ['GET'])]

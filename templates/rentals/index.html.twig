@@ -4,13 +4,12 @@
 
 {% block body %}
     <h1>Location</h1>
-
-    <table class="table table-hover">
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th>Matériel</th>
-                <th>Qauantité</th>
-                <th>Prix Unitaire</th>
+                <th data-sortable="true" data-field="material">Matériel</th>
+                <th data-sortable="true" data-field="quantity">Quantité</th>
+                <th data-sortable="true" data-field="price">Prix Unitaire</th>
                 <th>Actions</th>
                 <th><a href="{{ path('app_rentals_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter</a></th>
             </tr>
