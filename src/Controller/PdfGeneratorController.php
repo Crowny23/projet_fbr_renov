@@ -10,7 +10,7 @@ use Dompdf\Dompdf;
 
 class PdfGeneratorController extends AbstractController
 {
-    #[Route('/pdf/generator/{id}', name: 'app_pdf_generator', methods: 'GET')]
+    #[Route('/pdf/generator/{id}', name: 'app_pdf_generator_quotation', methods: 'GET')]
     public function index(Quotation $quotation): Response
     {
         if (sizeof($quotation->getDesignations()) > 7 && sizeof($quotation->getDesignations()) < 10 || sizeof($quotation->getDesignations()) > 21 && sizeof($quotation->getDesignations()) < 24) {

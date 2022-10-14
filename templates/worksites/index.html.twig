@@ -5,45 +5,48 @@
 {% block body %}
     <h1>Liste des chantiers</h1>
 
-    <table class="table table-hover">
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th>Nom du chantier</th>
-                <th>Adresse Complète</th>
-                <th>Client</th>
-                <th>Date de début</th>
+                <th>Actions</th>
+                <th data-sortable="true" data-field="worksite_name">Nom du chantier</th>
+                <th data-sortable="true" data-field="address">Adresse Complète</th>
+                <th data-sortable="true" data-field="customer">Client</th>
+                <th data-sortable="true" data-field="date_start">Date de début</th>
                 {# <th>Durée des travaux (en jours)</th>
                 <th>Travaux supplémentaires (en heures)</th> #}
-                <th>Distance</th>
+                <th data-sortable="true" data-field="dist">Distance</th>
                 {# <th>Note du client</th>
                 <th>Note personelle</th> #}
-                <th>Urgent</th>
-                <th>Statut</th>
+                <th data-sortable="true" data-field="urgent">Urgent</th>
+                <th data-sortable="true" data-field="status">Statut</th>
+                <th>
+                    <a href="{{ path('app_worksites_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter</a>
+                </th>
                 {# <th>Date de création</th>
                 <th>Date de dernière modification</th> #}
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for worksite in worksites %}
-            <tr>
+        <tr>
+                <td>
+                    <a href="{{ path('app_worksites_show', {'id': worksite.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                </td>
                 <td>{{ worksite.nameWorksite }}</td>
                 <td>{{ worksite.adressWorksite}}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</td>
                 <td>{{ worksite.clientWorksite }}</td>
                 <td>{{ worksite.startAt ? worksite.startAt|date('d M Y') : '' }}</td>
-                <td>{{ worksite.durationWorksite }}</td>
-                <td>{{ worksite.supplementWorksite }}</td>
+                {# <td>{{ worksite.durationWorksite }}</td>
+                <td>{{ worksite.supplementWorksite }}</td> #}
                 <td>{{ worksite.travelDistanceWorksite }}</td>
                 {# <td>{{ worksite.noteClientWorksite }}</td>
                 <td>{{ worksite.noteAdminWorksite }}</td> #}
                 <td>{{ worksite.isUrgent ? 'Oui' : 'Non' }}</td>
-                <td>{{ worksite.statusWorksite }}</td>
+                <td colspan="2">{{ worksite.statusWorksite }}</td>
                 {# <td>{{ worksite.createdAt ? worksite.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ worksite.updatedAt ? worksite.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
-                <td>
-                    <a href="{{ path('app_worksites_show', {'id': worksite.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
             </tr>
         {% else %}
             <tr>
@@ -53,5 +56,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_worksites_new') }}" class="btn btn-primary">Créer </a>
 {% endblock %}

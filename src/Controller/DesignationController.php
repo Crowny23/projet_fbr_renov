@@ -74,6 +74,6 @@ class DesignationController extends AbstractController
             $designationRepository->remove($designation, true);
         }
 
-        return $this->redirectToRoute('app_quotation_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_quotation_show', ['id' => $designation->getQuotation()->getId()], Response::HTTP_SEE_OTHER);
     }
 }

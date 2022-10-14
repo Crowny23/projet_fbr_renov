@@ -20,8 +20,17 @@
                 <td>{{ repairs_image.imageSize }} ko</td>
             </tr>
             <tr>
+                <th>Type de fichier</th>
+                <td>{{ repairs_image.mimeType }}</td>
+            </tr>
+            <tr>
+                {% if repairs_image.mimeType == 'application/pdf' %}
+                <th>Pdf</th>
+                <td><iframe src="{{ vich_uploader_asset(repairs_image) }}" frameborder="0" width="800" height="500"></iframe></td>
+                {% else %}
                 <th>L'image</th>
                 <td><img src="{{ vich_uploader_asset(repairs_image) }}" alt="" width="200"></td>
+                {% endif %}
             </tr>
         </tbody>
     </table>

@@ -5,35 +5,36 @@
 {% block body %}
     <h1>WorksiteImages index</h1>
 
-    <table class="table">
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th>Nom du dépannage</th>
-                <th>Non d'image</th>
-                <th>Taille</th>
-                <th>Image</th>
                 <th>actions</th>
+                <th>Image</th>
+                <th data-sortable="true" data-field="worksite_name">Nom du chantiers</th>
+                <th data-sortable="true" data-field="weight">Taille</th>
+                <th data-sortable="true" data-field="image_name">Nom d'image</th>
+                <th>
+                    <a href="{{ path('app_worksite_images_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter</a>
+                </th>
             </tr>
         </thead>
         <tbody>
         {% for worksite_image in worksite_images %}
             <tr>
-                <td>{{ worksite_image.worksite }}</td>
-                <td>{{ worksite_image.imageWorksiteImages }}</td>
-                <td>{{ worksite_image.imageSize }} ko</td>
-                <td><img src="{{ vich_uploader_asset(worksite_image) }}" alt="" width="200"></td>
                 <td>
-                    <a href="{{ path('app_worksite_images_show', {'id': worksite_image.id}) }}">show</a>
-                    <a href="{{ path('app_worksite_images_edit', {'id': worksite_image.id}) }}">edit</a>
+                    <a href="{{ path('app_worksite_images_show', {'id': worksite_image.id}) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_worksite_images_edit', {'id': worksite_image.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
+                <td><img src="{{ vich_uploader_asset(worksite_image) }}" alt="" width="200"></td>
+                <td>{{ worksite_image.worksite }}</td>
+                <td>{{ worksite_image.imageSize }} ko</td>
+                <td colspan="2">{{ worksite_image.imageWorksiteImages }}</td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucune image enregistré</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_worksite_images_new') }}">Create new</a>
 {% endblock %}
