@@ -36,7 +36,7 @@ class WorksitesType extends AbstractType
             ->add('travel_distance_worksite', IntegerType::class, ['label' => 'Distance', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('note_client_worksite', TextareaType::class, ['label' => 'Note du client', 'required' => false, 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('note_admin_worksite', TextareaType::class, ['label' => 'Note personnelle', 'required' => false, 'label_attr' => ['class' => 'mb-1, mt-2']])
-            ->add('is_urgent', CheckboxType::class, ['label' => 'Urgent', 'mapped' => false, 'required' => false, 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('is_urgent', CheckboxType::class, ['label' => 'Urgent', 'required' => false, 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('status_worksite', ChoiceType::class, ['label' => 'Statut', 'choices' => ['Non commencé' => 'Non commencé', 'En cours' => 'En cours', 'Terminé' => 'Terminé'], 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('category_worksite', EntityType::class, ['label' => 'Catégorie', 'class' => WorksiteCategories::class, 'label_attr' => ['class' => 'mb-1, mt-2']])
             // ->add('images_worksite', EntityType::class, ['label' => 'Images', 'class' => WorksiteImages::class])

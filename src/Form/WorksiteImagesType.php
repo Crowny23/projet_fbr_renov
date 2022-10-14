@@ -24,7 +24,7 @@ class WorksiteImagesType extends AbstractType
             'class' => Worksites::class,
             'label' => 'Chantier'
         ])
-        ->add('submit', SubmitType::class, ['label' => 'Valider'])
+        ->add('submit', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn btn-success mt-3']])
     ;
     }
 

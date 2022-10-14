@@ -110,7 +110,7 @@ class WorksiteImages
 
         return $this;
     }
-
+    
     public function getMimeType(): ?string
     {
         return $this->mimeType;
@@ -123,3 +123,4 @@ class WorksiteImages
         return $this;
     }
 }
+

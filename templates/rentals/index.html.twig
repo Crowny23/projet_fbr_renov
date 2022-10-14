@@ -4,7 +4,6 @@
 
 {% block body %}
     <h1>Location</h1>
-
     <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
@@ -12,19 +11,21 @@
                 <th data-sortable="true" data-field="quantity">Quantité</th>
                 <th data-sortable="true" data-field="price">Prix Unitaire</th>
                 <th>Actions</th>
+                <th><a href="{{ path('app_rentals_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter</a></th>
             </tr>
         </thead>
         <tbody>
         {% for rental in rentals %}
-            <tr>
+            <tr style="background-color: white;">
                 <td>{{ rental.getMaterialsRental().nameMaterial }}</td>
                 <td>{{ rental.quantityRental }}</td>
                 <td>{{ rental.unitPrice }}</td>
 
                 <td>
-                    <a href="{{ path('app_rentals_show', {'id': rental.id}) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_rentals_show', {'id': rental.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                     <a href="{{ path('app_rentals_edit', {'id': rental.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
+                <td></td>
             </tr>
         {% else %}
             <tr>
@@ -34,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_rentals_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Créer une Location</a>
+    
 {% endblock %}

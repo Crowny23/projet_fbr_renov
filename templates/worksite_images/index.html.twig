@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}WorksiteImages index{% endblock %}
+{% block title %}Images de Chantier{% endblock %}
 
 {% block body %}
-    <h1>WorksiteImages index</h1>
-
+    <h1>Images de Chantier</h1>
     <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
@@ -20,7 +19,7 @@
         </thead>
         <tbody>
         {% for worksite_image in worksite_images %}
-            <tr>
+            <tr style="background-color: white;">
                 <td>
                     <a href="{{ path('app_worksite_images_show', {'id': worksite_image.id}) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
                     <a href="{{ path('app_worksite_images_edit', {'id': worksite_image.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>

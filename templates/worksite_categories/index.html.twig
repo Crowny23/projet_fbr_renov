@@ -17,12 +17,13 @@
         </thead>
         <tbody>
         {% for worksite_category in worksite_categories %}
-            <tr>
+            <tr style="background-color: white;">
                 <td>
-                    <a href="{{ path('app_worksite_categories_show', {'id': worksite_category.id}) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_worksite_categories_show', {'id': worksite_category.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                     <a href="{{ path('app_worksite_categories_edit', {'id': worksite_category.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
                 <td colspan="2">{{ worksite_category.nameWorksiteCategories }}</td>
+
             </tr>
         {% else %}
             <tr>

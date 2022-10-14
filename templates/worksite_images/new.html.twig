@@ -3,9 +3,11 @@
 {% block title %}Ajouter une image{% endblock %}
 
 {% block body %}
-    <h1>Ajouter une image</h1>
+    <a href="{{ path('app_worksite_images_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i></a>
+    <h1 class="row mb-3 mt-2 container col-5 mx-auto">Ajouter une image</h1>
+    <div class="row mb-3 container col-5 ps-0 mt-5 mx-auto ">
+        {{ include('worksite_images/_form.html.twig') }}
+    </div>
 
-    {{ include('worksite_images/_form.html.twig') }}
-
-    <a href="{{ path('app_worksite_images_index') }}">Retour à la liste</a>
+    
 {% endblock %}

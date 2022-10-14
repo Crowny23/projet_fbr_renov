@@ -12,20 +12,22 @@
                 <th data-sortable="true" data-field="image_name_repair">Nom d'image</th>
                 <th data-sortable="true" data-field="weight">Taille</th>
                 <th>Image</th>
-                <th>actions</th>
+                <th>Actions</th>
+                <th><a href="{{ path('app_repairs_images_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter</a></th>
             </tr>
         </thead>
         <tbody>
         {% for repairs_image in repairs_images %}
-            <tr>
+            <tr style="background-color: white;">
                 <td>{{ repairs_image.repair }}</td>
                 <td>{{ repairs_image.imageRepairsImages }}</td>
                 <td>{{ repairs_image.imageSize }} ko</td>
                 <td><img src="{{ vich_uploader_asset(repairs_image) }}" alt="" width="200"></td>
                 <td>
-                    <a href="{{ path('app_repairs_images_show', {'id': repairs_image.id}) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_repairs_images_show', {'id': repairs_image.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                     <a href="{{ path('app_repairs_images_edit', {'id': repairs_image.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
+                <td></td>
             </tr>
         {% else %}
             <tr>
@@ -35,5 +37,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_repairs_images_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Créer une image</a>
 {% endblock %}

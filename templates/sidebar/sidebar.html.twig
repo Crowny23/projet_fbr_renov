@@ -1,9 +1,13 @@
 <nav id="sidebar" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
   <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
     <a href="/" class="d-flex align-items-center pb-3 me-md-auto text-white text-decoration-none">
-      <span class="fs-5 d-none d-sm-inline">FBR renovation</span>
+      {# <span class="fs-5 d-none d-sm-inline">FBR renovation</span> #}
+      <img src="../img/logo-bg.png" alt="Image de logo" class="container mx-auto">
     </a>
     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+      <li class="nav-item">
+        <a href="{{ path('app_main') }}" class="nav-link align-middle px-0"><i class="fa fa-house"></i> <span class="d-none ms-1 d-sm-inline"> Accueil</span></a>
+      </li>
       <li class="nav-item">
         <a href="#submenuClient" data-bs-toggle="collapse" class="nav-link align-middle px-0">
           <i class="fa fa-users"></i>
@@ -21,7 +25,7 @@
       <li class="nav-item">
         <a href="#submenuWorksite" data-bs-toggle="collapse" class="nav-link align-middle px-0">
           <i class="fa fa-building"></i>
-          <span class="ms-1 d-none d-sm-inline">Chantiers</span>
+          <span class="ms-1 d-none d-sm-inline"> Chantiers</span>
         </a>
         <ul class="collapse nav flex-column ms-1" id="submenuWorksite" data-bs-parent="#menu">
           <li class="w-100 ms-3">
@@ -44,7 +48,7 @@
       <li class="nav-item">
         <a href="#submenuRepair" data-bs-toggle="collapse" class="nav-link align-middle px-0">
           <i class="fa fa-person-digging"></i>
-          <span class="ms-1 d-none d-sm-inline">Dépannages</span>
+          <span class="ms-1 d-none d-sm-inline"> Dépannages</span>
         </a>
         <ul class="collapse nav flex-column ms-1" id="submenuRepair" data-bs-parent="#menu">
           <li class="w-100 ms-3">
@@ -82,8 +86,8 @@
         </ul>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link align-middle px-0">
-          <i class="fa fa-chart-simple"></i><span class="s-none ms-1 d-sm-inline">Statistique</span>
+        <a href="{{path('app_chart')}}" class="nav-link align-middle px-0">
+          <i class="fa fa-chart-simple"></i><span class="s-none ms-1 d-sm-inline"> Statistique</span>
         </a>
       </li>
     </ul>
