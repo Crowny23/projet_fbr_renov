@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CalendarController!{% endblock %}
+{% block title %}Agenda{% endblock %}
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    <a title="Add to Calendar" class="addeventstc" data-id="OV513711" href="https://www.addevent.com/calendar/OV513711" target="_blank" rel="nofollow">Add to Calendar</a>
-	<script type="text/javascript" src="https://cdn.addevent.com/libs/stc/1.0.2/stc.min.js" async defer></script>
+<div class="container row mx-auto col-12">
+    <h1 style="font-size: 1.6rem">Agenda</h1>
+    
+    <div class="mt-3 row mx-auto col-12">
+        <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Europe%2FParis&showTitle=1&showNav=1&mode=MONTH&src=amVzc3kuOTltaWxhcWlAZ21haWwuY29t&src=ZnIuZnJlbmNoI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=dTB0c2Q2ZHVhbW1qNzNnMnBhajE5ZzgwdmJrMWxpaGNAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%230B8043&color=%23F09300" style="border-width:0" width="1200" height="600" frameborder="0" scrolling="no"></iframe>
+    </div>
 
 
 </div>

@@ -86,5 +86,12 @@
 
     <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}"class="btn btn-primary mb-3">Modifier</a>
 
+    <div title="Add to Calendar" class="addeventatc btn btn-light mb-3" data-styling="none">
+        <i class="fa fa-calendar-plus"></i>
+        <span class="timezone">Europe/Paris</span>
+        <span class="title">{{ repair.nameRepair }}</span>
+        <span class="description">Horaire : {{ repair.scheduleRepair }} , <br> Distance : {{ repair.travelDistanceRepair }} km, <br> Client : {{ repair.client }}</span>
+        <span class="location">{{ repair.adressRepair }}, {{ repair.cityRepair }}, {{ repair.cpRepair }}</span>
+    </div>
     {{ include('repairs/_delete_form.html.twig') }}
 {% endblock %}

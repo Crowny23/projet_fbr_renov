@@ -5,10 +5,9 @@
 {% block body %}
 
 <div class="example-wrapper row flex col-10 mx-auto">
-    <h1>Accueil</h1>
-    <div class="rounded-4 col-10 ms-5 mt-3" style="background-color: white; width:1000px; height: 300px;">
-        <h3 style="font-size: 1.2rem;">Calendrier</h3>
-        
+    <h1 class="float-start" style="font-size: 1.6rem;">Accueil</h1>
+    <div class="rounded-4 col-10 ms-5 mt-3 pt-2" style="background-color: white; width:1000px; height: 300px;">
+        <iframe src="https://calendar.google.com/calendar/embed?height=280&wkst=1&bgcolor=%23ffffff&ctz=Europe%2FParis&showTitle=0&showTz=1&src=amVzc3kuOTltaWxhcWlAZ21haWwuY29t&src=dTB0c2Q2ZHVhbW1qNzNnMnBhajE5ZzgwdmJrMWxpaGNAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%23F09300" style="border-width:0" width="980" height="280" frameborder="0" scrolling="no"></iframe>
     </div>
 
 
@@ -60,7 +59,6 @@
                     <th>Nom du chantier</th>
                     <th>Adresse Complète</th>
                     <th>Client</th>
-                    <th>Distance</th>
                     <th>Urgent</th>
                     <th>Statut</th>
                     <th>Actions</th>
@@ -72,7 +70,6 @@
                     <td>{{ worksite.nameWorksite }}</td>
                     <td>{{ worksite.adressWorksite}}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</td>
                     <td>{{ worksite.clientWorksite }}</td>
-                    <td>{{ worksite.travelDistanceWorksite }}</td>
                     <td>{{ worksite.isUrgent ? 'Oui' : 'Non' }}</td>
                     <td>{{ worksite.statusWorksite }}</td>
                     <td>
