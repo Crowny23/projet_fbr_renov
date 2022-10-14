@@ -41,7 +41,7 @@
                 {# <td>{{ worksite.createdAt ? worksite.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ worksite.updatedAt ? worksite.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_worksites_show', {'id': worksite.id}) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-eye"></i></a>
+                    <a href="{{ path('app_worksites_show', {'id': worksite.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                     <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
             </tr>
