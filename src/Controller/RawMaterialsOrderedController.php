@@ -26,7 +26,7 @@ class RawMaterialsOrderedController extends AbstractController
     }
 
     #[Route('/new/{idOrder}/{idRawMaterial}/{qtty}', name: 'app_raw_materials_ordered_new', methods: ['GET', 'POST'])]
-    public function new($idOrder, $idRawMaterial, $qtty, Request $request, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository, OrdersRepository $ordersRepository, RawMaterialsRepository $rawMaterialsRepository): Response
+    public function new($idOrder, $idRawMaterial, $qtty, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository, OrdersRepository $ordersRepository, RawMaterialsRepository $rawMaterialsRepository): Response
     {
         // Find order et rawMaterial by ID with url params
         $order =  $ordersRepository->find($idOrder);

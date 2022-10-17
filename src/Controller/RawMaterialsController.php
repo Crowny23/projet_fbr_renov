@@ -7,8 +7,6 @@ use App\Form\RawMaterialsType;
 use App\Form\SearchFormType;
 use App\Repository\OrdersRepository;
 use App\Repository\RawMaterialsRepository;
-use Doctrine\ORM\EntityManager;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/materiaux')]
 class RawMaterialsController extends AbstractController
 {
-    #[Route('/', name: 'app_raw_materials_index', methods: ['GET'])]
+    #[Route('/', name: 'app_raw_materials_index', methods: ['GET', 'POST'])]
     public function index(RawMaterialsRepository $rawMaterialsRepository, Request $request, OrdersRepository $ordersRepository): Response
     {
         $rawMaterial = new RawMaterials();
-        $searchForm = $this->createForm(SearchFormType::class, $rawMaterial, ['method' => 'GET']);
+        $searchForm = $this->createForm(SearchFormType::class, $rawMaterial, ['method' => 'POST']);
         $searchForm->handleRequest($request);
 
         $list = $rawMaterialsRepository->findAll();
@@ -31,11 +29,13 @@ class RawMaterialsController extends AbstractController
             $category = $searchForm->getViewData()->getCategory();
             $list = $rawMaterialsRepository->findByNameAndCategory($search, $category);
         }
+        
+        $lastOrders = $ordersRepository->findBy([], ['id' => 'DESC'], 10, 0);
 
         return $this->renderForm('raw_materials/index.html.twig', [
             'raw_materials' => $list,
             'searchForm' => $searchForm,
-            'orders' => $ordersRepository->findBy([], ['id' => 'DESC'], 10, 0)
+            'orders' => $lastOrders
         ]);
     }
 
@@ -92,5 +92,32 @@ class RawMaterialsController extends AbstractController
         }
 
         return $this->redirectToRoute('app_raw_materials_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/ajax/orders/{searchOrder<\d*[a-zA-Z][a-zA-Z0-9]*>?}', name: 'app_last_10_orders', methods: ['GET'])]
+    public function getLastOrders($searchOrder = null, OrdersRepository $ordersRepository)
+    {
+        if($searchOrder === null || $searchOrder === ''){
+            $lastOrders = $ordersRepository->findBy([], ['id' => 'DESC'], 10, 0);
+        } else {
+            $lastOrders = $ordersRepository->findByName($searchOrder);
+        }
+
+        $lastOrdersNames = [];
+
+        foreach ($lastOrders as $key => $order) {
+            $orderName = $order->getNameOrder();
+            $orderId = $order->getId();
+            $tmpArray['id'] = $orderId;
+            $tmpArray['name'] = $orderName;
+            $lastOrdersNames[$orderName] = $tmpArray;
+        }
+
+        $lastOrdersNamesJson = json_encode($lastOrdersNames);
+        // dd($lastOrdersNamesJson);
+
+        return $this->render('orders/last10.html.twig', [
+            'lastOrders' => $lastOrdersNamesJson
+        ]);
     }
 }
