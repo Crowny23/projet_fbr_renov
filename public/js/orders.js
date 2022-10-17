@@ -11,8 +11,11 @@ addToOrderBtn.forEach((element, index) => {
         // Get input of opened modal
         const inputOrder = document.getElementById('input-order-modal-' + loopIndex)
 
-        btnSubmitModal.addEventListener('click', (e) => {
-            e.preventDefault()
+        // Get the qtty with getQtty() method
+        getQtty(loopIndex)
+
+        btnSubmitModal.addEventListener('click', (event) => {
+            event.preventDefault()
 
             // Get element we need from worksitesLinks to build a new html code in fetchOrderByName()
             // Get href of a worksiteslink
@@ -28,12 +31,7 @@ addToOrderBtn.forEach((element, index) => {
 
             // Call XMLHttpRequest
             fetchOrderByName(value, splitHref, splitOuterHtml, loopIndex)
-
-            // Get the qtty with getQtty() method after DOM modification
-            getQtty(loopIndex)
         })
-        // Get the qtty with getQtty() method
-        getQtty(loopIndex)
     })
 })
 
@@ -41,6 +39,8 @@ addToOrderBtn.forEach((element, index) => {
 function getQtty(index) {
     // get worksites links in case DOM has been modify when method called
     const worksitesLinks = document.querySelectorAll('.worksites-links-' + index)
+    console.log(worksitesLinks)
+    alert('after worksitelinks')
 
     // Event listener for each worksite link
     worksitesLinks.forEach(element => {
@@ -51,6 +51,8 @@ function getQtty(index) {
             const inputQtty = document.getElementById('input-qtty-' + index)
             // Get qauntity
             const qtty = inputQtty.value
+            console.log(qtty)
+            alert('after qtty')
             // Get link href
             const href = element.href
 
@@ -72,7 +74,7 @@ function getQtty(index) {
 function fetchOrderByName(name, arrayHref, arrayOuterHtml, index) {
     // Get containers
     const listOrders = document.getElementById('list-orders-' + index)
-    console.log(listOrders)
+    // console.log(listOrders)
 
     // Open a new XMLHttpRequest
     const xhr = new XMLHttpRequest()
@@ -102,6 +104,11 @@ function fetchOrderByName(name, arrayHref, arrayOuterHtml, index) {
             
             listOrders.innerHTML = ''
             listOrders.innerHTML = listDom
+            console.log(listDom)
+            alert('after ajax')
+
+            // Get the qtty with getQtty() method after DOM modification
+            getQtty(index)
         }
     }
     xhr.send()
