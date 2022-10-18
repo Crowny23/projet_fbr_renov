@@ -32,6 +32,10 @@
                 <td>{{ order.totalPrice }} €</td>
             </tr>
             <tr>
+                <th>Nombre de référence article</th>
+                <td>{% if order.numberRawMaterialOrdered is same as null %}La commande est vide{% else %}{{ order.numberRawMaterialOrdered }}{% endif %}</td>
+            </tr>
+            <tr>
                 <th>Date de création</th>
                 <td>{{ order.createdAt ? order.createdAt|date('d M Y H:i:s') : '' }}</td>
             </tr>
@@ -64,14 +68,27 @@
         {% for raw_material_ordered in raw_materials_ordered %}
             <tr>
                 <td>{{ raw_material_ordered.raw_material }}</td>
-                <td>{{ raw_material_ordered.quantity }}</td>
+                <td class="d-flex justify-content-around">
+                    <span>
+                        <a href="{{ path('app_raw_materials_ordered_plus', {'id': raw_material_ordered.id}) }}"><i class="fa-solid fa-square-plus fa-lg"></i></a>
+                    </span>
+                    <span>
+                        <form action="{{ path('app_raw_materials_ordered_quick_edit', {'id': raw_material_ordered.id }) }}" method="POST" onsubmit="return confirm('Êtes vous sûr de vouloir changer la quantité de {{ raw_material_ordered.raw_material }} ?');">
+                            <input required name="qtty" type="number" value="{{ raw_material_ordered.quantity }}">
+                            <button type="submit" class="link-success btn text-decoration-underline p-0 align-top"><i class="fa-solid fa-square-check fa-lg"></i></button>
+                        </form>
+                    </span>
+                    <span>
+                        <a href="{{ path('app_raw_materials_ordered_minus', {'id': raw_material_ordered.id}) }}" class="link-danger"><i class="fa-solid fa-square-minus fa-lg"></i></a>
+                    </span>
+                </td>
                 <td>{{ raw_material_ordered.totalPriceRawMaterial }} €</td>
                 <td>{{ raw_material_ordered.createdAt ? raw_material_ordered.createdAt|date('d M Y H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_raw_materials_ordered_edit', {'id': raw_material_ordered.id}) }}">Modifier la quantité</a>
+                <td class="d-flex justify-content-around">
+                    {# <a href="{{ path('app_raw_materials_ordered_edit', {'id': raw_material_ordered.id}) }}">Modifier la quantité</a> #}
                     <form method="post" action="{{ path('app_raw_materials_ordered_delete', {'id': raw_material_ordered.id}) }}" onsubmit="return confirm('Êtes vous sûr de vouloir supprimer ce matériau de votre commande ?');">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ raw_material_ordered.id) }}">
-                        <button class="btn">Supprimer</button>
+                        <button class="link-danger btn text-decoration-underline p-0 align-top">Supprimer</button>
                     </form>
                 </td>
             </tr>

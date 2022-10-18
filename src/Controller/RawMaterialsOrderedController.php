@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RawMaterialsOrderedController extends AbstractController
 {
     #[Route('/', name: 'app_raw_materials_ordered_index', methods: ['GET'])]
-    public function index(RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
+    public function index(RawMaterialsOrderedRepository $rawMaterialsOrderedRepository, OrdersRepository $ordersRepository): Response
     {
         return $this->render('raw_materials_ordered/index.html.twig', [
             'raw_materials_ordereds' => $rawMaterialsOrderedRepository->findAll(),
@@ -86,7 +86,11 @@ class RawMaterialsOrderedController extends AbstractController
         $ordersRepository->save($order, true);
         $rawMaterialsOrderedRepository->save($rawMaterialsOrdered, true);
 
-        // dd($order, $rawMaterial, $rawMaterialsOrdered);
+        // Count rawMaterilasOrdered for current order
+        $count = count($rawMaterialsOrderedRepository->findBy(['orders' => $order]));
+        $order->setNumberRawMaterialOrdered($count);
+        
+        $ordersRepository->save($order, true);
 
         return $this->redirectToRoute('app_raw_materials_index', [], Response::HTTP_SEE_OTHER);
     }
@@ -163,8 +167,106 @@ class RawMaterialsOrderedController extends AbstractController
             // Update in DB (Order price & rawMaterialsOrdered delete)
             $ordersRepository->save($order, true);
             $rawMaterialsOrderedRepository->remove($rawMaterialsOrdered, true);
+
+            // Count rawMaterilasOrdered for current order
+            $count = count($rawMaterialsOrderedRepository->findBy(['orders' => $order]));
+            $order->setNumberRawMaterialOrdered($count);
+            
+            $ordersRepository->save($order, true);
         }
 
         return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/plus/{id}', name: 'app_raw_materials_ordered_plus', methods: ['GET'])]
+    public function plus($id, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
+    {
+        // Get rawMaterialOrdered
+        $rawMaterialOrdered = $rawMaterialsOrderedRepository->find($id);
+        // Set new quantity
+        $qtty = $rawMaterialOrdered->getQuantity();
+        $qtty ++;
+        $rawMaterialOrdered->setQuantity($qtty);
+        // Get rawMaterial unit price
+        $rawMaterial = $rawMaterialOrdered->getRawMaterial();
+        $rawMaterialPrice = $rawMaterial->getPrice();
+        // Get rawMaterialOrdered price
+        $rawMaterialsOrderedPrice = $rawMaterialOrdered->getTotalPriceRawMaterial();
+        // Get order price
+        $order = $rawMaterialOrdered->getOrders();
+        $orderPrice = $order->getTotalPrice();
+        // Set new price for order and rawMaterialOrdered
+        $order->setTotalPrice($orderPrice + $rawMaterialPrice);
+        $rawMaterialOrdered->setTotalPriceRawMaterial($rawMaterialsOrderedPrice + $rawMaterialPrice);
+
+        $rawMaterialsOrderedRepository->save($rawMaterialOrdered, true);
+
+        $orderId = $order->getId();
+
+        return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/minus/{id}', name: 'app_raw_materials_ordered_minus', methods: ['GET'])]
+    public function minus($id, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
+    {
+        // Get rawMaterialOrdered
+        $rawMaterialOrdered = $rawMaterialsOrderedRepository->find($id);
+        // Set new quantity
+        $qtty = $rawMaterialOrdered->getQuantity();
+        $qtty --;
+        $rawMaterialOrdered->setQuantity($qtty);
+        // Get rawMaterial unit price
+        $rawMaterial = $rawMaterialOrdered->getRawMaterial();
+        $rawMaterialPrice = $rawMaterial->getPrice();
+        // Get rawMaterialOrdered price
+        $rawMaterialsOrderedPrice = $rawMaterialOrdered->getTotalPriceRawMaterial();
+        // Get order price
+        $order = $rawMaterialOrdered->getOrders();
+        $orderPrice = $order->getTotalPrice();
+        // Set new price for order and rawMaterialOrdered
+        $order->setTotalPrice($orderPrice - $rawMaterialPrice);
+        $rawMaterialOrdered->setTotalPriceRawMaterial($rawMaterialsOrderedPrice - $rawMaterialPrice);
+
+        $rawMaterialsOrderedRepository->save($rawMaterialOrdered, true);
+
+        $orderId = $rawMaterialOrdered->getOrders()->getId();
+
+        return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/edit-quantity', name: 'app_raw_materials_ordered_quick_edit', methods: ['GET', 'POST'])]
+    public function quickEditQuantity(RawMaterialsOrdered $rawMaterialsOrdered, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
+    {
+        // Get order id
+        $order = $rawMaterialsOrdered->getOrders();
+        $orderId = $order->getId();
+        // Get rawMaterialOrdered quantity
+        $qtty = $rawMaterialsOrdered->getQuantity();
+        $inputQtty = intval($_POST['qtty']);
+
+        // Check if quantity change
+        if($qtty === $inputQtty) {
+            return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+        } else {
+            // Get order total price
+            $orderPrice = $order->getTotalPrice();
+            // Get rawMaterialsOrdered old price
+            $rawMaterialsOrderedOldPrice = $rawMaterialsOrdered->getTotalPriceRawMaterial();
+            // Get rawMaterial price
+            $rawMaterial = $rawMaterialsOrdered->getRawMaterial();
+            $rawMaterialPrice = $rawMaterial->getPrice();
+            // Set new rawMaterialsOrdered quantity
+            $rawMaterialsOrdered->setQuantity($inputQtty);
+            // Set new rawMaterialsOrdered price
+            $rawMaterialsOrderedNewPrice = $inputQtty * $rawMaterialPrice;
+            $rawMaterialsOrdered->setTotalPriceRawMaterial($rawMaterialsOrderedNewPrice);
+            // Calculate order new price
+            $orderNewPrice = ($orderPrice - $rawMaterialsOrderedOldPrice) + $rawMaterialsOrderedNewPrice;
+            $order->setTotalPrice($orderNewPrice);
+
+            $rawMaterialsOrderedRepository->save($rawMaterialsOrdered, true);
+
+            return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+        }
     }
 }

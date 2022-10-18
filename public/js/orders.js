@@ -39,8 +39,7 @@ addToOrderBtn.forEach((element, index) => {
 function getQtty(index) {
     // get worksites links in case DOM has been modify when method called
     const worksitesLinks = document.querySelectorAll('.worksites-links-' + index)
-    console.log(worksitesLinks)
-    alert('after worksitelinks')
+    // console.log(worksitesLinks)
 
     // Event listener for each worksite link
     worksitesLinks.forEach(element => {
@@ -49,10 +48,8 @@ function getQtty(index) {
 
             // Get input where quantity is add
             const inputQtty = document.getElementById('input-qtty-' + index)
-            // Get qauntity
+            // Get quantity
             const qtty = inputQtty.value
-            console.log(qtty)
-            alert('after qtty')
             // Get link href
             const href = element.href
 
@@ -104,8 +101,6 @@ function fetchOrderByName(name, arrayHref, arrayOuterHtml, index) {
             
             listOrders.innerHTML = ''
             listOrders.innerHTML = listDom
-            console.log(listDom)
-            alert('after ajax')
 
             // Get the qtty with getQtty() method after DOM modification
             getQtty(index)

@@ -41,9 +41,13 @@ class Orders
     #[ORM\Column(nullable: true)]
     private ?int $total_price = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $number_raw_material_ordered = null;
+
     public function __construct()
     {
         $this->raw_material_ordered = new ArrayCollection();
+
         $date = new DateTimeImmutable();
         $timezone = new DateTimeZone('Europe/Paris');
         $created_at =  $date->setTimezone($timezone);
@@ -173,6 +177,18 @@ class Orders
     public function setTotalPrice(?int $total_price): self
     {
         $this->total_price = $total_price;
+
+        return $this;
+    }
+
+    public function getNumberRawMaterialOrdered(): ?int
+    {
+        return $this->number_raw_material_ordered;
+    }
+
+    public function setNumberRawMaterialOrdered(?int $number_raw_material_ordered): self
+    {
+        $this->number_raw_material_ordered = $number_raw_material_ordered;
 
         return $this;
     }
