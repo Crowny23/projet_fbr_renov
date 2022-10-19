@@ -266,10 +266,18 @@ class RawMaterialsOrderedController extends AbstractController
 
         // Check if quantity change
         if($qtty === $inputQtty) {
-            $datas = $qtty;
+            // Get order total price
+            $orderPrice = $order->getTotalPrice();
+            // Get rawMaterialsOrdered price
+            $rawMaterialsOrderedPrice = $rawMaterialsOrdered->getTotalPriceRawMaterial();
+
+            $datas = [$qtty, $orderPrice, $rawMaterialsOrderedPrice];
+
+            $datasJson = json_encode($datas);
+
             // return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
             return $this->render('raw_materials_ordered/quick-edit.html.twig', [
-                'datas' => $datas
+                'datas' => $datasJson
             ]);
         } else {
             // Get order total price
