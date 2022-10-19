@@ -29,7 +29,7 @@
                 <td>{{ order.supplier }}</td>
                 <td>{{ order.worksite }}</td>
                 <td>{{ order.totalPrice ? order.totalPrice : 0 }} €</td>
-                <td>{% if order.numberRawMaterialOrdered is same as null %}La commande est vide{% else %}{{ order.numberRawMaterialOrdered }}{% endif %}</td>
+                <td>{% if (order.numberRawMaterialOrdered is same as null) or (order.numberRawMaterialOrdered is same as 0) %}La commande est vide{% else %}{{ order.numberRawMaterialOrdered }}{% endif %}</td>
                 {# <td>{{ order.createdAt ? order.createdAt|date('d M Y H:i:s') : '' }}</td>
                 <td>{{ order.updatedAt ? order.updatedAt|date('d M Y H:i:s') : '' }}</td> #}
                 <td>

@@ -178,7 +178,7 @@ class RawMaterialsOrderedController extends AbstractController
         return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/plus/{id}', name: 'app_raw_materials_ordered_plus', methods: ['GET'])]
+    #[Route('/ajax/plus/{id}', name: 'app_raw_materials_ordered_plus', methods: ['GET'])]
     public function plus($id, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
     {
         // Get rawMaterialOrdered
@@ -196,17 +196,28 @@ class RawMaterialsOrderedController extends AbstractController
         $order = $rawMaterialOrdered->getOrders();
         $orderPrice = $order->getTotalPrice();
         // Set new price for order and rawMaterialOrdered
-        $order->setTotalPrice($orderPrice + $rawMaterialPrice);
-        $rawMaterialOrdered->setTotalPriceRawMaterial($rawMaterialsOrderedPrice + $rawMaterialPrice);
+        $orderNewPrice = $orderPrice + $rawMaterialPrice;
+        $order->setTotalPrice($orderNewPrice);
+        $rawMaterialsOrderedNewPrice = $rawMaterialsOrderedPrice + $rawMaterialPrice;
+        $rawMaterialOrdered->setTotalPriceRawMaterial($rawMaterialsOrderedNewPrice);
 
         $rawMaterialsOrderedRepository->save($rawMaterialOrdered, true);
 
-        $orderId = $order->getId();
+        // $orderId = $order->getId();
 
-        return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+        $datas = [$qtty, $orderNewPrice, $rawMaterialsOrderedNewPrice];
+
+        $datasJson = json_encode($datas);
+
+        // dd($datasJson);
+
+        // return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+        return $this->render('raw_materials_ordered/plus.html.twig', [
+            'datas' => $datasJson
+        ]);
     }
 
-    #[Route('/minus/{id}', name: 'app_raw_materials_ordered_minus', methods: ['GET'])]
+    #[Route('/ajax/minus/{id}', name: 'app_raw_materials_ordered_minus', methods: ['GET'])]
     public function minus($id, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
     {
         // Get rawMaterialOrdered
@@ -224,29 +235,42 @@ class RawMaterialsOrderedController extends AbstractController
         $order = $rawMaterialOrdered->getOrders();
         $orderPrice = $order->getTotalPrice();
         // Set new price for order and rawMaterialOrdered
-        $order->setTotalPrice($orderPrice - $rawMaterialPrice);
-        $rawMaterialOrdered->setTotalPriceRawMaterial($rawMaterialsOrderedPrice - $rawMaterialPrice);
+        $orderNewPrice = $orderPrice - $rawMaterialPrice;
+        $order->setTotalPrice($orderNewPrice);
+        $rawMaterialsOrderedNewPrice = $rawMaterialsOrderedPrice - $rawMaterialPrice;
+        $rawMaterialOrdered->setTotalPriceRawMaterial($rawMaterialsOrderedNewPrice);
 
         $rawMaterialsOrderedRepository->save($rawMaterialOrdered, true);
 
-        $orderId = $rawMaterialOrdered->getOrders()->getId();
+        // $orderId = $rawMaterialOrdered->getOrders()->getId();
 
-        return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+        $datas = [$qtty, $orderNewPrice, $rawMaterialsOrderedNewPrice];
+
+        $datasJson = json_encode($datas);
+
+        // return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+        return $this->render('raw_materials_ordered/plus.html.twig', [
+            'datas' => $datasJson
+        ]);
     }
 
-    #[Route('/{id}/edit-quantity', name: 'app_raw_materials_ordered_quick_edit', methods: ['GET', 'POST'])]
-    public function quickEditQuantity(RawMaterialsOrdered $rawMaterialsOrdered, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
+    #[Route('/ajax/{id}/edit-quantity/{inputQtty}', name: 'app_raw_materials_ordered_quick_edit', methods: ['GET', 'POST'])]
+    public function quickEditQuantity($inputQtty = 0, RawMaterialsOrdered $rawMaterialsOrdered, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
     {
         // Get order id
         $order = $rawMaterialsOrdered->getOrders();
-        $orderId = $order->getId();
+        // $orderId = $order->getId();
         // Get rawMaterialOrdered quantity
         $qtty = $rawMaterialsOrdered->getQuantity();
-        $inputQtty = intval($_POST['qtty']);
+        $inputQtty = intval($inputQtty);
 
         // Check if quantity change
         if($qtty === $inputQtty) {
-            return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+            $datas = $qtty;
+            // return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+            return $this->render('raw_materials_ordered/quick-edit.html.twig', [
+                'datas' => $datas
+            ]);
         } else {
             // Get order total price
             $orderPrice = $order->getTotalPrice();
@@ -266,7 +290,14 @@ class RawMaterialsOrderedController extends AbstractController
 
             $rawMaterialsOrderedRepository->save($rawMaterialsOrdered, true);
 
-            return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+            $datas = [$inputQtty, $orderNewPrice, $rawMaterialsOrderedNewPrice];
+
+            $datasJson = json_encode($datas);
+
+            // return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+            return $this->render('raw_materials_ordered/quick-edit.html.twig', [
+                'datas' => $datasJson
+            ]);
         }
     }
 }
