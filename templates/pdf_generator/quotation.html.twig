@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facture</title>
+    <title>Devis</title>
     <style>
 @page {
     margin: 20px 25px !important;
@@ -16,7 +16,7 @@
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, tt, var,
+small, strike, strong, sub, sup, tt, var,
 u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
@@ -79,7 +79,7 @@ table {
         <div style="float: left; margin-left: 220px;"><p><b>{{address}}<br>{{cp}} {{city}}<br><br><br>{{object}}</b></p></div>
     </div>
     <div style="float: right;">
-        <p style="text-align: right; color: grey; font-size: 2em; margin: 20px;"><b>FACTURE</b></p>
+        <p style="text-align: right; color: grey; font-size: 2em; margin: 20px;"><b>DEVIS</b></p>
         <div style="border: black solid 1px; padding: 10px; text-align: center; margin-right: 50px; margin-top: 100px;">
             <p>
                 <b>
@@ -90,7 +90,7 @@ table {
             </p>
         </div>
         <div style="border: black solid 1px; padding: 0px 5px; margin-top: 5px; margin-right: 50px;">
-            <p style="color: red; text-align: center;"><b>FACTURE:N° {{ reference }}</b></p>
+            <p style="color: red; text-align: center;"><b>DEVIS:N° {{ reference }}</b></p>
         </div>
         <p style="margin-top: 10px; font-size: 0.75em; text-align: right; margin-right: 30px;">{{'now'|date('d/m/Y')}}</p>
     </div>
@@ -98,13 +98,13 @@ table {
     <table style="margin: 0 auto;width: 750px;margin-top: 350px; border-collapse: collapse;" border="2">
         <thead style="background-color: rgb(217, 183, 182); color: white;">
             <tr>
-                <th style="border: 2px black solid; padding: 0 5px; font-weight: none;">Code</th>
-                <th style="border: 2px black solid; padding: 0 5px; font-weight: none;">Designation</th>
-                <th style="border: 2px black solid; padding: 0 5px; font-weight: none;">U</th>
-                <th style="border: 2px black solid; padding: 0 5px; font-weight: none;">Qté</th>
-                <th style="border: 2px black solid; padding: 0 5px; font-weight: none;">P.U.HT</th>
-                <th style="border: 2px black solid; padding: 0 5px; font-weight: none;">Montant HT</th>
-                <th style="border: 2px black solid; padding: 0 5px; font-weight: none;">%TVA</th>
+                <th style="border: 2px black solid; font-weight: none; padding: 0 5px;">Code</th>
+                <th style="border: 2px black solid; font-weight: none; padding: 0 5px;">Designation</th>
+                <th style="border: 2px black solid; font-weight: none; padding: 0 5px;">U</th>
+                <th style="border: 2px black solid; font-weight: none; padding: 0 5px;">Qté</th>
+                <th style="border: 2px black solid; font-weight: none; padding: 0 5px;">P.U.HT</th>
+                <th style="border: 2px black solid; font-weight: none; padding: 0 5px;">Montant HT</th>
+                <th style="border: 2px black solid; font-weight: none; padding: 0 5px;">%TVA</th>
             </tr>
         </thead>
         <tbody>
@@ -124,8 +124,12 @@ table {
     <div style="position: relative; z-index: 1000;"><p style="font-size: 0.60em; text-align: center; margin: 0 5px;">Clause de réserve de propriété: le vendeur conserve la propriété des biens vendus jusqu'au paiement effectif de l'intégralité du prix en principal. Le défaut de
         paiement de l'une ou quelconque des échéances pourra entraîner la revendication des biens.</p></div>
     <div {% if page_break %}  style="position: relative; page-break-before: always;" {% else %} style="position: relative;" {% endif %}>
-        <div style="position: absolute; left: 30px; margin-top: 30px; padding: 10px; width: 400px;">
-            <table style="width: 400px; text-align: center; font-weight: bold; border: 1px solid black;">
+        <div style="position: absolute; left: 30px; text-align: center;">
+            <p style="font-size: 0.75em; margin-top: 50px; width:60%;"><b>Durée de validité du devis: 3 mois <br><br> Devis gratuit</b><br><br></p>
+            <p style="width: 60%; font-size: 0.75em; color: red; font-weight: bold;">50% d'acompte à la signature du devis <br><br> {{ ((total + totalTva) / 2)|round(2) }} €</p>
+        </div>
+        <div style="position: absolute; left: 50%; margin-top: 30px; padding: 10px; width: 400px; transform: translateX(-40%);">
+            <table style="width: 60%; text-align: center; font-weight: bold; border: 1px solid black;">
                 <tr>
                     <td>TAUX</td>
                     <td>Base HT</td>
@@ -137,7 +141,7 @@ table {
                     <td>{{totalTva|round(2)}} €</td>
                 </tr>
             </table>
-            <div style="font-size: 0.60em; margin-top: 50px;"><p>En cas de retard de paiement, seront exigibles, conformément à l'article L 441-6 du code
+            <div style="font-size: 0.60em; margin-top: 50px; width:60%;"><p>En cas de retard de paiement, seront exigibles, conformément à l'article L 441-6 du code
                 de commerce, une indemnité calculée sur la base de 3 fois le taux d'intérêt légal en
                 vigueur ainsi qu'une indemnité forfaitire pour frais de recouvrement de 40€.</p></div>
         </div>
@@ -152,40 +156,11 @@ table {
                     <td style="padding-left: 30px;">{{totalTva|round(2)}} €</td>
                 </tr>
                 <tr>
+                    <td colspan="2"><hr></td>
+                </tr>
+                <tr>
                     <td>TOTAL TTC</td>
                     <td style="padding-left: 30px;">{{(total + totalTva)|round(2)}} €</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><hr></td>
-                </tr>
-                <tr>
-                    <td>1<sup>er</sup> acompte</td>
-                    <td style="padding-left: 30px;">{{((total + totalTva) / 2)|round(2)}} €</td>
-                </tr>
-                {% if secondDeposit != null %}
-                    {% set secDep = secondDeposit %}
-                    <tr>
-                        <td>2<sup>ème</sup> acompte</td>
-                        <td style="padding-left: 30px;">{{ secondDeposit|round(2) }} €</td>
-                    </tr>
-                {% else %}
-                    {% set secDep = 0 %}
-                {% endif %}
-                {% if discount != null %}
-                    {% set disc = discount %}
-                    <tr>
-                        <td>Remise</td>
-                        <td style="padding-left: 30px;">{{ discount|round(2) }} €</td>
-                    </tr>
-                {% else %}
-                    {% set disc = 0 %}
-                {% endif %}
-                <tr>
-                    <td colspan="2"><hr></td>
-                </tr>
-                <tr>
-                    <td>Net à payer</td>
-                    <td style="padding-left: 30px;">{{((total + totalTva) - ((total + totalTva) / 2) - secDep - disc)|round(2)}} €</td>
                 </tr>
             </table>
             <div>
@@ -194,6 +169,11 @@ table {
                     BIC: CCBPFRPPDJN
                 </p>
             </div>
+        </div>
+        <div style="position: absolute; top: 20%; left: 30px;">
+            <p style="font-size: 0.75em;">Veuillez nous retourner ce devis daté, signé et précédé de la mention "Lu et approuvé, Bon pour accord".</p>
+            <p style="font-size: 0.75em; float: left; padding-top: 20px; text-decoration: underline;">Date: </p>
+            <p style="font-size: 0.75em; float: right; padding-top: 20px; text-decoration: underline;">Signature du client: </p>
         </div>
     </div>
 </body>

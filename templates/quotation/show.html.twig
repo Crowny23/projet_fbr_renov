@@ -41,7 +41,7 @@
                     <table class="col-12">
                         <thead>
                             <tr>
-                                <th>Nom</th>
+                                <th>Désignations</th>
                                 <th>Unité</th>
                                 <th>Quantité</th>
                                 <th>Prix unitaire HT</th>
@@ -53,12 +53,12 @@
                         <tbody>
                         {% for designation in designations %}
                             <tr>
-                                <td>{{ designation.name }}</td>
+                                <td>{{ designation.designation }}</td>
                                 <td>{{ designation.unity }}</td>
                                 <td>{{ designation.quantity }}</td>
-                                <td>{{ designation.priceUnitaryHt }},00€</td>
-                                <td>{{ designation.priceHt }},00€</td>
-                                <td>{{ designation.tva }}</td>
+                                <td>{{ designation.priceUnitaryHt|number_format(2) }}</td>
+                                <td>{{ designation.priceHt|number_format(2) }}</td>
+                                <td>{{ designation.tva }}%</td>
                                 <td>
                                     {{ include('designation/_delete_form.html.twig') }}
                                     <a href="{{ path('app_designation_edit', {'id': designation.id}) }}"class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -72,6 +72,15 @@
                         </tbody>
                     </table>
                     <a href="{{ path('app_designation_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Créer</a>
+                </td>
+            </tr>
+            <tr>
+                <th>2<sup>ème</sup> acompte</th>
+                <td>{{ quotation.secondDeposit ? quotation.secondDeposit : include('quotation/_second_depot_form.html.twig', {'id': quotation.id}) }} {% if quotation.secondDeposit != null %} {{include('quotation/_second_depot_delete_form.html.twig', {'id': quotation.id})}} {% endif %}</td>
+            </tr>
+            <tr>
+                <th>Remise</th>
+                <td>{{ quotation.discount ? quotation.discount : include('quotation/_discount_form.html.twig', {'id': quotation.id}) }} {% if quotation.discount != null %} {{ include('quotation/_discount_delete_form.html.twig', {'id': quotation.id}) }} {% endif %}
                 </td>
             </tr>
             <tr>

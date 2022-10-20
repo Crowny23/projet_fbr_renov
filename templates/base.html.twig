@@ -8,6 +8,7 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
             <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
+            <link rel="stylesheet" href="https://cdn.addevent.com/libs/atc/themes/fff-theme-7/theme.css" type="text/css" media="all" />
         {% endblock %}
     </head>
     <body>
@@ -24,7 +25,7 @@
             {{ encore_entry_script_tags('app') }}
             <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
             <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/locale/bootstrap-table-fr-FR.min.js"></script>
-        {% endblock %}
-        <script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js"></script>
+            {% endblock %}
+            <script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.2/atc.min.js"></script>
     </body>
 </html>

@@ -24,19 +24,19 @@ class Quotation
     private ?string $reference_quotation = null;
 
     #[ORM\Column]
-    private ?int $price_quotation = null;
+    private ?float $price_quotation = null;
 
     #[ORM\Column(length: 255)]
     private ?string $status_quotation = null;
 
     #[ORM\Column]
-    private ?int $deposit_quotation = null;
+    private ?float $deposit_quotation = null;
 
     #[ORM\Column]
-    private ?int $intermediate_payment_quotation = null;
+    private ?float $intermediate_payment_quotation = null;
 
     #[ORM\Column]
-    private ?int $final_payment_quotation = null;
+    private ?float $final_payment_quotation = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -49,6 +49,12 @@ class Quotation
 
     #[ORM\OneToMany(mappedBy: 'quotation', targetEntity: Designation::class)]
     private Collection $designations;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $second_deposit = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $discount = null;
 
     public function __toString()
     {
@@ -90,12 +96,12 @@ class Quotation
         return $this;
     }
 
-    public function getPriceQuotation(): ?int
+    public function getPriceQuotation(): ?float
     {
         return $this->price_quotation;
     }
 
-    public function setPriceQuotation(int $price_quotation): self
+    public function setPriceQuotation(float $price_quotation): self
     {
         $this->price_quotation = $price_quotation;
 
@@ -114,36 +120,36 @@ class Quotation
         return $this;
     }
 
-    public function getDepositQuotation(): ?int
+    public function getDepositQuotation(): ?float
     {
         return $this->deposit_quotation;
     }
 
-    public function setDepositQuotation(int $deposit_quotation): self
+    public function setDepositQuotation(float $deposit_quotation): self
     {
         $this->deposit_quotation = $deposit_quotation;
 
         return $this;
     }
 
-    public function getIntermediatePaymentQuotation(): ?int
+    public function getIntermediatePaymentQuotation(): ?float
     {
         return $this->intermediate_payment_quotation;
     }
 
-    public function setIntermediatePaymentQuotation(?int $intermediate_payment_quotation): self
+    public function setIntermediatePaymentQuotation(?float $intermediate_payment_quotation): self
     {
         $this->intermediate_payment_quotation = $intermediate_payment_quotation;
 
         return $this;
     }
 
-    public function getFinalPaymentQuotation(): ?int
+    public function getFinalPaymentQuotation(): ?float
     {
         return $this->final_payment_quotation;
     }
 
-    public function setFinalPaymentQuotation(int $final_payment_quotation): self
+    public function setFinalPaymentQuotation(float $final_payment_quotation): self
     {
         $this->final_payment_quotation = $final_payment_quotation;
 
@@ -212,6 +218,30 @@ class Quotation
                 $designation->setQuotation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSecondDeposit(): ?float
+    {
+        return $this->second_deposit;
+    }
+
+    public function setSecondDeposit(?float $second_deposit): self
+    {
+        $this->second_deposit = $second_deposit;
+
+        return $this;
+    }
+
+    public function getDiscount(): ?float
+    {
+        return $this->discount;
+    }
+
+    public function setDiscount(?float $discount): self
+    {
+        $this->discount = $discount;
 
         return $this;
     }
