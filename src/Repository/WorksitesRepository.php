@@ -39,6 +39,17 @@ class WorksitesRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByYears(int $value): array
+    {
+        return $this->createQueryBuilder('y')
+            ->andWhere("DATE_FORMAT(y.start_at, '%Y') = :year")
+            ->setParameter('year', $value)
+            ->orderBy('y.start_at', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Worksites[] Returns an array of Worksites objects
 //     */
