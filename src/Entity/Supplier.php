@@ -33,7 +33,7 @@ class Supplier
     private ?int $cp = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $adress = null;
+    private ?string $address = null;
 
     #[ORM\OneToMany(mappedBy: 'supplier', targetEntity: Orders::class)]
     private Collection $orders;
@@ -120,14 +120,14 @@ class Supplier
         return $this;
     }
 
-    public function getAdress(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adress;
+        return $this->address;
     }
 
-    public function setAdress(string $adress): self
+    public function setAddress(string $address): self
     {
-        $this->adress = $adress;
+        $this->adress = $address;
 
         return $this;
     }

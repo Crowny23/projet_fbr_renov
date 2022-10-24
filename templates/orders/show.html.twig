@@ -55,10 +55,13 @@
     </table>
 
     <h2>Details de la commande</h2>
-
+    <form method="POST" action="{{ path('app_raw_materials_ordered_delete_multiple', {'orderId': order.id}) }}" id="delete-multiple" onsubmit="return confirm('Êtes vous sûr de vouloir supprimer ces matériaux de votre commande ?');">
+        <input name="submit" type="submit" value="Supprimer la sélection" class="btn btn-danger">
+    </form>
     <table class="table">
         <thead>
             <tr>
+                <th></th>
                 <th>Nom du matériau</th>
                 <th>Quantité</th>
                 <th>Prix total pour ce matériau</th>
@@ -69,6 +72,10 @@
         <tbody>
         {% for raw_material_ordered in raw_materials_ordered %}
             <tr>
+                <td>
+                    <input form="delete-multiple" type="checkbox" name="checkbox-delete[]" id="checkbox-{{ loop.index }}" value="{{ raw_material_ordered.id }}">
+                    <input form="delete-multiple" type="hidden" name="_token[]" value="{{ csrf_token('delete' ~ raw_material_ordered.id) }}">
+                </td>
                 <td>{{ raw_material_ordered.raw_material }}</td>
                 <td class="d-flex">
                     <span>
@@ -86,7 +93,7 @@
                 </td>
                 <td id="td-price-mat-{{ loop.index }}">{{ raw_material_ordered.totalPriceRawMaterial }} €</td>
                 <td>{{ raw_material_ordered.createdAt ? raw_material_ordered.createdAt|date('d M Y H:i:s') : '' }}</td>
-                <td>
+                <td class="d-flex">
                     {# <a href="{{ path('app_raw_materials_ordered_edit', {'id': raw_material_ordered.id}) }}">Modifier la quantité</a> #}
                     <form method="post" action="{{ path('app_raw_materials_ordered_delete', {'id': raw_material_ordered.id}) }}" onsubmit="return confirm('Êtes vous sûr de vouloir supprimer ce matériau de votre commande ?');">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ raw_material_ordered.id) }}">
@@ -101,6 +108,8 @@
         {% endfor %}
         </tbody>
     </table>
+    <input form="delete-multiple" name="submit" type="submit" value="Supprimer la sélection" class="btn btn-danger">
+    
 {% endblock %}
 
 {% block javascripts %}

@@ -178,6 +178,42 @@ class RawMaterialsOrderedController extends AbstractController
         return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/multiple/{orderId}', name: 'app_raw_materials_ordered_delete_multiple', methods: ['POST'])]
+    public function deleteMultiple($orderId, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository, Request $request, OrdersRepository $ordersRepository): Response
+    {
+        // dd($orderId);
+        $order = $ordersRepository->find($orderId);
+
+        if(isset($_POST['submit']) && isset($_POST['checkbox-delete'])){
+            $checkboxes = $_POST['checkbox-delete'];
+
+            foreach ($checkboxes as $rawMaterialOrderedId) {
+                // Get rawMaterialsOrdered
+                $rawMaterialsOrdered = $rawMaterialsOrderedRepository->find($rawMaterialOrderedId);
+
+                // Get rawMaterialsOrdered & Order price
+                $rawMaterialsOrderedPrice = $rawMaterialsOrdered->getTotalPriceRawMaterial();
+                $orderPrice = $order->getTotalPrice();
+                
+                // Set Order new price
+                $newPrice = $orderPrice - $rawMaterialsOrderedPrice;
+                $order->setTotalPrice($newPrice);
+
+                // Update in DB (Order price & rawMaterialsOrdered delete)
+                $ordersRepository->save($order, true);
+                $rawMaterialsOrderedRepository->remove($rawMaterialsOrdered, true);
+
+                // Count rawMaterilasOrdered for current order
+                $count = count($rawMaterialsOrderedRepository->findBy(['orders' => $order]));
+                $order->setNumberRawMaterialOrdered($count);
+                
+                $ordersRepository->save($order, true);
+            }
+        }
+
+        return $this->redirectToRoute('app_orders_show', ['id' => $orderId], Response::HTTP_SEE_OTHER);
+    }
+
     #[Route('/ajax/plus/{id}', name: 'app_raw_materials_ordered_plus', methods: ['GET'])]
     public function plus($id, RawMaterialsOrderedRepository $rawMaterialsOrderedRepository): Response
     {

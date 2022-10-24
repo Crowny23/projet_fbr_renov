@@ -35,6 +35,7 @@
                 <td>
                     <a href="{{ path('app_orders_show', {'id': order.id}) }}">Voir</a>
                     <a href="{{ path('app_orders_edit', {'id': order.id}) }}">Modifier</a>
+                    <a href="{{ path('app_pdf_generator_order', {'id': order.id}) }}" target="_blank">Pdf</a>
                 </td>
             </tr>
         {% else %}
