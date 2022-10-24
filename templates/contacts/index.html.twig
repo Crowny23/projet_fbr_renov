@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacts{% endblock %}
+
+{% block body %}
+    <h1>Contacts</h1>
+    <a href="{{ path('app_contacts_new') }}"  class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
+
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
+        <thead>
+            <tr>
+                <th data-sortable="true" data-field="title">Intitulé</th>
+                <th data-sortable="true" data-field="lastname">Nom</th>
+                <th data-sortable="true" data-field="firstname">Prénom</th>
+                <th data-sortable="true" data-field="city">Ville</th>
+                <th data-sortable="true" data-field="tel">Téléphone</th>
+                <th data-sortable="true" data-field="mail">E-mail</th>
+                <th data-sortable="true" data-field="contactsCategories">Catégories</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.title }}</td>
+                <td>{{ contact.lastname }}</td>
+                <td>{{ contact.firstname }}</td>
+                <td>{{ contact.city }}</td>
+                <td>0{{ contact.tel }}</td>
+                <td>{{ contact.mail }}</td>
+                <td>{{ contact.contactsCategories }}</td>
+
+                <td>
+                    <a href="{{ path('app_contacts_show', {'id': contact.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('app_contacts_edit', {'id': contact.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun enregistrement trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
