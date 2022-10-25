@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\DesignationRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DesignationRepository::class)]
@@ -14,16 +15,13 @@ class Designation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $unity = null;
 
     #[ORM\Column]
     private ?int $quantity = null;
 
     #[ORM\Column]
-    private ?int $price_unitary_ht = null;
+    private ?float $price_unitary_ht = null;
 
     #[ORM\Column]
     private ?int $tva = null;
@@ -32,23 +30,14 @@ class Designation
     private ?Quotation $quotation = null;
 
     #[ORM\Column]
-    private ?int $Price_ht = null;
+    private ?float $Price_ht = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $designation = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getUnity(): ?string
@@ -75,12 +64,12 @@ class Designation
         return $this;
     }
 
-    public function getPriceUnitaryHt(): ?int
+    public function getPriceUnitaryHt(): ?float
     {
         return $this->price_unitary_ht;
     }
 
-    public function setPriceUnitaryHt(int $price_unitary_ht): self
+    public function setPriceUnitaryHt(float $price_unitary_ht): self
     {
         $this->price_unitary_ht = $price_unitary_ht;
 
@@ -111,7 +100,7 @@ class Designation
         return $this;
     }
 
-    public function getPriceHt(): ?int
+    public function getPriceHt(): ?float
     {
         return $this->Price_ht;
     }
@@ -119,6 +108,18 @@ class Designation
     public function setPriceHt($quantity, $price_unitary_ht): self
     {
         $this->Price_ht = $price_unitary_ht * $quantity;
+
+        return $this;
+    }
+
+    public function getDesignation(): ?string
+    {
+        return $this->designation;
+    }
+
+    public function setDesignation(string $designation): self
+    {
+        $this->designation = $designation;
 
         return $this;
     }
