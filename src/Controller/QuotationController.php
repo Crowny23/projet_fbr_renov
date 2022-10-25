@@ -77,4 +77,26 @@ class QuotationController extends AbstractController
 
         return $this->redirectToRoute('app_quotation_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{id}/secdepot', name: 'app_quotation_secdepot_add', methods: ['POST'])]
+    public function secdepot(Request $request, Quotation $quotation, QuotationRepository $quotationRepository): Response
+    {
+    
+        $quotation->setSecondDeposit($request->request->get('second_deposit'));
+    
+        $quotationRepository->save($quotation, true);
+    
+        return $this->redirectToRoute('app_quotation_show', ['id' => $quotation->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/discount', name: 'app_quotation_discount_add', methods: ['POST'])]
+    public function discount(Request $request, Quotation $quotation, QuotationRepository $quotationRepository): Response
+    {
+    
+        $quotation->setDiscount($request->request->get('discount'));
+    
+        $quotationRepository->save($quotation, true);
+    
+        return $this->redirectToRoute('app_quotation_show', ['id' => $quotation->getId()], Response::HTTP_SEE_OTHER);
+    }
 }

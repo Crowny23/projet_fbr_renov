@@ -102,5 +102,15 @@
         <span class="location">{{ worksite.adressWorksite}}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</span>
     </div>
 
+    <div title="Add to Calendar" class="addeventatc" data-styling="none">
+        <i class="fa fa-calendar"></i>
+        <span class="start">10/27/2022 09:00 AM</span>
+        <span class="end">10/27/2022 11:00 AM</span>
+        <span class="timezone">Europe/Paris</span>
+        <span class="title">Summary of the event</span>
+        <span class="description">Description of the event</span>
+        <span class="location">Location of the event</span>
+    </div>
+
     {{ include('worksites/_delete_form.html.twig') }}
 {% endblock %}
