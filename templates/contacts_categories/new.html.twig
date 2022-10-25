@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle catégori{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_contacts_categories_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i></a>
+    <h1 class="row mb-3 mt-2 container col-5 mx-auto">Nouvelle catégorie</h1>
+
+    <div class="row mb-3 container col-5 ps-0 mt-5 mx-auto ">
+        {{ include('contacts_categories/_form.html.twig') }}
+    </div>
+
+    
+{% endblock %}

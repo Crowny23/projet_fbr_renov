@@ -93,6 +93,14 @@
     <a href="{{ path('app_worksites_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
 
     <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-primary mb-3">Modifier</a>
+    <div title="Add to Calendar" class="addeventatc btn btn-light mb-3" data-styling="none">
+        <i class="fa fa-calendar-plus"></i>
+        <span class="start">{{ worksite.startAt ? worksite.startAt|date('d M Y') : '' }}</span>
+        <span class="timezone">Europe/Paris</span>
+        <span class="title">{{ worksite.nameWorksite }}</span>
+        <span class="description">Durée des travaux : {{ worksite.durationWorksite }} jour(s), <br> Travaux supplémentaires : {{ worksite.supplementWorksite }} heure(s), <br> Distance : {{ worksite.travelDistanceWorksite }} km</span>
+        <span class="location">{{ worksite.adressWorksite}}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</span>
+    </div>
 
     <div title="Add to Calendar" class="addeventatc" data-styling="none">
         <i class="fa fa-calendar"></i>

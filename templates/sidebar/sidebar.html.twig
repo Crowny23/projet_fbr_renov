@@ -2,7 +2,7 @@
   <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
     <a href="/" class="d-flex align-items-center pb-3 me-md-auto text-white text-decoration-none">
       {# <span class="fs-5 d-none d-sm-inline">FBR renovation</span> #}
-      <img src="../img/logo-bg.png" alt="Image de logo" class="container mx-auto">
+      <img src="{{asset('img/logo-bg.png')}}" alt="Image de logo" class="container mx-auto">
     </a>
     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
       <li class="nav-item">
@@ -90,13 +90,39 @@
           <i class="fa fa-chart-simple"></i><span class="s-none ms-1 d-sm-inline"> Statistique</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a href="{{path('app_calendar')}}" class="nav-link align-middle px-0">
+          <i class="fa fa-calendar-plus"></i></i><span class="s-none ms-1 d-sm-inline"> Agenda</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#submenuContacts" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+          <i class="fa fa-address-book"></i>
+          <span class="ms-1 d-none d-sm-inline"> Contacts</span>
+        </a>
+        <ul class="collapse nav flex-column ms-1" id="submenuContacts" data-bs-parent="#menu">
+          <li class="w-100 ms-3">
+            <a href="{{path('app_contacts_index')}}" class="nav-link px-0"><i class="fa fa-address-card"></i><span class="d-none ms-1 d-sm-inline">Voir</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_contacts_categories_index')}}" class="nav-link px-0"><i class="fa fa-list-alt"></i><span class="d-none ms-1 d-sm-inline">Catégories</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_contacts_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
+          </li>
+        </ul>
+      </li>
     </ul>
     <div class="dropdown pb-4">
       <a href="" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUserCo" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fa fa-user"></i>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUserCo">
+      {% if app.user %}
         <li><a href="{{path('app_logout')}}" class="dropdown-item">Déconnexion</a></li>
+      {% else  %}
+        <li><a href="{{path('app_login')}}" class="dropdown-item">Connexion</a></li>
+      {% endif %}
       </ul>
     </div>
   </div>

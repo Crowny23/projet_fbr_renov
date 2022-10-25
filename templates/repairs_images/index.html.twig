@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Les images dépannages</h1>
-
+    <a href="{{ path('app_repairs_images_new') }}" class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
     <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
@@ -13,7 +13,6 @@
                 <th data-sortable="true" data-field="weight">Taille</th>
                 <th>Image</th>
                 <th>Actions</th>
-                <th><a href="{{ path('app_repairs_images_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter</a></th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +26,6 @@
                     <a href="{{ path('app_repairs_images_show', {'id': repairs_image.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
                     <a href="{{ path('app_repairs_images_edit', {'id': repairs_image.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
-                <td></td>
             </tr>
         {% else %}
             <tr>

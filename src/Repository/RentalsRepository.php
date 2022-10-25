@@ -39,6 +39,17 @@ class RentalsRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByYears(int $value): array
+    {
+        return $this->createQueryBuilder('y')
+            ->andWhere("DATE_FORMAT(y.created_at, '%Y') = :year")
+            ->setParameter('year', $value)
+            ->orderBy('y.created_at', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Rentals[] Returns an array of Rentals objects
 //     */
