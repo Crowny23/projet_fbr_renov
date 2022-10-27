@@ -31,7 +31,7 @@ class Worksites
     private ?string $adress_worksite = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $start_at = null;
+    private ?\DateTime $start_at = null;
 
     #[ORM\Column]
     private ?int $duration_worksite = null;
@@ -80,12 +80,16 @@ class Worksites
     #[ORM\JoinColumn(nullable: false)]
     private ?Customers $client_worksite = null;
 
+    #[ORM\OneToMany(mappedBy: 'worksite', targetEntity: Orders::class)]
+    private Collection $orders;
+
     public function __construct()
     {
         $this->task_worksite = new ArrayCollection();
         $this->rental_worksite = new ArrayCollection();
         $this->image_worksite = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
+        $this->orders = new ArrayCollection();
     }
 
     public function __toString()
@@ -146,12 +150,12 @@ class Worksites
         return $this;
     }
 
-    public function getStartAt(): ?\DateTimeImmutable
+    public function getStartAt(): ?\DateTime
     {
         return $this->start_at;
     }
 
-    public function setStartAt(\DateTimeImmutable $start_at): self
+    public function setStartAt(\DateTime $start_at): self
     {
         $this->start_at = $start_at;
 
@@ -225,11 +229,11 @@ class Worksites
 
     public function setIsUrgent($is_urgent): self
     {
-        if($is_urgent === null) {
-            $this->is_urgent = false;
-        } else {
+        // if($is_urgent === null) {
+        //     $this->is_urgent = false;
+        // } else {
            $this->is_urgent = $is_urgent; 
-        }
+        // }
         return $this;
     }
 
@@ -429,6 +433,36 @@ class Worksites
     public function setClientWorksite(?Customers $client_worksite): self
     {
         $this->client_worksite = $client_worksite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Orders>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Orders $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setWorksite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Orders $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getWorksite() === $this) {
+                $order->setWorksite(null);
+            }
+        }
 
         return $this;
     }

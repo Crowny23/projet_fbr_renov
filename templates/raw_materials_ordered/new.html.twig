@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New RawMaterialsOrdered{% endblock %}
+
+{% block body %}
+    <h1>Create new RawMaterialsOrdered</h1>
+
+    {{ include('raw_materials_ordered/_form.html.twig') }}
+
+    <a href="{{ path('app_raw_materials_ordered_index') }}">Retour à la liste</a>
+{% endblock %}

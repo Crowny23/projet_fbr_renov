@@ -67,6 +67,11 @@ class Quotation
         $this->designations = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->reference_quotation;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

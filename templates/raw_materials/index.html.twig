@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des matériaux{% endblock %}
+
+{% block body %}
+    <h1>Liste des matériaux</h1>
+
+    {{ form_start(searchForm) }}
+        {{ form_widget(searchForm) }}
+    {{ form_end(searchForm) }}
+
+    <a href="{{ path('app_raw_materials_index')}}">Afficher tous les matériaux</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom du matériau</th>
+                <th>Categorie</th>
+                <th>Unité</th>
+                <th>Prix HT (A titre indicatif)</th>
+                <th>Date de création</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for raw_material in raw_materials %}
+        {% set index = loop.index %}
+            <tr>
+                <td>{{ raw_material.id }}</td>
+                <td>{{ raw_material.nameRawMaterial }}</td>
+                <td>{{ raw_material.category }}</td>
+                <td>{{ raw_material.unit }}</td>
+                <td>{{ raw_material.price }}</td>
+                <td>{{ raw_material.createdAt ? raw_material.createdAt|date('d M Y H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_raw_materials_show', {'id': raw_material.id}) }}">Voir</a>
+                    <a href="{{ path('app_raw_materials_edit', {'id': raw_material.id}) }}">Modifier</a>
+                    <p class="text-decoration-underline link-primary add-to-order-btn" value="{{ loop.index }}" data-bs-toggle="modal" data-bs-target="#modal-material-{{ index }}">Ajouter à une commande</p>
+                    <div class="modal fade" id="modal-material-{{ index }}">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-6">A quelle commande et en quelle quantité voulez-vous ajouter : {{ raw_material.nameRawMaterial }} ?</h1>
+                                <button type="button" class="btn-close ps-3 m-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body pb-0">
+                                <div>
+                                    <label for="qtty">Quantité</label>
+                                    <input id="input-qtty-{{ index }}" name="qtty" type="number" required>
+                                </div>
+                                <div>
+                                    <form method="POST" action="" class="d-flex">
+                                        <label for="order">Rechercher une commande</label>
+                                        <input id="input-order-modal-{{ index }}" name="order" type="text" required>
+                                        <input id="submit-order-modal-{{ index }}" type="submit" value="Rechercher">
+                                    </form>
+                                    
+                                </div>
+                                <div id="list-orders-{{ index }}" class="list-orders">
+                                    {% for order in orders %}
+                                        <a class="worksites-links-{{ index }}" href="{{ path('app_raw_materials_ordered_new', {'idOrder': order.id, 'idRawMaterial': raw_material.id, 'qtty': 0}) }}">{{ order.nameOrder }}</a>
+                                        <br>
+                                    {% endfor %}
+                                </div>
+                                <br>
+                                <p class="mb-0">Ou créer une nouvelle commande :</p>
+                              </div>
+                              <div class="modal-footer justify-content-between">
+                                <a href="{{ path('app_orders_new') }}">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Créer une nouvelle commande</button>
+                                </a>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                              </div>
+                            </div>
+                          </div>                        
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Pas de matériaux existant</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_raw_materials_new') }}">Ajouter un nouveau matériau</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    <script src="{{ asset('js/rawMaterials.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit RawMaterialsOrdered{% endblock %}
+
+{% block body %}
+    <h1>Edit RawMaterialsOrdered</h1>
+
+    {{ include('raw_materials_ordered/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_orders_show', {'id': orderId}) }}" onclick="return confirm('Attention ! Toutes les modifications seront perdues. Voules-vous continuer ?')">Retour à la commande</a>
+
+    {{ include('raw_materials_ordered/_delete_form.html.twig') }}
+{% endblock %}
