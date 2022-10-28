@@ -127,7 +127,7 @@ class Supplier
 
     public function setAddress(string $address): self
     {
-        $this->adress = $address;
+        $this->address = $address;
 
         return $this;
     }
