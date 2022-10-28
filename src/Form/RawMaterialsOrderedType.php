@@ -14,8 +14,8 @@ class RawMaterialsOrderedType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('quantity', IntegerType::class, ['label' => 'Quantité'])
-            ->add('submit', SubmitType::class, ['label' => 'Valider'])
+            ->add('quantity', IntegerType::class, ['label' => 'Quantité', 'attr' => ["class" => "mb-3"], 'label_attr' => ['class' => "mb-1, mt-2"]])
+            ->add('submit', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn btn-success']])
         ;
     }
 

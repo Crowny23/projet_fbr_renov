@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Supplier{% endblock %}
+{% block title %}Modifier Fournisseur{% endblock %}
 
 {% block body %}
-    <h1>Edit Supplier</h1>
+    <div class="contain col-12" style=" display:flex; flex-direction: row; justify-content: space-between;">
+        <a href="{{ path('app_supplier_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
+        {{ include('supplier/_delete_form.html.twig') }}
+    </div>
+    <h1 class="row mb-3 mt-2 container col-5 mx-auto">Modifier fournisseur</h1>
+    <div class="row mb-3 container col-5 ps-0 mt-5 mx-auto">
 
-    {{ include('supplier/_form.html.twig', {'button_label': 'Modifier'}) }}
+        {{ include('supplier/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+    </div>
 
-    <a href="{{ path('app_supplier_index') }}">Retour à la liste des fournisseurs</a>
 
-    {{ include('supplier/_delete_form.html.twig') }}
 {% endblock %}

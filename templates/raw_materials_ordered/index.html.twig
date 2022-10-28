@@ -1,35 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}RawMaterialsOrdered index{% endblock %}
+{% block title %}Commandes Matériaux{% endblock %}
 
 {% block body %}
-    <h1>RawMaterialsOrdered index</h1>
+    <h1>Commandes matériaux</h1>
 
-    <table class="table">
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Quantity</th>
-                <th>Created_at</th>
-                <th>Total_price_raw_material</th>
-                <th>actions</th>
+                <th data-sortable="true" data-field="quantity">Quantité</th>
+                <th data-sortable="true" data-field="created_at">Date de création</th>
+                <th data-sortable="true" data-field="totalPrice">Prix total du matériaux</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for raw_materials_ordered in raw_materials_ordereds %}
             <tr>
-                <td>{{ raw_materials_ordered.id }}</td>
                 <td>{{ raw_materials_ordered.quantity }}</td>
                 <td>{{ raw_materials_ordered.createdAt ? raw_materials_ordered.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ raw_materials_ordered.totalPriceRawMaterial }}</td>
                 <td>
-                    <a href="{{ path('app_raw_materials_ordered_show', {'id': raw_materials_ordered.id}) }}">show</a>
-                    <a href="{{ path('app_raw_materials_ordered_edit', {'id': raw_materials_ordered.id}) }}">edit</a>
+                    <a href="{{ path('app_raw_materials_ordered_show', {'id': raw_materials_ordered.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('app_raw_materials_ordered_edit', {'id': raw_materials_ordered.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucun enregistrement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>

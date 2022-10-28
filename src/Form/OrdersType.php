@@ -23,7 +23,6 @@ class OrdersType extends AbstractType
             // ->add('total_price', Integer::class, ['label' => 'Prix total HT'])
             ->add('worksite', EntityType::class, ['label' => 'Chantier', 'class' => Worksites::class])
             ->add('supplier', EntityType::class, ['label' => 'Fournisseur', 'class' => Supplier::class])
-            ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
     }
 

@@ -85,6 +85,46 @@
           </li>
         </ul>
       </li>
+
+      <li class="nav-item">
+        <a href="#submenuCommandes" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+          <i class="fa fa-box"></i>
+          <span class="ms-1 d-none d-sm-inline"> Commandes</span>
+        </a>
+        <ul class="collapse nav flex-column ms-1" id="submenuCommandes" data-bs-parent="#menu">
+          <li class="w-100 ms-3">
+            <a href="{{path('app_orders_index')}}" class="nav-link px-0"><i class="fa fa-box-open"></i><span class="d-none ms-1 d-sm-inline">Voir</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_supplier_index')}}" class="nav-link px-0"><i class="fa fa-boxes-packing"></i><span class="d-none ms-1 d-sm-inline">Fournisseur</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_orders_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a href="#submenuMateriaux" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+          <i class="fa fa-trowel-bricks"></i>
+          <span class="ms-1 d-none d-sm-inline"> Matériaux</span>
+        </a>
+        <ul class="collapse nav flex-column ms-1" id="submenuMateriaux" data-bs-parent="#menu">
+          <li class="w-100 ms-3">
+            <a href="{{path('app_raw_materials_index')}}" class="nav-link px-0"><i class="fa fa-trowel-bricks"></i><span class="d-none ms-1 d-sm-inline">Voir</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_raw_materials_ordered_index')}}" class="nav-link px-0"><i class="fa-solid fa-dolly"></i><span class="d-none ms-1 d-sm-inline">Commandes</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_raw_materials_categories_index')}}" class="nav-link px-0"><i class="fa fa-list-alt"></i><span class="d-none ms-1 d-sm-inline">Catégories</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_raw_materials_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
+          </li>
+        </ul>
+      </li>
+
       <li class="nav-item">
         <a href="{{path('app_chart')}}" class="nav-link align-middle px-0">
           <i class="fa fa-chart-simple"></i><span class="s-none ms-1 d-sm-inline"> Statistique</span>

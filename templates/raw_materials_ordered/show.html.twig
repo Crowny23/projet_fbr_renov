@@ -1,34 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}RawMaterialsOrdered{% endblock %}
+{% block title %}Commandes Matériaux{% endblock %}
 
 {% block body %}
-    <h1>RawMaterialsOrdered</h1>
+    <h1>Commandes matériaux</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ raw_materials_ordered.id }}</td>
-            </tr>
-            <tr>
-                <th>Quantity</th>
+                <th>Quantité</th>
                 <td>{{ raw_materials_ordered.quantity }}</td>
             </tr>
             <tr>
-                <th>Created_at</th>
+                <th>Date de création</th>
                 <td>{{ raw_materials_ordered.createdAt ? raw_materials_ordered.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Total_price_raw_material</th>
+                <th>Prix total du matériaux</th>
                 <td>{{ raw_materials_ordered.totalPriceRawMaterial }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_raw_materials_ordered_index') }}">Retour à liste</a>
+    <a href="{{ path('app_raw_materials_ordered_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_raw_materials_ordered_edit', {'id': raw_materials_ordered.id}) }}">Modifier</a>
+    <a href="{{ path('app_raw_materials_ordered_edit', {'id': raw_materials_ordered.id}) }}" class="btn btn-primary mb-3">Modifier</a>
 
     {{ include('raw_materials_ordered/_delete_form.html.twig') }}
 {% endblock %}

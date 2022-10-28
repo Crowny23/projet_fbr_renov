@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New RawMaterialsOrdered{% endblock %}
+{% block title %}Nouveaux Commande Matériau{% endblock %}
 
 {% block body %}
-    <h1>Create new RawMaterialsOrdered</h1>
-
-    {{ include('raw_materials_ordered/_form.html.twig') }}
-
-    <a href="{{ path('app_raw_materials_ordered_index') }}">Retour à la liste</a>
+    <a href="{{ path('app_raw_materials_ordered_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
+    <h1 class="row mb-3 mt-2 container col-5 mx-auto">Créer commande matériau</h1>
+    <div class="row mb-3 container col-5 ps-0 mt-5 mx-auto">
+        {{ include('raw_materials_ordered/_form.html.twig') }}
+    </div>
 {% endblock %}

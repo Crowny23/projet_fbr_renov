@@ -3,9 +3,11 @@
 {% block title %}Ajouter un matériau{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un matériau</h1>
+    <a href="{{ path('app_raw_materials_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
+    <h1 class="row mb-3 mt-2 container col-5 mx-auto">Ajouter un matériau</h1>
 
-    {{ include('raw_materials/_form.html.twig') }}
+    <div class="row mb-3 container col-5 ps-0 mt-5 mx-auto">
+        {{ include('raw_materials/_form.html.twig') }}
+    </div>
 
-    <a href="{{ path('app_raw_materials_index') }}">Retour à la liste</a>
 {% endblock %}

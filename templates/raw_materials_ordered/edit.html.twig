@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit RawMaterialsOrdered{% endblock %}
+{% block title %}Modifier commande{% endblock %}
 
 {% block body %}
-    <h1>Edit RawMaterialsOrdered</h1>
+    <div class="contain col-12" style=" display:flex; flex-direction: row; justify-content: space-between;">
+        <a href="{{ path('app_orders_show', {'id': orderId}) }}" onclick="return confirm('Attention ! Toutes les modifications seront perdues. Voules-vous continuer ?')" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i> Retour à la commande</a>
+        
+        {{ include('raw_materials_ordered/_delete_form.html.twig') }}
+    </div>
+    <h1 class="mb-3 mt-2 ps-4 container col-5 mx-auto">Modifier la commande du matériau</h1>
+    <div class="row mb-3 container col-5 mx-auto">
+        {{ include('raw_materials_ordered/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+    </div>
 
-    {{ include('raw_materials_ordered/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_orders_show', {'id': orderId}) }}" onclick="return confirm('Attention ! Toutes les modifications seront perdues. Voules-vous continuer ?')">Retour à la commande</a>
-
-    {{ include('raw_materials_ordered/_delete_form.html.twig') }}
 {% endblock %}
