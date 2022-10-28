@@ -6,6 +6,7 @@
 parameters:
     app.path.worksites_images: /uploads/images/worksites
     app.path.repairs_images: /uploads/images/repairs
+    app.path.documents: /uploads/documents
 
 services:
     # default configuration for services in *this* file

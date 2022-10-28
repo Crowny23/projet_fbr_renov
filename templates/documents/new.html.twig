@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Documents{% endblock %}
+
+{% block body %}
+    <h1>Nouveau Document</h1>
+
+    {{ include('documents/_form.html.twig') }}
+
+    <a href="{{ path('app_documents_index') }}"><i class="fa-solid fa-reply"></i> Retour</a>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Documents{% endblock %}
+
+{% block body %}
+    <h1>Documents</h1>
+
+    <a href="{{ path('app_documents_new') }}" class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
+
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
+        <thead>
+            <tr>
+                <th data-sortable="true" data-field="Name">Nom</th>
+                <th>Taille</th>
+                <th>Type</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for document in documents %}
+            <tr>
+                <td>{{ document.nameDocument }}</td>
+                <td>{{ document.size }}</td>
+                <td>{{ document.mimeType }}</td>
+                <td>
+                    <a href="{{ path('app_documents_show', {'id': document.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('app_documents_edit', {'id': document.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun document</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
