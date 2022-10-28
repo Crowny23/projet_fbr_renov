@@ -67,21 +67,21 @@
       </li>
       <li class="nav-item">
         <a href="#submenuRental" data-bs-toggle="collapse" class="nav-link align-middle px-0">
-          <i class="fa fa-truck-moving"></i>
-          <span class="ms-1 d-none d-sm-inline">Locatiers</span>
+          <i class="fa fa-right-to-bracket"></i>
+          <span class="ms-1 d-none d-sm-inline">Locations</span>
         </a>
         <ul class="collapse nav flex-column ms-1" id="submenuRental" data-bs-parent="#menu">
           <li class="w-100 ms-3">
-            <a href="{{path('app_renter_index')}}" class="nav-link px-0"><i class="fa fa-truck-moving"></i><span class="d-none ms-1 d-sm-inline">Voir</span></a>
+            <a href="{{path('app_rentals_index')}}" class="nav-link px-0"><i class="fa fa-right-to-bracket"></i><span class="d-none ms-1 d-sm-inline">Voir</span></a>
           </li>
           <li class="w-100 ms-3">
-            <a href="{{path('app_rentals_index')}}" class="nav-link px-0"><i class="fa fa-right-to-bracket"></i><span class="d-none ms-1 d-sm-inline">Locations</span></a>
+            <a href="{{path('app_renter_index')}}" class="nav-link px-0"><i class="fa fa-truck-moving"></i><span class="d-none ms-1 d-sm-inline">Locatiers</span></a>
           </li>
           <li class="w-100 ms-3">
             <a href="{{path('app_materials_index')}}" class="nav-link px-0"><i class="fa fa-screwdriver-wrench"></i><span class="d-none ms-1 d-sm-inline">Matériels</span></a>
           </li>
           <li class="w-100 ms-3">
-            <a href="{{path('app_renter_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
+            <a href="{{path('app_rentals_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
           </li>
         </ul>
       </li>
@@ -109,6 +109,20 @@
           </li>
           <li class="w-100 ms-3">
             <a href="{{path('app_contacts_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a href="#submenuDocuments" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+          <i class="fa fa-file-pdf"></i>
+          <span class="ms-1 d-none d-sm-inline"> Documents</span>
+        </a>
+        <ul class="collapse nav flex-column ms-1" id="submenuDocuments" data-bs-parent="#menu">
+          <li class="w-100 ms-3">
+            <a href="{{path('app_documents_index')}}" class="nav-link px-0"><i class="fa fa-file"></i><span class="d-none ms-1 d-sm-inline">Voir</span></a>
+          </li>
+          <li class="w-100 ms-3">
+            <a href="{{path('app_documents_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
           </li>
         </ul>
       </li>

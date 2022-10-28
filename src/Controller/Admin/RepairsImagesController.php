@@ -58,6 +58,7 @@ class RepairsImagesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $repairsImagesRepository->save($repairsImage, true);
+            $repairsImage->setFile($request->files->get('repairs_images')['file']);
 
             return $this->redirectToRoute('app_repairs_images_index', [], Response::HTTP_SEE_OTHER);
         }
