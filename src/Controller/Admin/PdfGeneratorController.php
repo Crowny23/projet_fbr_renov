@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Quotation;
 use App\Entity\Orders;
@@ -12,7 +12,7 @@ use Dompdf\Dompdf;
 
 class PdfGeneratorController extends AbstractController
 {
-    #[Route('/pdf/facture/{id}', name: 'app_pdf_generator_facture', methods: 'GET')]
+    #[Route('/admin/pdf/facture/{id}', name: 'app_pdf_generator_facture', methods: 'GET')]
     public function facture(Quotation $quotation): Response
     {
         if (sizeof($quotation->getDesignations()) > 3 && sizeof($quotation->getDesignations()) < 7 || sizeof($quotation->getDesignations()) > 10 && sizeof($quotation->getDesignations()) < 13) {

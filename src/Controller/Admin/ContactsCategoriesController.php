@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\ContactsCategories;
 use App\Form\ContactsCategoriesType;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/contacts/categories')]
+#[Route('/admin/contacts/categories')]
 class ContactsCategoriesController extends AbstractController
 {
     #[Route('/', name: 'app_contacts_categories_index', methods: ['GET'])]

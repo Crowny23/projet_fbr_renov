@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Users;
 use App\Form\UsersType;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/users')]
+#[Route('admin/users')]
 class UsersController extends AbstractController
 {
     #[Route('/', name: 'app_users_index', methods: ['GET'])]

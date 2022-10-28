@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Orders;
 use App\Entity\RawMaterials;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/materiaux-commande')]
+#[Route('/admin/materiaux-commande')]
 class RawMaterialsOrderedController extends AbstractController
 {
     #[Route('/', name: 'app_raw_materials_ordered_index', methods: ['GET'])]

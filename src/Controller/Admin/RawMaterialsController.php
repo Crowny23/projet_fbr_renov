@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\RawMaterials;
 use App\Form\RawMaterialsType;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/materiaux')]
+#[Route('/admin/materiaux')]
 class RawMaterialsController extends AbstractController
 {
     #[Route('/', name: 'app_raw_materials_index', methods: ['GET', 'POST'])]

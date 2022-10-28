@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\RawMaterialsCategories;
 use App\Form\RawMaterialsCategoriesType;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/materiaux-categories')]
+#[Route('/admin/materiaux-categories')]
 class RawMaterialsCategoriesController extends AbstractController
 {
     #[Route('/', name: 'app_raw_materials_categories_index', methods: ['GET'])]
