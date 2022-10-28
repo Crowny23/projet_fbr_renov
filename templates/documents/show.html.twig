@@ -8,23 +8,19 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ document.id }}</td>
-            </tr>
-            <tr>
-                <th>Name_document</th>
+                <th>Nom du document</th>
                 <td>{{ document.nameDocument }}</td>
             </tr>
             <tr>
-                <th>UpdateAt</th>
+                <th>Date de modification</th>
                 <td>{{ document.updateAt ? document.updateAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Size</th>
+                <th>Taille</th>
                 <td>{{ document.size }} ko</td>
             </tr>
             <tr>
-                <th>MimeType</th>
+                <th>Type</th>
                 <td>{{ document.mimeType }}</td>
             </tr>
             <tr>
@@ -34,9 +30,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_documents_index') }}">back to list</a>
+    <a href="{{ path('app_documents_index') }}"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_documents_edit', {'id': document.id}) }}">edit</a>
+    <a href="{{ path('app_documents_edit', {'id': document.id}) }}" class="btn btn-primary mb-3">Modifier</a>
 
     {{ include('documents/_delete_form.html.twig') }}
 {% endblock %}
