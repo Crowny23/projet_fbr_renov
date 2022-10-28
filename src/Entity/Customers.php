@@ -40,7 +40,7 @@ class Customers
     #[ORM\Column]
     private ?int $phone = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $social_reason = null;
 
     #[ORM\Column(length: 255, nullable: true)]

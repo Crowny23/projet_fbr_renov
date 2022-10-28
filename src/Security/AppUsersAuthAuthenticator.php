@@ -50,13 +50,11 @@ class AppUsersAuthAuthenticator extends AbstractLoginFormAuthenticator
         
         if($isAdmin === true) {
             return new RedirectResponse($this->urlGenerator->generate('app_main'));
+        }else {
+            return new RedirectResponse($this->urlGenerator->generate('app_login'));
         }
-        // Redirect if user is not admin
-        // else {
-        //     return new RedirectResponse($this->urlGenerator->generate('user_public_path'));
-        // }
         
-        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl(Request $request): string
