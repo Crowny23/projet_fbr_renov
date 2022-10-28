@@ -3,42 +3,62 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Users;
-use App\Form\UsersType;
+use App\Repository\CustomersRepository;
 use App\Repository\UsersRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('admin/users')]
+#[Route('admin/utilisateurs')]
 class UsersController extends AbstractController
 {
     #[Route('/', name: 'app_users_index', methods: ['GET'])]
-    public function index(UsersRepository $usersRepository): Response
+    public function index(UsersRepository $usersRepository, CustomersRepository $customersRepository): Response
     {
-        return $this->render('users/index.html.twig', [
-            'users' => $usersRepository->findAll(),
-        ]);
-    }
+        $users = $usersRepository->findAll();
+        $clients = [];
+        $admins = [];
 
-    #[Route('/new', name: 'app_users_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UsersRepository $usersRepository): Response
-    {
-        $user = new Users();
-        $form = $this->createForm(UsersType::class, $user);
-        $form->handleRequest($request);
+        foreach ($users as $user) {
+            $userRoles = $user->getRoles();
+            $isAdmin = in_array('ROLE_ADMIN', $userRoles);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $usersRepository->save($user, true);
-
-            return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
+            if($isAdmin === true ) {
+                array_push($admins, $user);
+            } else {
+                $client = $customersRepository->findBy(['id_user' => $user]);
+                
+                if(!empty($client)) {
+                    array_push($clients, $client[0]);
+                }
+            }
         }
 
-        return $this->renderForm('users/new.html.twig', [
-            'user' => $user,
-            'form' => $form,
+        return $this->render('users/index.html.twig', [
+            'clients' => $clients,
+            'admins' => $admins
         ]);
     }
+
+    // #[Route('/new', name: 'app_users_new', methods: ['GET', 'POST'])]
+    // public function new(Request $request, UsersRepository $usersRepository): Response
+    // {
+    //     $user = new Users();
+    //     $form = $this->createForm(UsersType::class, $user);
+    //     $form->handleRequest($request);
+
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $usersRepository->save($user, true);
+
+    //         return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
+    //     }
+
+    //     return $this->renderForm('users/new.html.twig', [
+    //         'user' => $user,
+    //         'form' => $form,
+    //     ]);
+    // }
 
     #[Route('/{id}', name: 'app_users_show', methods: ['GET'])]
     public function show(Users $user): Response
@@ -48,23 +68,23 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_users_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Users $user, UsersRepository $usersRepository): Response
-    {
-        $form = $this->createForm(UsersType::class, $user);
-        $form->handleRequest($request);
+    // #[Route('/{id}/edit', name: 'app_users_edit', methods: ['GET', 'POST'])]
+    // public function edit(Request $request, Users $user, UsersRepository $usersRepository): Response
+    // {
+    //     $form = $this->createForm(UsersType::class, $user);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $usersRepository->save($user, true);
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $usersRepository->save($user, true);
 
-            return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->renderForm('users/edit.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->renderForm('users/edit.html.twig', [
+    //         'user' => $user,
+    //         'form' => $form,
+    //     ]);
+    // }
 
     #[Route('/{id}', name: 'app_users_delete', methods: ['POST'])]
     public function delete(Request $request, Users $user, UsersRepository $usersRepository): Response

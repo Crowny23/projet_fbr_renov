@@ -9,7 +9,6 @@ use App\Form\WorksitesType;
 use App\Repository\WorksiteCategoriesRepository;
 use App\Repository\WorksiteImagesRepository;
 use App\Repository\WorksitesRepository;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

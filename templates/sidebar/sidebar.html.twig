@@ -133,6 +133,7 @@
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUserCo">
       {% if app.user %}
+        <li><a href="{{path('app_admin_show')}}" class="dropdown-item">Compte Admin</a></li>
         <li><a href="{{path('app_logout')}}" class="dropdown-item">Déconnexion</a></li>
       {% else  %}
         <li><a href="{{path('app_login')}}" class="dropdown-item">Connexion</a></li>

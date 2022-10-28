@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modification Contacts{% endblock %}
+{% block title %}Contacts | Modifier{% endblock %}
 
 {% block body %}
     <div class="contain col-12" style=" display:flex; flex-direction: row; justify-content: space-between;">
@@ -8,7 +8,7 @@
 
         {{ include('contacts/_delete_form.html.twig') }}
     </div>
-    <h1 class="mb-3 mt-2 ps-4 container col-5 mx-auto">Modifier les Contacts</h1>
+    <h1 class="mb-3 mt-2 ps-4 container col-5 mx-auto">Modifier le contact</h1>
     <div class="row mb-3 container col-5 mx-auto">
         {{ include('contacts/_form.html.twig', {'button_label': 'Enregistrer'}) }}
     </div>

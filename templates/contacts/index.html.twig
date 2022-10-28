@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contacts{% endblock %}
+{% block title %}Contacts | Liste{% endblock %}
 
 {% block body %}
-    <h1>Contacts</h1>
-    <a href="{{ path('app_contacts_new') }}"  class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
+    <h1>Liste des contacts</h1>
+    <a href="{{ path('app_contacts_new') }}"  class="btn btn-primary float-end mt-2"><i class="fa fa-plus"></i></a>
 
     <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>

@@ -3,35 +3,69 @@
 {% block title %}Users index{% endblock %}
 
 {% block body %}
-    <h1>Users index</h1>
+    <h1>Liste des utilisateurs</h1>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Mot de passe</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>
-                    <a href="{{ path('app_users_show', {'id': user.id}) }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-eye"></i></a>
-                    <a href="{{ path('app_users_edit', {'id': user.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">Aucun enregistrement trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="pb-5">
+        <h2>Admins</h2>
 
-    <a href="{{ path('app_users_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Create new</a>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th class="col-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for admin in admins %}
+                <tr>
+                    <td>{{ admin.email }}</td>
+                    <td>
+                        <a href="{{ path('app_users_show', {'id': admin.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                        {# <a href="{{ path('app_users_edit', {'id': admin.id}) }}" class="btn btn-success"><i class="fa fa-pen-to-square"></i></a> #}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_admin_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter un nouvel admin</a>
+    </div>
+
+    <div>
+        <h2>Clients</h2>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nom Prénom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th class="col-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for client in clients %}
+                <tr>
+                    <td>{{ client.lastname }} {{ client.firstname }}</td>
+                    <td>{{ client.mail }}</td>
+                    <td>{% if client.phone|length is same as 9 %} 0{{ client.phone }}{% else %}{{ client.phone }}{% endif %}</td>
+                    <td>
+                        <a href="{{ path('app_users_show', {'id': client.idUser.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                        {# <a href="{{ path('app_users_edit', {'id': client.idUser.id}) }}" class="btn btn-success"><i class="fa fa-pen-to-square"></i></a> #}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_customers_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Ajouter un nouveau client</a>
+    </div>
 {% endblock %}

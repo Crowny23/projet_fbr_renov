@@ -4,20 +4,21 @@ namespace App\Controller\Admin;
 
 use App\Entity\Users;
 use App\Form\RegistrationFormType;
+use App\Repository\UsersRepository;
 use App\Security\AppUsersAuthAuthenticator;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
-class RegistrationController extends AbstractController
+#[Route('/admin/compte')]
+class AdminController extends AbstractController
 {
-    #[Route('/admin/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppUsersAuthAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    #[Route('/new', name: 'app_admin_new')]
+    public function new(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppUsersAuthAuthenticator $authenticator, UsersRepository $usersRepository): Response
     {
         $user = new Users();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -31,9 +32,9 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setRoles(['ROLE_ADMIN']).
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $usersRepository->save($user, true);
             // do anything else you need here, like send an email
 
             return $userAuthenticator->authenticateUser(
@@ -43,8 +44,18 @@ class RegistrationController extends AbstractController
             );
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('admin/new.html.twig', [
             'registrationForm' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/', name: 'app_admin_show')]
+    public function show(Security $security): Response
+    {
+        $user = $security->getUser();  
+
+        return $this->render('admin/show.html.twig', [
+            'user' => $user
         ]);
     }
 }

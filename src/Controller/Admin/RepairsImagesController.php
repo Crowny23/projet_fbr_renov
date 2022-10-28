@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Repairs;
 use App\Entity\RepairsImages;
 use App\Form\RepairsImagesType;
 use App\Repository\RepairsImagesRepository;

@@ -34,8 +34,11 @@ class CustomersController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $customersRepository->save($customer, true);
+
             $random = random_bytes(10);
             $plainPassword = bin2hex($random);
+
             $user->setEmail($customer->getMail());
             $user->addCustomer($customer);
             $user->setPassword(
@@ -44,8 +47,10 @@ class CustomersController extends AbstractController
                     $plainPassword
                 )
             );
-            dd(bin2hex($random));
-            $customersRepository->save($customer, true);
+
+            $usersRepository->save($user, true);
+
+            // Send Email
 
             return $this->redirectToRoute('app_customers_index', [], Response::HTTP_SEE_OTHER);
         }
