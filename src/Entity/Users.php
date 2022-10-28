@@ -39,7 +39,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Customers::class, onDelete:"CASCADE")]
+    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Customers::class)]
     private Collection $customers;
 
     public function getId(): ?int
