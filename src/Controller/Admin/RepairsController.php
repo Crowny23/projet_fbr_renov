@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Repairs;
 use App\Form\RepairsType;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/repairs')]
+#[Route('/admin/repairs')]
 class RepairsController extends AbstractController
 {
     #[Route('/', name: 'app_repairs_index', methods: ['GET'])]

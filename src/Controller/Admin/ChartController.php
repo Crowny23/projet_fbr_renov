@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Repository\CustomersRepository;
 use App\Repository\RentalsRepository;
@@ -13,7 +13,7 @@ use Symfony\UX\Chartjs\Model\Chart;
 
 class ChartController extends AbstractController
 {
-    #[Route('/chart', name: 'app_chart')]
+    #[Route('/admin/chart', name: 'app_chart')]
     public function index(ChartBuilderInterface $chartBuilder, WorksitesRepository $worksitesRepository, RentalsRepository $rentalsRepository, CustomersRepository $customersRepository): Response
     {
         $worksitesTot = $worksitesRepository->findAll();

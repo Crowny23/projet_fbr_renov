@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Customers;
 use App\Form\CustomersType;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/customers')]
+#[Route('/admin/customers')]
 class CustomersController extends AbstractController
 {
     #[Route('/', name: 'app_customers_index', methods: ['GET'])]
