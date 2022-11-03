@@ -13,10 +13,12 @@ class MainController extends AbstractController
     #[Route('/', name: 'app_main')]
     public function index(WorksitesRepository $worksitesRepository, RepairsRepository $repairsRepository): Response
     {
+        $worksitesByStatus = $worksitesRepository->findBy(['status_worksite' => 'En cours'], null, 5);
+        // dd($worksitesByStatus);
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
-            'worksites' => array_slice($worksitesRepository->findBy(array(), array('name_worksite' => 'ASC')), 0, 3),
-            'repairs' => array_slice($repairsRepository->findBy(array(), array('name_repair' => 'ASC')), 0, 3),
+            'worksites' => $worksitesByStatus,
+            'repairs' => array_slice($repairsRepository->findBy(array(), array('name_repair' => 'DESC')), 0, 3),
         ]);
     }
 }

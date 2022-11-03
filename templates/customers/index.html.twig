@@ -1,43 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Clients{% endblock %}
+{% block title %}Clients | Liste{% endblock %}
 
 {% block body %}
-    <h1>Customers</h1>
-    <a href="{{ path('app_customers_new') }}"  class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
-    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
-        <thead>
-            <tr>
-                <th data-sortable="true" data-field="firstname">Prenom</th>
-                <th data-sortable="true" data-field="lastname">Nom</th>
-                <th data-sortable="true" data-field="address">Adresse Complète</th>
-                <th data-sortable="true" data-field="mail">E-mail</th>
-                <th data-sortable="true" data-field="phone">Téléphone</th>
-                <th data-sortable="true" data-field="social_reason">Raison Sociale</th>
-                <th>Note</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for customer in customers %}
-            <tr style="background-color: white;">
-                <td>{{ customer.firstname }}</td>
-                <td>{{ customer.lastname }}</td>
-                <td>{{ customer.address }} {{ customer.postalcode }} {{ customer.Town }}</td>
-                <td>{{ customer.mail }}</td>
-                <td>0{{ customer.phone }}</td>
-                <td>{{ customer.socialReason }}</td>
-                <td>{{ customer.customerNote }}</td>
-                <td>
-                    <a href="{{ path('app_customers_show', {'id': customer.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('app_customers_edit', {'id': customer.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="13">Aucun enregistrement trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Liste des clients</h1>
+</div>
+<a href="{{ path('app_customers_new') }}"  class="btn btn-primary float-sm-end mt-2 col-6 col-sm-4 col-md-3 col-lg-2"><i class="fa fa-plus"></i> Ajouter</a>
+<table class="table table-hover col-12" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
+    <thead>
+        <tr>
+            <th data-sortable="true" data-field="lastname">Nom Prénom</th>
+            <th data-sortable="true" data-field="address" class="d-none d-xl-table-cell">Adresse Complète</th>
+            <th data-sortable="true" data-field="mail" class="d-none d-sm-table-cell">E-mail</th>
+            <th data-sortable="true" data-field="phone" class="d-none d-sm-table-cell">Téléphone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for customer in customers %}
+        <tr>
+            <td>{{ customer.lastname }} {{ customer.firstname }}</td>
+            <td class="d-none d-xl-table-cell">{{ customer.address }}, {{ customer.postalcode }} {{ customer.Town }}</td>
+            <td class="d-none d-sm-table-cell">{{ customer.mail }}</td>
+            <td class="d-none d-sm-table-cell">{% if customer.phone|length is same as 9 %}0{{ customer.phone }}{% else %}{{ customer.phone }}{% endif %}</td>
+            <td>
+                <a href="{{ path('app_customers_show', {'id': customer.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye fa-fw"></i></a>
+                <a href="{{ path('app_customers_edit', {'id': customer.id}) }}" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square fa-fw"></i></a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="13">Aucun enregistrement trouvé</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

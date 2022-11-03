@@ -15,7 +15,7 @@
         </thead>
         <tbody>
         {% for material in materials %}
-            <tr style="background-color: white;">
+            <tr>
                 <td>{{ material.nameMaterial }}</td>
                 <td>
                     <a href="{{ path('app_materials_show', {'id': material.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>

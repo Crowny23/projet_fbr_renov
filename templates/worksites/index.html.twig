@@ -1,45 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des chantiers{% endblock %}
+{% block title %}Chantiers | Liste{% endblock %}
 
 {% block body %}
-    <h1 style="font-size: 2rem;">Liste des chantiers</h1>
-    <a href="{{ path('app_worksites_new') }}" class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
-    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
-        <thead>
-            <tr>
-                <th data-sortable="true" data-field="worksite_name">Nom du chantier</th>
-                <th data-sortable="true" data-field="address">Adresse Complète</th>
-                <th data-sortable="true" data-field="customer">Client</th>
-                <th data-sortable="true" data-field="date_start">Date de début</th>
-                <th data-sortable="true" data-field="dist">Distance</th>
-                <th data-sortable="true" data-field="urgent">Urgent</th>
-                <th data-sortable="true" data-field="status">Statut</th>
-                <th>Actions</th>
-                
-            </tr>
-            
-        </thead>
-        <tbody>
-        {% for worksite in worksites %}
-            <tr>
-                <td>{{ worksite.nameWorksite }}</td>
-                <td>{{ worksite.adressWorksite}}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</td>
-                <td>{{ worksite.clientWorksite }}</td>
-                <td>{{ worksite.startAt ? worksite.startAt|date('d M Y') : '' }}</td>
-                <td>{{ worksite.travelDistanceWorksite }}</td>
-                <td>{{ worksite.isUrgent ? 'Oui' : 'Non' }}</td>
-                <td>{{ worksite.statusWorksite }}</td>
-                <td>
-                    <a href="{{ path('app_worksites_show', {'id': worksite.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="16">Aucun chantier existant</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Liste des chantiers</h1>
+</div>
+<a href="{{ path('app_worksites_new') }}" class="btn btn-primary float-sm-end mt-2 col-6 col-sm-4 col-md-3 col-lg-2"><i class="fa fa-plus"></i> Ajouter</a>
+
+<table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
+    <thead>
+        <tr>
+            <th data-sortable="true" data-field="worksite_name">Nom du chantier</th>
+            <th data-sortable="true" data-field="customer" class="d-none d-lg-table-cell">Client</th>
+            <th data-sortable="true" data-field="date_start" class="d-none d-lg-table-cell">Début</th>
+            <th data-sortable="true" data-field="urgent" class="d-none d-sm-table-cell">Urgent</th>
+            <th data-sortable="true" data-field="status" class="d-none d-sm-table-cell">Statut</th>
+            <th>Actions</th> 
+        </tr>
+    </thead>
+    <tbody>
+    {% for worksite in worksites %}
+        <tr>
+            <td>{{ worksite.nameWorksite }}</td>
+            <td>{{ worksite.clientWorksite }}</td>
+            <td>{{ worksite.startAt ? worksite.startAt|date('d M Y') : '' }}</td>
+            <td>{{ worksite.isUrgent ? 'Oui' : 'Non' }}</td>
+            <td>{{ worksite.statusWorksite }}</td>
+            <td>
+                <a href="{{ path('app_worksites_show', {'id': worksite.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye fa-fw"></i></a>
+                <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square fa-fw"></i></a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="16">Aucun chantier existant</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

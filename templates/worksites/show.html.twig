@@ -1,9 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ worksite.nameworksite }}{% endblock %}
+{% block title %}Chantiers | Détails{% endblock %}
 
 {% block body %}
-    <h1>Chantier : {{ worksite.nameWorksite }}</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Détails du chantier</h1>
+</div>
 
     <table class="table">
         <tbody>
@@ -12,24 +14,20 @@
                 <td>{{ worksite.nameWorksite }}</td>
             </tr>
             <tr>
-                <th>Adresse</th>
-                <td>{{ worksite.adressWorksite }}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</td>
-            </tr>
-            {# <tr>
                 <th>Ville</th>
                 <td>{{ worksite.cityWorksite }}</td>
             </tr>
             <tr>
                 <th>Code Postal</th>
-                <td>{{ worksite.cpWorksite }}</td>
+                <td>{% if worksite.cpWorksite|length is same as 4 %}0{{ worksite.cpWorksite }}{% else %}{{worksite.cpWorksite}}{% endif %}</td>
             </tr>
             <tr>
                 <th>Adresse</th>
                 <td>{{ worksite.adressWorksite }}</td>
-            </tr> #}
+            </tr>
             <tr>
                 <th>Date de début</th>
-                <td>{{ worksite.startAt ? worksite.startAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ worksite.startAt ? worksite.startAt|date('d M Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Durée des travaux (en jours)</th>
@@ -45,15 +43,15 @@
             </tr>
             <tr>
                 <th>Note du client</th>
-                <td>{% if worksite.noteClientWorksite is same as null %} Aucune {% else %} {{ worksite.noteClientWorksite }}{% endif %}</td>
+                <td>{% if worksite.noteClientWorksite is same as null %}Pas de note client{% else %} {{ worksite.noteClientWorksite }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Note personnelle</th>
-                <td>{% if worksite.noteAdminWorksite is same as null %} Aucune {% else %} {{ worksite.noteAdminWorksite }}{% endif %}</td>
+                <td>{% if worksite.noteAdminWorksite is same as null %}Pas de note personelle{% else %} {{ worksite.noteAdminWorksite }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Urgent</th>
-                <td>{{ worksite.isUrgent ? 'Yes' : 'No' }}</td>
+                <td>{{ worksite.isUrgent ? 'Oui' : 'Non' }}</td>
             </tr>
             <tr>
                 <th>Statut</th>
@@ -90,16 +88,20 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_worksites_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
+    <div class="d-flex">
+        <a href="{{ path('app_worksites_index') }}" class="btn btn-primary mb-2 me-2"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-primary mb-3">Modifier</a>
-    <div title="Add to Calendar" class="addeventatc btn btn-light mb-3" data-styling="">
-        <span class="start">{{ worksite.startAt ? worksite.startAt|date('d M Y') : '' }}</span>
-        <span class="timezone">Europe/Paris</span>
-        <span class="title">{{ worksite.nameWorksite }}</span>
-        <span class="description">Durée des travaux : {{ worksite.durationWorksite }} jour(s), <br> Travaux supplémentaires : {{ worksite.supplementWorksite }} heure(s), <br> Distance : {{ worksite.travelDistanceWorksite }} km</span>
-        <span class="location">{{ worksite.adressWorksite}}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</span>
+        <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-primary mb-2 me-2"><i class="fa fa-pen-to-square"></i> Modifier</a>
+        
+        <div title="Add to Calendar" class="addeventatc btn mb-2 p-0 me-2 position-relative border border-0" data-styling="none">
+            <i class="fa-fw fa-solid fa-calendar position-absolute top-50 start-50 translate-middle"></i>
+            <span class="start">{{ worksite.startAt ? worksite.startAt|date('d M Y') : '' }}</span>
+            <span class="timezone">Europe/Paris</span>
+            <span class="title">{{ worksite.nameWorksite }}</span>
+            <span class="description">Durée des travaux : {{ worksite.durationWorksite }} jour(s), <br> Travaux supplémentaires : {{ worksite.supplementWorksite }} heure(s), <br> Distance : {{ worksite.travelDistanceWorksite }} km</span>
+            <span class="location">{{ worksite.adressWorksite}}, {% if worksite.cpWorksite|length is same as 4 %}0{{ worksite.cpWorksite }}{% else %}{{worksite.cpWorksite}}{% endif %} {{ worksite.cityWorksite }}</span>
+        </div>
+
+        {{ include('worksites/_delete_form.html.twig') }}
     </div>
-
-    {{ include('worksites/_delete_form.html.twig') }}
 {% endblock %}

@@ -18,7 +18,7 @@
         <div class="container-fluid">
             <div class="row flex-nowrap">
                 {% include "sidebar/sidebar.html.twig" %}
-                <div class="col py-3">
+                <div class="col py-4">
                     {% block body %}{% endblock %}
                 </div>
             </div>
@@ -30,5 +30,6 @@
             <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/locale/bootstrap-table-fr-FR.min.js"></script>
             {% endblock %}
             <script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
+            <script src="{{ asset('js/sidebar.js') }}"></script>
     </body>
 </html>

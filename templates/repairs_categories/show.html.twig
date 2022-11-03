@@ -1,30 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Catégorie dépannage{% endblock %}
+{% block title %}Dépannages | Détails de la catégorie{% endblock %}
 
 {% block body %}
-    <h1>Catégorie dépannage</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Détails de la catégorie</h1>
+</div>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Nom de la catégorie</th>
+            <td>{{ repairs_category.nameRepairsCategory }}</td>
+        </tr>
+        <tr>
+            <th>Date de création</th>
+            <td>{{ repairs_category.createdAt ? repairs_category.createdAt|date('d M Y H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Date de modification</th>
+            <td>{{ repairs_category.updatedAt ? repairs_category.updatedAt|date('d M Y H:i:s') : '' }}</td>
+        </tr>
+    </tbody>
+</table>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom de la catégorie</th>
-                <td>{{ repairs_category.nameRepairsCategory }}</td>
-            </tr>
-            <tr>
-                <th>Date de création</th>
-                <td>{{ repairs_category.createdAt ? repairs_category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Date de modification</th>
-                <td>{{ repairs_category.updatedAt ? repairs_category.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="d-flex">
+    <a href="{{ path('app_repairs_categories_index') }}" class="btn btn-primary mb-3 me-2"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_repairs_categories_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
-
-    <a href="{{ path('app_repairs_categories_edit', {'id': repairs_category.id}) }}" class="btn btn-primary mb-3">Modifier</a>
+    <a href="{{ path('app_repairs_categories_edit', {'id': repairs_category.id}) }}" class="btn btn-primary mb-3 me-2">Modifier</a>
 
     {{ include('repairs_categories/_delete_form.html.twig') }}
+</div>
 {% endblock %}

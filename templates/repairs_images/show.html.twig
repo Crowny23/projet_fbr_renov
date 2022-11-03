@@ -1,43 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Image{% endblock %}
+{% block title %}Dépannages | Image{% endblock %}
 
 {% block body %}
-    <h1>Image</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Image</h1>
+</div>
+<table class="table">
+    <tbody>
+        <tr>
+            {% if repairs_image.mimeType == 'application/pdf' %}
+            <td><iframe src="{{ vich_uploader_asset(repairs_image) }}" frameborder="0" width="800" height="500"></iframe></td>
+            {% else %}
+            <td><img class="img-fluid" src="{{ vich_uploader_asset(repairs_image) }}" alt="" width="500"></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <th>Nom du fichier</th>
+            <td>{{ repairs_image.imageRepairsImages }}</td>
+        </tr>
+    </tbody>
+</table>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom de l'image</th>
-                <td>{{ repairs_image.imageRepairsImages }}</td>
-            </tr>
-            <tr>
-                <th>Date de modification</th>
-                <td>{{ repairs_image.updatedAt ? repairs_image.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Taille de l'image</th>
-                <td>{{ repairs_image.imageSize }} ko</td>
-            </tr>
-            <tr>
-                <th>Type de fichier</th>
-                <td>{{ repairs_image.mimeType }}</td>
-            </tr>
-            <tr>
-                {% if repairs_image.mimeType == 'application/pdf' %}
-                <th>Pdf</th>
-                <td><iframe src="{{ vich_uploader_asset(repairs_image) }}" frameborder="0" width="800" height="500"></iframe></td>
-                {% else %}
-                <th>L'image</th>
-                <td><img src="{{ vich_uploader_asset(repairs_image) }}" alt="" width="500"></td>
-                {% endif %}
-            </tr>
-        </tbody>
-    </table>
+<div class="d-flex">
+    <a href="{{ path('app_repairs_images_index') }}" class="btn btn-primary mb-3 me-2"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_repairs_images_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
-
-    <a href="{{ path('app_repairs_images_edit', {'id': repairs_image.id}) }}" class="btn btn-primary mb-3">Modifier</a>
+    <a href="{{ path('app_repairs_images_edit', {'id': repairs_image.id}) }}" class="btn btn-primary mb-3 me-2">Modifier</a>
 
     {{ include('repairs_images/_delete_form.html.twig') }}
+</div>
 {% endblock %}

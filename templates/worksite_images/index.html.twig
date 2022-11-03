@@ -1,38 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Images de Chantier{% endblock %}
+{% block title %}Chantiers | Images{% endblock %}
 
 {% block body %}
-    <h1>Images de Chantier</h1>
-    <a href="{{ path('app_worksite_images_new') }}"  class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
-    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th data-sortable="true" data-field="worksite_name">Nom du chantiers</th>
-                <th data-sortable="true" data-field="weight">Taille</th>
-                <th data-sortable="true" data-field="image_name">Nom d'image</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for worksite_image in worksite_images %}
-            <tr style="background-color: white;">
-                
-                <td><img src="{{ vich_uploader_asset(worksite_image) }}" alt="" width="200"></td>
-                <td>{{ worksite_image.worksite }}</td>
-                <td>{{ worksite_image.imageSize }} ko</td>
-                <td>{{ worksite_image.imageWorksiteImages }}</td>
-                <td>
-                    <a href="{{ path('app_worksite_images_show', {'id': worksite_image.id}) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
-                    <a href="{{ path('app_worksite_images_edit', {'id': worksite_image.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">Aucune image enregistré</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Liste des images de chantiers</h1>
+</div>
+<a href="{{ path('app_worksite_images_new') }}" class="btn btn-primary float-sm-end mt-2 col-6 col-sm-4 col-md-3 col-lg-2"><i class="fa fa-plus"></i> Ajouter</a>
+<table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th data-sortable="true" data-field="worksite_name">Nom du chantiers</th>
+            <th data-sortable="true" data-field="image_name" class="d-none d-md-table-cell">Nom d'image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for worksite_image in worksite_images %}
+        <tr>
+            
+            <td><img style="max-width: 200px; min-width: 50px; width: 100%;" src="{{ vich_uploader_asset(worksite_image) }}"></td>
+            <td>{{ worksite_image.worksite }}</td>
+            <td>{{ worksite_image.imageWorksiteImages }}</td>
+            <td>
+                <a href="{{ path('app_worksite_images_show', {'id': worksite_image.id}) }}" class="btn-sm btn btn-primary mb-2"><i class="fa-fw fa-solid fa-eye"></i></a>
+                <a href="{{ path('app_worksite_images_edit', {'id': worksite_image.id}) }}" class="btn-sm btn btn-success mb-2"><i class="fa-fw fa-solid fa-pen-to-square"></i></a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">Aucune image enregistré</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
