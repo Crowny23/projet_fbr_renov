@@ -24,7 +24,7 @@
                 <td>{{ renter.adressRenter }} {{ renter.cpRenter }} {{ renter.cityRenter }}</td>
                 <td>{{ renter.websiteRenter }}</td>
                 <td>{{ renter.emailRenter }}</td>
-                <td>{{ renter.phoneRenter }}</td>
+                <td>0{{ renter.phoneRenter }}</td>
                 <td>{{ renter.noteAdminRenter }}</td>
                 <td>
                     <a href="{{ path('app_renter_show', {'id': renter.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
@@ -33,7 +33,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="12">Aucun enregistrement trouvé</td>
+                <td colspan="12">Aucun locatier enregistré</td>
             </tr>
         {% endfor %}
         </tbody>

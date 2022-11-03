@@ -26,7 +26,7 @@
             <tr>
                 <td>{{ supplier.nameSupplier }}</td>
                 <td>{{ supplier.email }}</td>
-                <td>{{ supplier.phone }}</td>
+                <td>0{{ supplier.phone }}</td>
                 <td>{{ supplier.address }}, {{ supplier.cp }} {{ supplier.city }}</td>
                 {# <td>{{ supplier.city }}</td>
                 <td>{{ supplier.cp }}</td>
@@ -39,7 +39,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">Pas de fournisseur existant</td>
+                <td colspan="9">Aucun fournisseur enregistré</td>
             </tr>
         {% endfor %}
         </tbody>
