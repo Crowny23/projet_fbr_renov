@@ -4,9 +4,9 @@ This traineeship project is programming in symfony, everything is already set up
 
 # Requirements
 
-Install (Composer)[https://getcomposer.org/]
-Install (Scoop)[https://scoop.sh/] for Install (Symfony CLI)[https://symfony.com/download]
-Install (Node.js)[https://nodejs.org/en/download/]
+- Install [Composer](https://getcomposer.org/)
+- Install [Scoop](https://scoop.sh/) for Install [Symfony CLI](https://symfony.com/download)
+- Install [Node.js](https://nodejs.org/en/download/)
 
 # Symfony Setup
 
