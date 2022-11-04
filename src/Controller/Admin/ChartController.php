@@ -13,7 +13,7 @@ use Symfony\UX\Chartjs\Model\Chart;
 
 class ChartController extends AbstractController
 {
-    #[Route('/admin/statistique', name: 'app_chart')]
+    #[Route('/admin/statistiques', name: 'app_chart')]
     public function index(ChartBuilderInterface $chartBuilder, WorksitesRepository $worksitesRepository, RentalsRepository $rentalsRepository, CustomersRepository $customersRepository): Response
     {   
         // Worksites stats
@@ -81,7 +81,7 @@ class ChartController extends AbstractController
             'labels' => ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
             'datasets' => [
                 [
-                    'label' => 'Coût Location',
+                    'label' => 'Coût total des locations de l\année en cours par mois',
                     'backgroundColor' => 'blue',
                     'borderColor' => 'blue',
                     'data' => $dataR,
