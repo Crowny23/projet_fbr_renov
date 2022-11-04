@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/repairs-images')]
+#[Route('/admin/depannages-images')]
 class RepairsImagesController extends AbstractController
 {
     #[Route('/', name: 'app_repairs_images_index', methods: ['GET'])]

@@ -13,7 +13,7 @@ use Symfony\UX\Chartjs\Model\Chart;
 
 class ChartController extends AbstractController
 {
-    #[Route('/admin/chart', name: 'app_chart')]
+    #[Route('/admin/statistique', name: 'app_chart')]
     public function index(ChartBuilderInterface $chartBuilder, WorksitesRepository $worksitesRepository, RentalsRepository $rentalsRepository, CustomersRepository $customersRepository): Response
     {
         $worksitesTot = $worksitesRepository->findAll();

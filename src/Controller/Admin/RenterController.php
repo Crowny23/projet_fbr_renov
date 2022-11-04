@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/renter')]
+#[Route('/admin/locatiers')]
 class RenterController extends AbstractController
 {
     #[Route('/', name: 'app_renter_index', methods: ['GET'])]
