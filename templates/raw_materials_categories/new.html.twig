@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New RawMaterialsCategories{% endblock %}
+{% block title %}Nouvelle Catégorie{% endblock %}
 
 {% block body %}
-    <h1>Create new RawMaterialsCategories</h1>
+    <a href="{{ path('app_raw_materials_categories_index') }}" class="btn btn-primary ms-1 mt-1"><i class="fa-solid fa-reply"></i></a>
+    <h1 class="row mb-3 mt-2 container col-5 mx-auto">Créer Nouvelle Catégorie</h1>
+    <div class="row mb-3 container col-5 ps-0 mt-5 mx-auto">
+        {{ include('raw_materials_categories/_form.html.twig') }}
+    </div>
 
-    {{ include('raw_materials_categories/_form.html.twig') }}
-
-    <a href="{{ path('app_raw_materials_categories_index') }}">Retour à la lsite des catégories</a>
 {% endblock %}

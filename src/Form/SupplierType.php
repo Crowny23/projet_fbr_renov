@@ -20,8 +20,8 @@ class SupplierType extends AbstractType
             ->add('phone', IntegerType::class, ['label' => 'Numéro de téléphone'])
             ->add('city', TextType::class, ['label' => 'Ville'])
             ->add('cp', IntegerType::class, ['label' => 'Code postal'])
-            ->add('address', TextType::class, ['label' => 'Adresse'])
-            ->add('submit', SubmitType::class, ['label' => 'Valider'])
+            ->add('address', TextType::class, ['label' => 'Adresse', 'attr' => ["class" => "mb-3"], 'label_attr' => ['class' => "mb-1, mt-2"]])
+            ->add('submit', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn btn-success']])
         ;
     }
 

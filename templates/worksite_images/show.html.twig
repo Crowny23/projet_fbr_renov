@@ -1,33 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}WorksiteImages{% endblock %}
+{% block title %}Chantiers | Image{% endblock %}
 
 {% block body %}
-    <h1>WorksiteImages</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Image</h1>
+</div>
+<table class="table">
+    <tbody>
+        <tr>
+            {% if worksite_image.mimeType == 'application/pdf' %}
+                <td><iframe src="{{ vich_uploader_asset(worksite_image) }}" frameborder="0" width="800" height="500"></iframe></td>
+            {% else %}
+                <td><img class="img-fluid" src="{{ vich_uploader_asset(worksite_image) }}" alt="" width="500"></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <th>Nom du fichier</th>
+            <td>{{ worksite_image.imageWorksiteImages }}</td>
+        </tr>
+    </tbody>
+</table>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                {% if worksite_image.mimeType == 'application/pdf' %}
-                    <iframe src="{{ vich_uploader_asset(worksite_image) }}" frameborder="0" width="800" height="500"></iframe>
-                {% else %}
-                    <img src="{{ vich_uploader_asset(worksite_image) }}" alt="" width="500">
-                {% endif %}
-            </tr>
-            <tr>
-                <th>Image_worksite_images</th>
-                <td>{{ worksite_image.imageWorksiteImages }}</td>
-            </tr>
-            <tr>
-                <th>Date de modification</th>
-                <td>{{ worksite_image.updatedAt|date('Y-m-d H:i:s') }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="d-flex">
+    <a href="{{ path('app_worksite_images_index') }}" class="btn btn-primary mb-2 me-2"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_worksite_images_index') }}" class="btn btn-primary mb-2"><i class="fa-solid fa-reply"></i> Retour</a>
-
-    <a href="{{ path('app_worksite_images_edit', {'id': worksite_image.id}) }}" class="btn btn-primary mb-2">Modifier</a>
+    <a href="{{ path('app_worksite_images_edit', {'id': worksite_image.id}) }}" class="btn btn-primary mb-2 me-2">Modifier</a>
 
     {{ include('worksite_images/_delete_form.html.twig') }}
+</div>
 {% endblock %}

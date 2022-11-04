@@ -14,8 +14,8 @@ class RawMaterialsCategoriesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, ['label' => 'Nom de la catégorie de matériaux'])
-            ->add('submit', SubmitType::class, ['label' => 'Valider'])
+            ->add('name', TextType::class, ['label' => 'Nom de la catégorie de matériaux', 'attr' => ["class" => "mb-3"], 'label_attr' => ['class' => "mb-1, mt-2"]])
+            ->add('submit', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn btn-success']])
         ;
     }
 

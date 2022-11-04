@@ -3,7 +3,9 @@
 {% block title %}Dépannage{% endblock %}
 
 {% block body %}
-    <h1>Dépannage</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Détails du dépannage</h1>
+</div>
 
     <table class="table">
         <tbody>
@@ -17,18 +19,18 @@
             </tr>
             <tr>
                 <th>Code postal</th>
-                <td>{{ repair.cpRepair }}</td>
+                <td>{% if repair.cpRepair|length is same as 4 %}0{{ repair.cpRepair }}{% else %}{{repair.cpRepair}}{% endif %}</td>
             </tr>
             <tr>
                 <th>Adresse</th>
                 <td>{{ repair.adressRepair }}</td>
             </tr>
             <tr>
-                <th>Prix</th>
+                <th>Prix(€)</th>
                 <td>{{ repair.priceRepair }}</td>
             </tr>
             <tr>
-                <th>Reference</th>
+                <th>Référence</th>
                 <td>{{ repair.referenceRepair }}</td>
             </tr>
             <tr>
@@ -36,12 +38,12 @@
                 <td>{{ repair.scheduleRepair }}</td>
             </tr>
             <tr>
-                <th>Distance</th>
+                <th>Distance(km)</th>
                 <td>{{ repair.travelDistanceRepair }}</td>
             </tr>
             <tr>
                 <th>Note</th>
-                <td>{{ repair.noteAdminRepair }}</td>
+                <td>{% if (repair.noteAdminRepair is same as null) or (repair.noteAdminRepair is same as '') %}Pas de note{% else %}{{ repair.noteAdminRepair }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Client</th>
@@ -53,11 +55,11 @@
             </tr>
             <tr>
                 <th>Date de création</th>
-                <td>{{ repair.createdAt ? repair.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ repair.createdAt ? repair.createdAt|date('d M Y H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Date de modification</th>
-                <td>{{ repair.updatedAt ? repair.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ repair.updatedAt ? repair.updatedAt|date('d M Y H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Images</th>
@@ -82,15 +84,17 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_repairs_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
+    <div class="d-flex">
+        <a href="{{ path('app_repairs_index') }}" class="btn btn-primary mb-3 me-2"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}"class="btn btn-primary mb-3">Modifier</a>
-
-    <div title="Add to Calendar" class="addeventatc btn btn-light mb-3" data-styling="">
-        <span class="timezone">Europe/Paris</span>
-        <span class="title">{{ repair.nameRepair }}</span>
-        <span class="description">Horaire : {{ repair.scheduleRepair }} , <br> Distance : {{ repair.travelDistanceRepair }} km, <br> Client : {{ repair.client }}</span>
-        <span class="location">{{ repair.adressRepair }}, {{ repair.cityRepair }}, {{ repair.cpRepair }}</span>
+        <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}"class="btn btn-primary mb-3 me-2">Modifier</a>
+    
+        <div title="Add to Calendar" class="addeventatc btn btn-light mb-3 me-2" data-styling="">
+            <span class="timezone">Europe/Paris</span>
+            <span class="title">{{ repair.nameRepair }}</span>
+            <span class="description">Horaire : {{ repair.scheduleRepair }} , <br> Distance : {{ repair.travelDistanceRepair }} km, <br> Client : {{ repair.client }}</span>
+            <span class="location">{{ repair.adressRepair }}, {% if repair.cpRepair|length is same as 4 %}0{{ repair.cpRepair }}{% else %}{{repair.cprepair}}{% endif %} {{ repair.cityRepair }}</span>
+        </div>
+        {{ include('repairs/_delete_form.html.twig') }}
     </div>
-    {{ include('repairs/_delete_form.html.twig') }}
 {% endblock %}

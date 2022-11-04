@@ -1,16 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Supplier{% endblock %}
+{% block title %}Fournisseur{% endblock %}
 
 {% block body %}
-    <h1>Supplier</h1>
+    <h1>Fournisseur</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ supplier.id }}</td>
-            </tr>
             <tr>
                 <th>Nom du fournisseur</th>
                 <td>{{ supplier.nameSupplier }}</td>
@@ -21,7 +17,7 @@
             </tr>
             <tr>
                 <th>Téléphone</th>
-                <td>{{ supplier.phone }}</td>
+                <td>0{{ supplier.phone }}</td>
             </tr>
             <tr>
                 <th>Ville</th>
@@ -42,9 +38,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_supplier_index') }}">Retour à la liste</a>
+    <a href="{{ path('app_supplier_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}">Modifier</a>
+    <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}" class="btn btn-primary mb-3">Modifier</a>
 
     {{ include('supplier/_delete_form.html.twig') }}
 {% endblock %}

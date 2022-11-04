@@ -1,25 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}FBR Rénovation | Accueil{% endblock %}
 
 {% block body %}
-
-<div class="example-wrapper row flex col-10 mx-auto">
-    <h1 class="float-start" style="font-size: 1.6rem;">Accueil</h1>
-    <div class="rounded-4 col-10 ms-5 mt-3 pt-2" style="background-color: white; width:1000px; height: 300px;">
-        <iframe src="https://calendar.google.com/calendar/embed?height=280&wkst=1&bgcolor=%23ffffff&ctz=Europe%2FParis&showTitle=0&showTz=1&src=amVzc3kuOTltaWxhcWlAZ21haWwuY29t&src=dTB0c2Q2ZHVhbW1qNzNnMnBhajE5ZzgwdmJrMWxpaGNAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%23F09300" style="border-width:0" width="980" height="280" frameborder="0" scrolling="no"></iframe>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Bienvenue sur la page d'accueil de votre interface de gestion</h1>
+</div>
+<div class="d-flex justify-content-center pt-5">
+    <div class="rounded-4 col-11 col-xl-10 col-xxl-9 bg-white d-flex justify-content-center p-3">
+        <iframe class="col-12" src="https://calendar.google.com/calendar/embed?height=280&wkst=1&bgcolor=%23ffffff&ctz=Europe%2FParis&showTitle=0&showTz=1&src=amVzc3kuOTltaWxhcWlAZ21haWwuY29t&src=dTB0c2Q2ZHVhbW1qNzNnMnBhajE5ZzgwdmJrMWxpaGNAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%23F09300" style="border-width:0" width="980" height="280" frameborder="0" scrolling="no"></iframe>
     </div>
+</div>
 
-    <div class="rounded-4 col-10 ms-5 mt-5 mb-5" style="background-color: white; width:1000px; height: 300px;">
-        <h3 style="font-size: 1.2rem;" class="mt-2">Chantiers</h3>
-        <table class="table table-hover mt-4">
+<div class="d-flex justify-content-center pt-5">
+    <div class="rounded-4 col-11 col-xl-10 col-xxl-9 bg-white d-flex flex-column justify-content-center p-3">
+        <h3 class="fs-2">Chantiers</h3>
+        <table class="table table-hover mt-4 col-12">
             <thead>
                 <tr>
                     <th>Nom du chantier</th>
-                    <th>Adresse Complète</th>
-                    <th>Client</th>
-                    <th>Urgent</th>
-                    <th>Statut</th>
+                    <th class="d-none d-lg-table-cell">Adresse</th>
+                    <th class="d-none d-sm-table-cell">Client</th>
+                    <th class="d-none d-sm-table-cell">Urgent</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -27,13 +29,12 @@
             {% for worksite in worksites %}
                 <tr>
                     <td>{{ worksite.nameWorksite }}</td>
-                    <td>{{ worksite.adressWorksite}}, {{ worksite.cpWorksite }} {{ worksite.cityWorksite }}</td>
-                    <td>{{ worksite.clientWorksite }}</td>
-                    <td>{{ worksite.isUrgent ? 'Oui' : 'Non' }}</td>
-                    <td>{{ worksite.statusWorksite }}</td>
+                    <td class="d-none d-lg-table-cell">{{ worksite.adressWorksite}}, {% if worksite.cpWorksite|length is same as 4 %}0{{ worksite.cpWorksite }}{% else %}{{worksite.cpWorksite}}{% endif %} {{ worksite.cityWorksite }}</td>
+                    <td class="d-none d-sm-table-cell">{{ worksite.clientWorksite }}</td>
+                    <td class="d-none d-sm-table-cell">{{ worksite.isUrgent ? 'Oui' : 'Non' }}</td>
                     <td>
-                        <a href="{{ path('app_worksites_show', {'id': worksite.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                        <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{{ path('app_worksites_show', {'id': worksite.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye fa-fw"></i></a>
+                        <a href="{{ path('app_worksites_edit', {'id': worksite.id}) }}" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square fa-fw"></i></a>
                     </td>
                 </tr>
             {% else %}
@@ -43,21 +44,20 @@
             {% endfor %}
             </tbody>
         </table>
-
     </div>
-    <div class="rounded-4 col-10 ms-5 mt-5" style="background-color: white; width:1000px; height: 300px;">
-        <h3 style="font-size: 1.2rem;" class="mt-2">Dépannages</h3>
+</div>
 
+<div class="d-flex justify-content-center pt-5">
+    <div class="rounded-4 col-11 col-xl-10 col-xxl-9 bg-white d-flex flex-column justify-content-center p-3">
+        <h3 class="fs-2">Dépannages</h3>
+    
         <table class="table table-hover mt-4">
             <thead>
                 <tr>
-                    <th>Nom dépannage</th>
-                    <th>Ville</th>
-                    <th>Code Postal</th>
-                    <th>Adresse</th>
-                    <th>Prix</th>
-                    <th>Client</th>
-                    <th>Catégorie</th>
+                    <th>Nom du dépannage</th>
+                    <th class="d-none d-sm-table-cell">Adresse</th>
+                    <th class="d-none d-md-table-cell">Client</th>
+                    <th class="d-none d-lg-table-cell">Type de chantier</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -65,26 +65,21 @@
             {% for repair in repairs %}
                 <tr>
                     <td>{{ repair.nameRepair }}</td>
-                    <td>{{ repair.cityRepair }}</td>
-                    <td>{{ repair.cpRepair }}</td>
-                    <td>{{ repair.adressRepair }}</td>
-                    <td>{{ repair.priceRepair }}</td>
-                    <td>{{ repair.client }}</td>
-                    <td>{{ repair.category }}</td>
+                    <td class="d-none d-sm-table-cell">{{ repair.adressRepair }}, {% if repair.cpRepair|length is same as 4 %}0{{ repair.cpRepair }}{% else %}{{repair.cpRepair}}{% endif %} {{ repair.cityRepair }}</td>
+                    <td class="d-none d-md-table-cell">{{ repair.client }}</td>
+                    <td class="d-none d-lg-table-cell">{{ repair.category }}</td>
                     <td>
-                        <a href="{{ path('app_repairs_show', {'id': repair.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                        <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{{ path('app_repairs_show', {'id': repair.id}) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye fa-fw"></i></a>
+                        <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}" class="btn btn-success btn-sm"><i class="fa-solid fa-pen-to-square fa-fw"></i></a>
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="13">Aucun dépannage trouvé</td>
+                    <td colspan="13">Aucun dépannage enregistré</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
-
-    
 </div>
 {% endblock %}

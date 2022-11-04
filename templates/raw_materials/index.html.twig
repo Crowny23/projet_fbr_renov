@@ -4,22 +4,23 @@
 
 {% block body %}
     <h1>Liste des matériaux</h1>
+    <div class="container flex col-5">
+        {{ form_start(searchForm) }}
+            {{ form_widget(searchForm) }}
+        {{ form_end(searchForm) }}
+    </div>
+    <a href="{{ path('app_raw_materials_index')}}" class="btn btn-primary mt-3"> Afficher tous les matériaux</a>
+    
+    <a href="{{ path('app_raw_materials_new') }}" class="btn btn-primary float-end col-2 mt-3"><i class="fa fa-plus"></i> Ajouter</a>
 
-    {{ form_start(searchForm) }}
-        {{ form_widget(searchForm) }}
-    {{ form_end(searchForm) }}
-
-    <a href="{{ path('app_raw_materials_index')}}">Afficher tous les matériaux</a>
-
-    <table class="table">
+    <table class="table table-hover" id="table" data-toggle="table" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom du matériau</th>
-                <th>Categorie</th>
-                <th>Unité</th>
-                <th>Prix HT (A titre indicatif)</th>
-                <th>Date de création</th>
+                <th data-sortable="true" data-field="name_raw_material">Nom du matériau</th>
+                <th data-sortable="true" data-field="category">Catégorie</th>
+                <th data-sortable="true" data-field="unity">Unité</th>
+                <th data-sortable="true" data-field="price">Prix HT (A titre indicatif)</th>
+                <th data-sortable="true" data-field="date">Date de création</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,16 +28,15 @@
         {% for raw_material in raw_materials %}
         {% set index = loop.index %}
             <tr>
-                <td>{{ raw_material.id }}</td>
                 <td>{{ raw_material.nameRawMaterial }}</td>
                 <td>{{ raw_material.category }}</td>
                 <td>{{ raw_material.unit }}</td>
                 <td>{{ raw_material.price }}</td>
                 <td>{{ raw_material.createdAt ? raw_material.createdAt|date('d M Y H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_raw_materials_show', {'id': raw_material.id}) }}">Voir</a>
-                    <a href="{{ path('app_raw_materials_edit', {'id': raw_material.id}) }}">Modifier</a>
-                    <p class="text-decoration-underline link-primary add-to-order-btn" value="{{ loop.index }}" data-bs-toggle="modal" data-bs-target="#modal-material-{{ index }}">Ajouter à une commande</p>
+                    <a href="{{ path('app_raw_materials_show', {'id': raw_material.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                    <p class=" btn btn-primary add-to-order-btn mt-3" value="{{ loop.index }}" data-bs-toggle="modal" data-bs-target="#modal-material-{{ index }}"><i class="fa fa-plus"></i> Ajouter à une commande</p>
+                    <a href="{{ path('app_raw_materials_edit', {'id': raw_material.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                     <div class="modal fade" id="modal-material-{{ index }}">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -79,13 +79,12 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">Pas de matériaux existant</td>
+                <td colspan="4">Aucun matériaux enregistré</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_raw_materials_new') }}">Ajouter un nouveau matériau</a>
 {% endblock %}
 
 {% block javascripts %}

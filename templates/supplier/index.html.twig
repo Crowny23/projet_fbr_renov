@@ -1,49 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Supplier index{% endblock %}
+{% block title %}Fournisseur{% endblock %}
 
 {% block body %}
-    <h1>Supplier index</h1>
+    <h1>Fournisseur</h1>
 
-    <table class="table">
+    <a href="{{ path('app_supplier_new') }}" class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
+
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom du fournisseur</th>
-                <th>Email</th>
-                <th>Téléphone</th>
-                <th>Adresse</th>
+                <th data-sortable="true" data-field="name">Nom du fournisseur</th>
+                <th data-sortable="true" data-field="mail">Email</th>
+                <th data-sortable="true" data-field="tel">Téléphone</th>
+                <th data-sortable="true" data-field="address">Adresse</th>
                 {# <th>City</th>
                 <th>Cp</th>
                 <th>Adress</th> #}
-                <th>Date de création</th>
+                <th data-sortable="true" data-field="created_at">Date de création</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for supplier in suppliers %}
             <tr>
-                <td>{{ supplier.id }}</td>
                 <td>{{ supplier.nameSupplier }}</td>
                 <td>{{ supplier.email }}</td>
-                <td>{{ supplier.phone }}</td>
+                <td>0{{ supplier.phone }}</td>
                 <td>{{ supplier.address }}, {{ supplier.cp }} {{ supplier.city }}</td>
                 {# <td>{{ supplier.city }}</td>
                 <td>{{ supplier.cp }}</td>
                 <td>{{ supplier.adress }}</td> #}
                 <td>{{ supplier.createdAt ? supplier.createdAt|date('d M Y H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_supplier_show', {'id': supplier.id}) }}">Voir</a>
-                    <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}">Modifier</a>
+                    <a href="{{ path('app_supplier_show', {'id': supplier.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">Pas de fournisseur existant</td>
+                <td colspan="9">Aucun fournisseur enregistré</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_supplier_new') }}">Ajouter un fournisseur</a>
 {% endblock %}

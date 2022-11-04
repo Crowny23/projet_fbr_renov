@@ -1,20 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Orders index{% endblock %}
+{% block title %}Commandes{% endblock %}
 
 {% block body %}
-    <h1>Orders index</h1>
+    <h1>Commandes</h1>
 
-    <table class="table">
+    <a href="{{ path('app_orders_new') }}" class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
+
+    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom de la commande</th>
-                <th>Numéro de la commande</th>
-                <th>Fournisseur</th>
-                <th>Chantier</th>
-                <th>Prix total HT (A titre indicatif)</th>
-                <th>Nombre de référence article</th>
+                <th data-sortable="true" data-field="nameOrder">Nom de la commande</th>
+                <th data-sortable="true" data-field="reference">N° de la commande</th>
+                <th data-sortable="true" data-field="supplier">Fournisseur</th>
+                <th data-sortable="true" data-field="worksite">Chantier</th>
+                <th data-sortable="true" data-field="name_order">Prix total HT (A titre indicatif)</th>
+                <th data-sortable="true" data-field="NumberRef"> N° de référence article</th>
                 {# <th>Date de création</th>
                 <th>Date de dernière modification</th> #}
                 <th>Actions</th>
@@ -23,7 +24,6 @@
         <tbody>
         {% for order in orders %}
             <tr>
-                <td>{{ order.id }}</td>
                 <td>{{ order.nameOrder }}</td>
                 <td>{{ order.reference }}</td>
                 <td>{{ order.supplier }}</td>
@@ -33,9 +33,9 @@
                 {# <td>{{ order.createdAt ? order.createdAt|date('d M Y H:i:s') : '' }}</td>
                 <td>{{ order.updatedAt ? order.updatedAt|date('d M Y H:i:s') : '' }}</td> #}
                 <td>
-                    <a href="{{ path('app_orders_show', {'id': order.id}) }}">Voir</a>
-                    <a href="{{ path('app_orders_edit', {'id': order.id}) }}">Modifier</a>
-                    <a href="{{ path('app_pdf_generator_order', {'id': order.id}) }}" target="_blank">Pdf</a>
+                    <a href="{{ path('app_pdf_generator_order', {'id': order.id}) }}" target="_blank" class="btn btn-primary" target="_blank"><i class="fa fa-file-pdf"></i></a>
+                    <a href="{{ path('app_orders_show', {'id': order.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                    <a href="{{ path('app_orders_edit', {'id': order.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
             </tr>
         {% else %}
@@ -46,5 +46,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_orders_new') }}">Créer une nouvelle commande</a>
 {% endblock %}

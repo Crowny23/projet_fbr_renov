@@ -8,10 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ raw_material.id }}</td>
-            </tr>
-            <tr>
                 <th>Nom du matériau</th>
                 <td>{{ raw_material.nameRawMaterial }}</td>
             </tr>
@@ -19,12 +15,24 @@
                 <th>Date de création</th>
                 <td>{{ raw_material.createdAt ? raw_material.createdAt|date('d M Y H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <th>Nom de la catégorie</th>
+                <td>{{ raw_material.category }}</td>
+            </tr>
+            <tr>
+                <th>Unité</th>
+                <td>{{ raw_material.unit }}</td>
+            </tr>
+            <tr>
+                <th>Prix HT</th>
+                <td>{{ raw_material.price }}</td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_raw_materials_index') }}">Retour à la liste</a>
+    <a href="{{ path('app_raw_materials_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_raw_materials_edit', {'id': raw_material.id}) }}">Modifier</a>
+    <a href="{{ path('app_raw_materials_edit', {'id': raw_material.id}) }}" class="btn btn-primary mb-3">Modifier</a>
 
     {{ include('raw_materials/_delete_form.html.twig') }}
 {% endblock %}

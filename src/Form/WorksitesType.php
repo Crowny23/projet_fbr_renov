@@ -6,10 +6,12 @@ use App\Entity\Customers;
 use App\Entity\Quotation;
 use App\Entity\WorksiteCategories;
 use App\Entity\Worksites;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -28,7 +30,7 @@ class WorksitesType extends AbstractType
             ->add('client_worksite', EntityType::class, ['class' => Customers::class, 'label' => 'Client', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('cp_worksite', IntegerType::class, ['label' => 'Code Postal', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('adress_worksite', TextType::class, ['label' => 'Adresse', 'label_attr' => ['class' => 'mb-1, mt-2']])
-            ->add('start_at', DateTimeType::class, ['label' => 'Date de début', 'input' => 'datetime_immutable', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('start_at', DateType::class, ['label' => 'Date de début', 'input' => 'datetime', 'widget' => 'choice', 'format' => 'ddMMMyyyy', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('duration_worksite', IntegerType::class, ['label' => 'Durée des travaux (en jours)', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('supplement_worksite', IntegerType::class, ['label' => 'Travaux supplémentaires (en heures)', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('travel_distance_worksite', IntegerType::class, ['label' => 'Distance', 'label_attr' => ['class' => 'mb-1, mt-2']])

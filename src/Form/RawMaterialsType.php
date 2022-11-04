@@ -17,11 +17,11 @@ class RawMaterialsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name_raw_material', TextType::class, ['label' => 'Nom du matériau'])
-            ->add('category', EntityType::class, ['label' => 'Catégorie', 'class' => RawMaterialsCategories::class])
-            ->add('unit', TextType::class, ['label' => 'Unité'])
-            ->add('price', MoneyType::class, ['label' => 'Prix HT (A titre indicatif) '])
-            ->add('submit', SubmitType::class, ['label' => 'Valider'])
+            ->add('name_raw_material', TextType::class, ['label' => 'Nom du matériau', 'label_attr' => ['class' => "mb-1, mt-2"]])
+            ->add('category', EntityType::class, ['label' => 'Catégorie', 'class' => RawMaterialsCategories::class,'label_attr' => ['class' => "mb-1, mt-2"]])
+            ->add('unit', TextType::class, ['label' => 'Unité','label_attr' => ['class' => "mb-1, mt-2"]])
+            ->add('price', MoneyType::class, ['label' => 'Prix HT (A titre indicatif) ', 'attr' => ["class" => "mb-3"], 'label_attr' => ['class' => "mb-1, mt-2"]])
+            ->add('submit', SubmitType::class, ['label' => 'Enregisrer', 'attr' => ['class' => 'btn btn-success']])
         ;
     }
 

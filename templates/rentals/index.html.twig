@@ -16,7 +16,7 @@
         </thead>
         <tbody>
         {% for rental in rentals %}
-            <tr style="background-color: white;">
+            <tr>
                 <td>{{ rental.getMaterialsRental().nameMaterial }}</td>
                 <td>{{ rental.quantityRental }}</td>
                 <td>{{ rental.unitPrice }}</td>
@@ -27,7 +27,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">Aucun enregistrement trouvé</td>
+                <td colspan="6">Aucune location enregistré</td>
             </tr>
         {% endfor %}
         </tbody>
