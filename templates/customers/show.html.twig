@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Customers{% endblock %}
+{% block title %}Clients | Détails{% endblock %}
 
 {% block body %}
-    <h1>Customers</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Détails du client</h1>
+</div>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Prenom</th>
+                <th>Prénom</th>
                 <td>{{ customer.firstname }}</td>
             </tr>
             <tr>
@@ -21,7 +23,7 @@
             </tr>
             <tr>
                 <th>Code Postal</th>
-                <td>{{ customer.postalcode }}</td>
+                <td>{% if customer.postalcode|length is same as 4 %}0{{ customer.postalcode }}{% else %}{{ customer.postalcode }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Adresse</th>
@@ -33,30 +35,31 @@
             </tr>
             <tr>
                 <th>Téléphone</th>
-                <td>0{{ customer.phone }}</td>
+                <td>{% if customer.phone|length is same as 9 %}0{{ customer.phone }}{% else %}{{ customer.phone }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Raison Sociale</th>
-                <td>{{ customer.socialReason }}</td>
+                <td>{% if (customer.socialReason is same as null) or (customer.socialReason is same as '') %}Pas de raison sociale{% else %}{{ customer.socialReason }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Note Client</th>
-                <td>{{ customer.customerNote }}</td>
+                <td>{% if (customer.customerNote is same as null) or (customer.customerNote is same as '') %}Pas de note client{% else %}{{ customer.customerNote }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Date de création</th>
-                <td>{{ customer.createdAt ? customer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ customer.createdAt ? customer.createdAt|date('d M Y H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Date de modification</th>
-                <td>{{ customer.updateAt ? customer.updateAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ customer.updateAt ? customer.updateAt|date('d M Y H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
+    <div class="d-flex">
+        <a href="{{ path('app_customers_index') }}" class="btn btn-primary mb-2 me-2"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_customers_index') }}" class="btn btn-primary mb-2"><i class="fa-solid fa-reply"></i> Retour</a>
+        <a href="{{ path('app_customers_edit', {'id': customer.id}) }}" class="btn btn-primary mb-2 me-2"><i class="fa-solid fa-pen-to-square fa-fw"></i> Modifier</a>
 
-    <a href="{{ path('app_customers_edit', {'id': customer.id}) }}" class="btn btn-primary mb-2">Modifier</a>
-
-    {{ include('customers/_delete_form.html.twig') }}
+        {{ include('customers/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

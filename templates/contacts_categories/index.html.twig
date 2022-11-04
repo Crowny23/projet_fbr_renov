@@ -16,7 +16,7 @@
         </thead>
         <tbody>
         {% for contacts_category in contacts_categories %}
-            <tr style="background-color: white;">
+            <tr>
                 <td>{{ contacts_category.name }}</td>
                 <td>
                     <a href="{{ path('app_contacts_categories_show', {'id': contacts_category.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>

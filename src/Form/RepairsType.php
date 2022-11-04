@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Customers;
 use App\Entity\RepairsCategories;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class RepairsType extends AbstractType
 {
@@ -22,21 +23,22 @@ class RepairsType extends AbstractType
             ->add('city_repair', TextType::class, ['label' => 'Ville', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('cp_repair', IntegerType::class, ['label' => 'Code postal', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('adress_repair', TextType::class, ['label' => 'Adresse', 'label_attr' => ['class' => 'mb-1, mt-2']])
-            ->add('price_repair', IntegerType::class, ['label' => 'Prix', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('price_repair', IntegerType::class, ['label' => 'Prix(€)', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('reference_repair', IntegerType::class, ['label' => 'Référence du dépannage', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('schedule_repair', ChoiceType::class, [
                 'choices' => [
-                    'jour' => 'jour',
-                    'nuit' => 'nuit',
-                    'weekend' => 'weekend'
+                    'Jour' => 'Jour',
+                    'Nuit' => 'Nuit',
+                    'Weekend' => 'Weekend'
                 ],
                 'label' => 'horaire',
                 'label_attr' => ['class' => 'mb-1, mt-2']
             ])
-            ->add('travel_distance_repair', IntegerType::class, ['label' => 'Distance', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('travel_distance_repair', IntegerType::class, ['label' => 'Distance(km)', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('note_admin_repair', TextType::class, ['label' => 'Note', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('client', EntityType::class, ['class' => Customers::class, 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('category', EntityType::class, ['class' => RepairsCategories::class, 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('submit', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn btn-success mt-3']])
         ;
     }
 

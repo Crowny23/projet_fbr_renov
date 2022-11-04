@@ -4,27 +4,25 @@
 
 {% block body %}
     <h1>Les images dépannages</h1>
-    <a href="{{ path('app_repairs_images_new') }}" class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
+    <a href="{{ path('app_repairs_images_new') }}" class="btn btn-primary float-sm-end mt-2 col-6 col-sm-4 col-md-3 col-lg-2"><i class="fa fa-plus"></i> Ajouter</a>
     <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
         <thead>
             <tr>
-                <th data-sortable="true" data-field="repair_name">Nom du dépannage</th>
-                <th data-sortable="true" data-field="image_name_repair">Nom d'image</th>
-                <th data-sortable="true" data-field="weight">Taille</th>
                 <th>Image</th>
+                <th data-sortable="true" data-field="repair_name">Nom du dépannage</th>
+                <th data-sortable="true" data-field="image_name_repair" class="d-none d-md-table-cell">Nom d'image</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for repairs_image in repairs_images %}
-            <tr style="background-color: white;">
+            <tr>
+                <td><img style="max-width: 200px; min-width: 50px; width: 100%;" src="{{ vich_uploader_asset(repairs_image) }}"></td>
                 <td>{{ repairs_image.repair }}</td>
                 <td>{{ repairs_image.imageRepairsImages }}</td>
-                <td>{{ repairs_image.imageSize }} ko</td>
-                <td><img src="{{ vich_uploader_asset(repairs_image) }}" alt="" width="200"></td>
                 <td>
-                    <a href="{{ path('app_repairs_images_show', {'id': repairs_image.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('app_repairs_images_edit', {'id': repairs_image.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a href="{{ path('app_repairs_images_show', {'id': repairs_image.id}) }}" class="btn-sm mb-2 btn btn-primary"><i class="fa-fw fa fa-eye"></i></a> 
+                    <a href="{{ path('app_repairs_images_edit', {'id': repairs_image.id}) }}" class="btn-sm mb-2 btn btn-success"><i class="fa-fw fa-solid fa-pen-to-square"></i></a> 
                 </td>
             </tr>
         {% else %}

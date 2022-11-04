@@ -3,43 +3,43 @@
 {% block title %}Les dépannages{% endblock %}
 
 {% block body %}
-    <h1>Les dépannages</h1>
-    <a href="{{ path('app_repairs_new') }}" class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
-    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
-        <thead>
-            <tr>
-                <th data-sortable="true" data-field="repairName">Nom dépannage</th>
-                <th data-sortable="true" data-field="address">Adresse Complète</th>
-                <th data-sortable="true" data-field="price">Prix</th>
-                <th data-sortable="true" data-field="reference">Reference</th>
-                <th data-sortable="true" data-field="schedule">Horaire</th>
-                <th data-sortable="true" data-field="customer">Client</th>
-                <th data-sortable="true" data-field="category">Catégorie</th>
-                <th>Note</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for repair in repairs %}
-            <tr style="background-color: white;">
-                <td>{{ repair.nameRepair }}</td>
-                <td>{{ repair.adressRepair }} {{ repair.cpRepair }} {{ repair.cityRepair }}</td>
-                <td>{{ repair.priceRepair }}</td>
-                <td>{{ repair.referenceRepair }}</td>
-                <td>{{ repair.scheduleRepair }}</td>
-                <td>{{ repair.client }}</td>
-                <td>{{ repair.category }}</td>
-                <td>{{ repair.noteAdminRepair }}</td>
-                <td>
-                    <a href="{{ path('app_repairs_show', {'id': repair.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="13">Aucun dépannage enregistré</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Liste des dépannages</h1>
+</div>
+
+<a href="{{ path('app_repairs_new') }}" class="btn btn-primary float-sm-end mt-2 col-6 col-sm-4 col-md-3 col-lg-2"><i class="fa fa-plus"></i> Ajouter</a>
+
+<table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
+    <thead>
+        <tr>
+            <th data-sortable="true" data-field="repairName">Dépannage</th>
+            <th data-sortable="true" data-field="reference" class="d-none d-md-table-cell">Référence</th>
+            <th data-sortable="true" data-field="address" class="d-none d-sm-table-cell">Adresse</th>
+            <th data-sortable="true" data-field="price" class="d-none d-md-table-cell">Prix(€)</th>
+            <th data-sortable="true" data-field="customer" class="d-none d-lg-table-cell">Client</th>
+            <th data-sortable="true" data-field="category" class="d-none d-xl-table-cell">Catégorie</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for repair in repairs %}
+        <tr>
+            <td>{{ repair.nameRepair }}</td>
+            <td>{{ repair.referenceRepair }}</td>
+            <td>{{ repair.adressRepair }}, {% if repair.cpRepair|length is same as 4 %}0{{ repair.cpRepair }}{% else %}{{repair.cpRepair}}{% endif %} {{ repair.cityRepair }}</td>
+            <td>{{ repair.priceRepair }}</td>
+            <td>{{ repair.client }}</td>
+            <td>{{ repair.category }}</td>
+            <td>
+                <a href="{{ path('app_repairs_show', {'id': repair.id}) }}" class="btn btn-primary btn-sm mb-2"><i class="fa-fw fa fa-eye"></i></a>
+                <a href="{{ path('app_repairs_edit', {'id': repair.id}) }}" class="btn btn-success btn-sm mb-2"><i class="fa-fw fa-solid fa-pen-to-square"></i></a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="13">Aucun dépannage trouvé</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

@@ -1,102 +1,104 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Devis{% endblock %}
+{% block title %}Chantiers | Détails du devis{% endblock %}
 
 {% block body %}
-    <h1>Devis n°{{ quotation.referenceQuotation }}</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Devis n°{{ quotation.referenceQuotation }}</h1>
+</div>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Référence du devis</th>
+            <td>{{ quotation.referenceQuotation }}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td>{{ quotation.priceQuotation }}€</td>
+        </tr>
+        <tr>
+            <th>Statut</th>
+            <td>{{ quotation.statusQuotation }}</td>
+        </tr>
+        <tr>
+            <th>Montant de l'accompte</th>
+            <td>{{ quotation.depositQuotation }}€</td>
+        </tr>
+        <tr>
+            <th>Montant du paiement intermédiaire</th>
+            <td>{{ quotation.intermediatePaymentQuotation }}€</td>
+        </tr>
+        <tr>
+            <th>Montant du paiement final</th>
+            <td>{{ quotation.finalPaymentQuotation }}€</td>
+        </tr>
+        <tr>
+            <th>Chantier</th>
+            <td>{{ quotation.worksite }}</td>
+        </tr>
+        <tr>
+            <th>2<sup>ème</sup> acompte</th>
+            <td>{{ quotation.secondDeposit ? quotation.secondDeposit : include('quotation/_second_depot_form.html.twig', {'id': quotation.id}) }} {% if quotation.secondDeposit != null %} {{include('quotation/_second_depot_delete_form.html.twig', {'id': quotation.id})}} {% endif %}</td>
+        </tr>
+        <tr>
+            <th>Remise</th>
+            <td>{{ quotation.discount ? quotation.discount : include('quotation/_discount_form.html.twig', {'id': quotation.id}) }} {% if quotation.discount != null %} {{ include('quotation/_discount_delete_form.html.twig', {'id': quotation.id}) }} {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>Date de création</th>
+            <td>{{ quotation.createdAt ? quotation.createdAt|date('d M Y H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Date de modification</th>
+            <td>{{ quotation.updatedAt ? quotation.updatedAt|date('d M Y H:i:s') : '' }}</td>
+        </tr>
+    </tbody>
+</table>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Réference du devis</th>
-                <td>{{ quotation.referenceQuotation }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ quotation.priceQuotation }}</td>
-            </tr>
-            <tr>
-                <th>Statut</th>
-                <td>{{ quotation.statusQuotation }}</td>
-            </tr>
-            <tr>
-                <th>Montant de l'accompte</th>
-                <td>{{ quotation.depositQuotation }}</td>
-            </tr>
-            <tr>
-                <th>Montant du paiement intermédiaire</th>
-                <td>{{ quotation.intermediatePaymentQuotation }}</td>
-            </tr>
-            <tr>
-                <th>Montant du paiement final</th>
-                <td>{{ quotation.finalPaymentQuotation }}</td>
-            </tr>
-            <tr>
-                <th>Chantier</th>
-                <td>{{ quotation.worksite }}</td>
-            </tr>
-            <tr>
-                <th>Listes des désignations</th>
-                <td>
-                    <table class="col-12">
-                        <thead>
-                            <tr>
-                                <th>Désignations</th>
-                                <th>Unité</th>
-                                <th>Quantité</th>
-                                <th>Prix unitaire HT</th>
-                                <th>Prix HT</th>
-                                <th>TVA</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for designation in designations %}
-                            <tr>
-                                <td>{{ designation.designation }}</td>
-                                <td>{{ designation.unity }}</td>
-                                <td>{{ designation.quantity }}</td>
-                                <td>{{ designation.priceUnitaryHt|number_format(2) }}</td>
-                                <td>{{ designation.priceHt|number_format(2) }}</td>
-                                <td>{{ designation.tva }}%</td>
-                                <td>
-                                    {{ include('designation/_delete_form.html.twig') }}
-                                    <a href="{{ path('app_designation_edit', {'id': designation.id}) }}"class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                                </td>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="7">Aucun enregistrement trové</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    <a href="{{ path('app_designation_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Créer</a>
-                </td>
-            </tr>
-            <tr>
-                <th>2<sup>ème</sup> acompte</th>
-                <td>{{ quotation.secondDeposit ? quotation.secondDeposit : include('quotation/_second_depot_form.html.twig', {'id': quotation.id}) }} {% if quotation.secondDeposit != null %} {{include('quotation/_second_depot_delete_form.html.twig', {'id': quotation.id})}} {% endif %}</td>
-            </tr>
-            <tr>
-                <th>Remise</th>
-                <td>{{ quotation.discount ? quotation.discount : include('quotation/_discount_form.html.twig', {'id': quotation.id}) }} {% if quotation.discount != null %} {{ include('quotation/_discount_delete_form.html.twig', {'id': quotation.id}) }} {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <th>Date de création</th>
-                <td>{{ quotation.createdAt ? quotation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Date de modification</th>
-                <td>{{ quotation.updatedAt ? quotation.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="d-flex">
+    <a href="{{ path('app_quotation_index') }}" class="btn btn-primary mb-3 me-2"><i class="fa fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_quotation_index') }}" class="btn btn-primary mb-3"><i class="fa fa-reply"></i> Retour</a>
-
-    <a href="{{ path('app_quotation_edit', {'id': quotation.id}) }}"  class="btn btn-primary mb-3">Modifier</a>
+    <a href="{{ path('app_quotation_edit', {'id': quotation.id}) }}"  class="btn btn-primary mb-3 me-2">Modifier</a>
 
     {{ include('quotation/_delete_form.html.twig') }}
+</div>
+
+<div class="d-flex justify-content-center py-3">
+    <h2 class="col-12 col-sm-9 text-center fs-2">Liste des désignations</h2>
+</div>
+<table class="col-12 table table-hover table-bordered" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
+    <thead>
+        <tr>
+            <th data-sortable="true" data-field="designation">Désignation</th>
+            <th data-sortable="true" data-field="unity" class="d-none d-xl-table-cell">Unité</th>
+            <th data-sortable="true" data-field="quantity" class="d-none d-xl-table-cell">Quantité</th>
+            <th data-sortable="true" data-field="priceUnitaryHt" class="d-none d-lg-table-cell">Prix unitaire HT(€)</th>
+            <th data-sortable="true" data-field="priceHt" class="d-none d-sm-table-cell">Prix total HT(€)</th>
+            <th data-sortable="true" data-field="tva" class="d-none d-md-table-cell">TVA(%)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for designation in designations %}
+        <tr>
+            <td>{{ designation.designation }}</td>
+            <td>{{ designation.unity }}</td>
+            <td>{{ designation.quantity }}</td>
+            <td>{{ designation.priceUnitaryHt|number_format(2) }}</td>
+            <td>{{ designation.priceHt|number_format(2) }}</td>
+            <td>{{ designation.tva }}</td>
+            <td class="d-flex justify-content-around">
+                {{ include('designation/_delete_form.html.twig') }}
+                <a href="{{ path('app_designation_edit', {'id': designation.id}) }}"class="btn btn-success btn-sm ms-2"><i class="fa-fw fa-solid fa-pen-to-square"></i></a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7">Aucun enregistrement trové</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<a href="{{ path('app_designation_new') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Créer une nouvelle désignation</a>
 {% endblock %}
