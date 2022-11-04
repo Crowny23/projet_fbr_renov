@@ -15,6 +15,18 @@
                 <th>Date de création</th>
                 <td>{{ raw_material.createdAt ? raw_material.createdAt|date('d M Y H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <th>Nom de la catégorie</th>
+                <td>{{ raw_material.category }}</td>
+            </tr>
+            <tr>
+                <th>Unité</th>
+                <td>{{ raw_material.unit }}</td>
+            </tr>
+            <tr>
+                <th>Prix HT</th>
+                <td>{{ raw_material.price }}</td>
+            </tr>
         </tbody>
     </table>
 
