@@ -1,12 +1,12 @@
-<nav id="sidebar" class="min-vh-100 position-md-static col-1 col-md-3 col-xxl-2 px-md-2 px-0 bg-dark" style="z-index: 999;">
+<nav id="sidebar" style="height: 100vh;" class="position-sticky top-0 col-1 col-md-3 col-xxl-2 px-md-2 px-0 bg-dark" style="z-index: 999;">
 
-  <div id="btn-wrapper-open" class="col-12 d-md-none min-vh-100 d-flex justify-content-center align-items-start">
+  <div id="btn-wrapper-open" class="col-12 d-md-none d-flex justify-content-center align-items-start">
     <button id="btn-open" class="col-12 p-0 btn text-white"><i class="fa-solid fa-angles-right py-3"></i></button>
   </div>
   <div id="btn-wrapper-close" class="col-12 d-none d-flex justify-content-start align-items-start">
     <button id="btn-close" class="col-1 p-0 btn text-white d-md-none"><i class="fa-solid fa-angles-left py-3"></i></button>
   </div>
-  <div id="menu-wrapper" class="d-none d-md-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white mh-100">
+  <div id="menu-wrapper" class="d-none d-md-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
     <a href="/" class="d-none d-sm-flex align-items-center pb-3 me-md-auto text-white text-decoration-none">
       {# <span class="fs-5 d-none d-sm-inline">FBR renovation</span> #}
       <img src="{{asset('img/logo-bg.png')}}" alt="Image de logo" class="container mx-auto col-6 col-md-12">
@@ -127,7 +127,10 @@
             </a>
           </li>
           <li class="w-100 ms-3">
-            <a href="{{path('app_renter_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
+            <a href="{{path('app_rentals_new')}}" class="nav-link px-0">
+              <i class="fa fa-add"></i>
+              <span class="ms-1 d-sm-inline">Ajouter</span>
+            </a>
           </li>
         </ul>
       </li>

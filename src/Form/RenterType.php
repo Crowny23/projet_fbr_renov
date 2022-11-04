@@ -21,10 +21,10 @@ class RenterType extends AbstractType
             ->add('city_renter', TextType::class, ['label' => 'Ville', 'label_attr' => ['class' => 'mb-2, mt-3']])
             ->add('cp_renter', NumberType::class, ['label' => 'Code Postal', 'label_attr' => ['class' => 'mb-2, mt-2']])
             ->add('adress_renter', TextType::class, ['label' => 'Adresse', 'label_attr' => ['class' => 'mb-2, mt-2']])
-            ->add('website_renter', TextType::class, ['label' => 'Site Internet', 'label_attr' => ['class' => 'mb-2, mt-2']])
+            ->add('website_renter', TextType::class, ['label' => 'Site Internet', 'required' => false, 'label_attr' => ['class' => 'mb-2, mt-2']])
             ->add('email_renter', EmailType::class, ['label' => 'E-mail', 'label_attr' => ['class' => 'mb-2, mt-2']])
             ->add('phone_renter', TelType::class, ['label' => 'Téléphone', 'label_attr' => ['class' => 'mb-2, mt-2']])
-            ->add('note_admin_renter', TextType::class, ['label' => 'Note', 'label_attr' => ['class' => 'mb-2, mt-2']])
+            ->add('note_admin_renter', TextType::class, ['label' => 'Note', 'required' =>false, 'label_attr' => ['class' => 'mb-2, mt-2']])
         ;
     }
 

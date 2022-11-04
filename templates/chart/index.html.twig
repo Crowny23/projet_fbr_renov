@@ -3,49 +3,51 @@
 {% block title %}Statistiques{% endblock %}
 
 {% block body %}
-<div>
-    <h1 style="font-size:2rem;" class="mb-5 container col-3">Statistiques <i class="fa fa-chart-line"></i></h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Statistiques</h1>
 </div>
-<div class="example-wrapper mt-5">
-    <h2> Chantiers</h2>
-    <div class="container col-8">
-        {{ render_chart(chart) }}
-
-    
+<div class="d-flex justify-content-center">
+    <hr class="col-10">
+</div>
+<div class="d-flex justify-content-center pt-3">
+    <div class="col-11">
+        <h2 class="fs-3">Chantiers</h2>
+        <div class="container col-10">
+            {{ render_chart(chart) }}
+        </div>
+        <p class="text-center fs-5">Année {{'now'|date('Y')}}</p>
+        <div>
+            <p class="fs-5">Total chantiers sur l'année {{'now'|date('Y')}} : {{total}} €</p>
+            <p class="fs-5">Total chantiers sur tous les années : {{allYearTot}} €</p>
+            <p class="fs-5">Nb de chantiers en total : {{worksitesCount}} chantiers</p>
+        </div>
     </div>
-    <p class="text-center fs-4">{{'now'|date('Y')}}</p>
 </div>
-
-<div>
-    <p class="fs-3">Total chantiers sur l'année {{'now'|date('Y')}} : {{total}} €</p>
+<div class="d-flex justify-content-center">
+    <hr class="col-10">
 </div>
-
-<div>
-    <p class="fs-3">Total chantiers sur tous les années : {{allYearTot}} €</p>
-    <p class="fs-4">Nb de chantiers en total : {{worksitesCount}} chantiers</p>
-</div>
-
-<div class="example-wrapper mt-5">
-    <h2>Locations</h2>
-    <div class="container col-8">
-        {{ render_chart(chartRentals) }}
-
-    
+<div class="d-flex justify-content-center pt-3">
+    <div class="col-11">
+        <h2 class="fs-3">Locations</h2>
+        <div class="container col-10">
+            {{ render_chart(chartRentals) }}
+        </div>
+        <p class="text-center fs-5">Année {{'now'|date('Y')}}</p>
+        <div>
+            <p class="fs-5">Total locations sur l'année {{'now'|date('Y')}} :  {{totalR}} €</p>
+            <p class="fs-5">Nb de locations en total : {{rentalsCount}} locations</p>
+        </div>
     </div>
-    <p class="text-center fs-4">{{'now'|date('Y')}}</p>
 </div>
-
-<div>
-    <p class="fs-3">Total locations sur l'année {{'now'|date('Y')}} :  {{totalR}} €</p>
-    <p class="fs-4">Nb de locations en total : {{rentalsCount}} locations</p>
-
+<div class="d-flex justify-content-center">
+    <hr class="col-10">
 </div>
-
-<div class="mt-5">
-    <h2>Clients</h2>
-    <p class="fs-3">Total des Clients en tout : {{CustomersTotal}} clients</p>
+<div class="d-flex justify-content-center pt-3">
+    <div class="col-11">
+        <h2 class="fs-3">Clients</h2>
+        <p class="fs-5">Total des Clients en tout : {{CustomersTotal}} clients</p>
+    </div>
 </div>
-
 
 {% endblock %}
 

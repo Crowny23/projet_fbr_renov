@@ -1,46 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Fournisseur{% endblock %}
+{% block title %}Commandes | Liste des fournisseur{% endblock %}
 
 {% block body %}
-    <h1>Fournisseur</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Détails du fournisseur</h1>
+</div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom du fournisseur</th>
-                <td>{{ supplier.nameSupplier }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ supplier.email }}</td>
-            </tr>
-            <tr>
-                <th>Téléphone</th>
-                <td>0{{ supplier.phone }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ supplier.city }}</td>
-            </tr>
-            <tr>
-                <th>Code Postal</th>
-                <td>{{ supplier.cp }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ supplier.address }}</td>
-            </tr>
-            <tr>
-                <th>Date de création</th>
-                <td>{{ supplier.createdAt ? supplier.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Nom du fournisseur</th>
+            <td>{{ supplier.nameSupplier }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ supplier.email }}</td>
+        </tr>
+        <tr>
+            <th>Téléphone</th>
+            <td>0{{ supplier.phone }}</td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td>{{ supplier.city }}</td>
+        </tr>
+        <tr>
+            <th>Code Postal</th>
+            <td>{% if (supplier.cp|length is same as 4) %}0{{ supplier.cp }}{% else %}{{supplier.cp }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ supplier.address }}</td>
+        </tr>
+        <tr>
+            <th>Date de création</th>
+            <td>{{ supplier.createdAt ? supplier.createdAt|date('d M Y H:i:s') : '' }}</td>
+        </tr>
+    </tbody>
+</table>
 
-    <a href="{{ path('app_supplier_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
+<div class="d-flex">
+    <a href="{{ path('app_supplier_index') }}" class="btn btn-primary mb-3 me-2"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}" class="btn btn-primary mb-3">Modifier</a>
+    <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}" class="btn btn-primary mb-3 me-2">Modifier</a>
 
     {{ include('supplier/_delete_form.html.twig') }}
+</div>
 {% endblock %}

@@ -35,7 +35,7 @@ class RepairsType extends AbstractType
                 'label_attr' => ['class' => 'mb-1, mt-2']
             ])
             ->add('travel_distance_repair', IntegerType::class, ['label' => 'Distance(km)', 'label_attr' => ['class' => 'mb-1, mt-2']])
-            ->add('note_admin_repair', TextType::class, ['label' => 'Note', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('note_admin_repair', TextType::class, ['label' => 'Note', 'required' => false, 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('client', EntityType::class, ['class' => Customers::class, 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('category', EntityType::class, ['class' => RepairsCategories::class, 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('submit', SubmitType::class, ['label' => 'Enregistrer', 'attr' => ['class' => 'btn btn-success mt-3']])

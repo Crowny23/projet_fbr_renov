@@ -1,46 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contacts{% endblock %}
+{% block title %}Contacts | Liste{% endblock %}
 
 {% block body %}
-    <h1>Contacts</h1>
-    <a href="{{ path('app_contacts_new') }}"  class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Liste des contacts</h1>
+</div>
 
-    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
-        <thead>
-            <tr>
-                <th data-sortable="true" data-field="title">Intitulé</th>
-                <th data-sortable="true" data-field="lastname">Nom</th>
-                <th data-sortable="true" data-field="firstname">Prénom</th>
-                <th data-sortable="true" data-field="city">Ville</th>
-                <th data-sortable="true" data-field="tel">Téléphone</th>
-                <th data-sortable="true" data-field="mail">E-mail</th>
-                <th data-sortable="true" data-field="contactsCategories">Catégories</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for contact in contacts %}
-            <tr>
-                <td>{{ contact.title }}</td>
-                <td>{{ contact.lastname }}</td>
-                <td>{{ contact.firstname }}</td>
-                <td>{{ contact.city }}</td>
-                <td>0{{ contact.tel }}</td>
-                <td>{{ contact.mail }}</td>
-                <td>{{ contact.contactsCategories }}</td>
+<a href="{{ path('app_contacts_new') }}"  class="btn btn-primary float-sm-end mt-2 col-6 col-sm-4 col-md-3 col-lg-2"><i class="fa fa-plus"></i> Ajouter</a>
 
-                <td>
-                    <a href="{{ path('app_contacts_show', {'id': contact.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('app_contacts_edit', {'id': contact.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">Aucun enregistrement enregistré</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+<table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
+    <thead>
+        <tr>
+            <th data-sortable="true" data-field="title">Intitulé</th>
+            <th data-sortable="true" data-field="lastname" class="d-none d-lg-table-cell">Nom Prénom</th>
+            <th data-sortable="true" data-field="city" class="d-none d-xl-table-cell">Ville</th>
+            <th data-sortable="true" data-field="tel" class="d-none d-sm-table-cell">Téléphone</th>
+            <th data-sortable="true" data-field="mail" class="d-none d-sm-table-cell">E-mail</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.title }}</td>
+            <td>{{ contact.lastname }} {{ contact.firstname }}</td>
+            <td>{{ contact.city }}</td>
+            <td>0{{ contact.tel }}</td>
+            <td>{{ contact.mail }}</td>
+            <td>
+                <a href="{{ path('app_contacts_show', {'id': contact.id}) }}" class="btn btn-primary btn-sm"><i class="fa-fw fa fa-eye"></i></a>
+                <a href="{{ path('app_contacts_edit', {'id': contact.id}) }}" class="btn btn-success btn-sm"><i class="fa-fw fa-solid fa-pen-to-square"></i></a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7">Aucun enregistrement enregistré</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

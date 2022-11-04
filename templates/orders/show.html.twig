@@ -1,106 +1,111 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Orders{% endblock %}
+{% block title %}Commandes | Détails{% endblock %}
 
 {% block body %}
-    <h1>Commande {{ order.nameOrder }}</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Commande : {{ order.reference }}</h1>
+</div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom de la commande</th>
-                <td>{{ order.nameOrder }}</td>
-            </tr>
-            <tr>
-                <th>Numéro de commande</th>
-                <td>{{ order.reference }}</td>
-            </tr>
-            <tr>
-                <th>Fournisseur</th>
-                <td>{{ order.supplier }}</td>
-            </tr>
-            <tr>
-                <th>Chantier</th>
-                <td>{{ order.worksite }}</td>
-            </tr>
-            <tr>
-                <th>Prix total HT</th>
-                <td id="td-price">{{ order.totalPrice }} €</td>
-            </tr>
-            <tr>
-                <th>Nombre de référence article</th>
-                <td>{% if (order.numberRawMaterialOrdered is same as null) or (order.numberRawMaterialOrdered is same as 0) %}La commande est vide{% else %}{{ order.numberRawMaterialOrdered }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Date de création</th>
-                <td>{{ order.createdAt ? order.createdAt|date('d M Y H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Date de dernière modification</th>
-                <td>{{ order.updatedAt ? order.updatedAt|date('d M Y H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <a href="{{ path('app_orders_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
-    <a href="{{ path('app_orders_edit', {'id': order.id}) }}" class="btn btn-primary mb-3">Modifier</a>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Nom de la commande</th>
+            <td>{{ order.nameOrder }}</td>
+        </tr>
+        <tr>
+            <th>Numéro de commande</th>
+            <td>{{ order.reference }}</td>
+        </tr>
+        <tr>
+            <th>Fournisseur</th>
+            <td>{{ order.supplier }}</td>
+        </tr>
+        <tr>
+            <th>Chantier</th>
+            <td>{{ order.worksite }}</td>
+        </tr>
+        <tr>
+            <th>Prix total HT</th>
+            <td id="td-price">{{ order.totalPrice }} €</td>
+        </tr>
+        <tr>
+            <th>Nombre de référence article</th>
+            <td>{% if (order.numberRawMaterialOrdered is same as null) or (order.numberRawMaterialOrdered is same as 0) %}Commande vide{% else %}{{ order.numberRawMaterialOrdered }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Date de création</th>
+            <td>{{ order.createdAt ? order.createdAt|date('d M Y H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Date de dernière modification</th>
+            <td>{{ order.updatedAt ? order.updatedAt|date('d M Y H:i:s') : '' }}</td>
+        </tr>
+    </tbody>
+</table>
+<div class="d-flex">
+    <a href="{{ path('app_orders_index') }}" class="btn btn-primary mb-3 me-2"><i class="fa-solid fa-reply"></i> Retour</a>
+    <a href="{{ path('app_orders_edit', {'id': order.id}) }}" class="btn btn-primary mb-3 me-2">Modifier</a>
     {{ include('orders/_delete_form.html.twig') }}
+</div>
 
-    <h2 class="mt-5">Details de la commande</h2>
-    <form method="POST" action="{{ path('app_raw_materials_ordered_delete_multiple', {'orderId': order.id}) }}" id="delete-multiple" onsubmit="return confirm('Êtes vous sûr de vouloir supprimer ces matériaux de votre commande ?');">
-        <input name="submit" type="submit" value="Supprimer la sélection" class="btn btn-danger">
-    </form>
-    <table class="table">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Nom du matériau</th>
-                <th>Quantité</th>
-                <th>Prix total pour ce matériau</th>
-                <th>Date d'ajout dans la commande</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for raw_material_ordered in raw_materials_ordered %}
-            <tr>
-                <td>
-                    <input form="delete-multiple" type="checkbox" name="checkbox-delete[]" id="checkbox-{{ loop.index }}" value="{{ raw_material_ordered.id }}">
-                    <input form="delete-multiple" type="hidden" name="_token[]" value="{{ csrf_token('delete' ~ raw_material_ordered.id) }}">
-                </td>
-                <td>{{ raw_material_ordered.raw_material }}</td>
-                <td class="d-flex">
-                    <span>
-                        <a class="col-1 btn link-primary btn-plus" href="{{ path('app_raw_materials_ordered_plus', {'id': raw_material_ordered.id}) }}"><i class="fa-solid fa-square-plus fa-lg"></i></a>
-                    </span>
-                    <span>
-                        <a class="col-1 btn link-danger btn-minus" href="{{ path('app_raw_materials_ordered_minus', {'id': raw_material_ordered.id}) }}"><i class="fa-solid fa-square-minus fa-lg"></i></a>
-                    </span>
-                    <span class="col-10">
-                        <form class="d-flex justify-content-center" action="{{ path('app_raw_materials_ordered_quick_edit', {'id': raw_material_ordered.id, 'inputQtty': raw_material_ordered.quantity }) }}" method="POST" onsubmit="return confirm('Êtes vous sûr de vouloir changer la quantité de {{ raw_material_ordered.raw_material }} ?');">
-                            <input id="input-qtty-{{ loop.index }}" required name="qtty" type="number" value="{{ raw_material_ordered.quantity }}">
-                            <button type="submit" class="link-success btn border-0 btn-validate"><i class="fa-solid fa-square-check fa-lg"></i></button>
-                        </form>
-                    </span>
-                </td>
-                <td id="td-price-mat-{{ loop.index }}">{{ raw_material_ordered.totalPriceRawMaterial }} €</td>
-                <td>{{ raw_material_ordered.createdAt ? raw_material_ordered.createdAt|date('d M Y H:i:s') : '' }}</td>
-                <td class="d-flex">
-                    {# <a href="{{ path('app_raw_materials_ordered_edit', {'id': raw_material_ordered.id}) }}">Modifier la quantité</a> #}
-                    <form method="post" action="{{ path('app_raw_materials_ordered_delete', {'id': raw_material_ordered.id}) }}" onsubmit="return confirm('Êtes vous sûr de vouloir supprimer ce matériau de votre commande ?');">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ raw_material_ordered.id) }}">
-                        <button class="btn btn-danger">Supprimer</button>
+<div class="d-flex justify-content-center">
+    <h2 class="col-12 col-sm-9 text-center fs-2">Détails de la commande</h2>
+</div>
+<form method="POST" action="{{ path('app_raw_materials_ordered_delete_multiple', {'orderId': order.id}) }}" id="delete-multiple" onsubmit="return confirm('Êtes vous sûr de vouloir supprimer ces matériaux de votre commande ?');">
+    <input name="submit" type="submit" value="Supprimer la sélection" class="btn btn-danger">
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Nom du matériau</th>
+            <th class="d-none d-sm-table-cell col-6 col-md-4 col-lg-3">Quantité</th>
+            <th class="d-none d-md-table-cell">Total HT(€)</th>
+            <th class="d-none d-xl-table-cell">Date d'ajout</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for raw_material_ordered in raw_materials_ordered %}
+        <tr>
+            <td>
+                <input form="delete-multiple" type="checkbox" name="checkbox-delete[]" id="checkbox-{{ loop.index }}" value="{{ raw_material_ordered.id }}">
+                <input form="delete-multiple" type="hidden" name="_token[]" value="{{ csrf_token('delete' ~ raw_material_ordered.id) }}">
+            </td>
+            <td>{{ raw_material_ordered.raw_material }}</td>
+            <td class="d-sm-flex d-none">
+                <span class="col-2">
+                    <a class="col-12 btn link-primary btn-plus" href="{{ path('app_raw_materials_ordered_plus', {'id': raw_material_ordered.id}) }}"><i class="fa-solid fa-square-plus fa-lg"></i></a>
+                </span>
+                <span class="col-2">
+                    <a class="col-12 btn link-danger btn-minus" href="{{ path('app_raw_materials_ordered_minus', {'id': raw_material_ordered.id}) }}"><i class="fa-solid fa-square-minus fa-lg"></i></a>
+                </span>
+                <span>
+                    <form class="d-flex justify-content-center" action="{{ path('app_raw_materials_ordered_quick_edit', {'id': raw_material_ordered.id, 'inputQtty': raw_material_ordered.quantity }) }}" method="POST" onsubmit="return confirm('Êtes vous sûr de vouloir changer la quantité de {{ raw_material_ordered.raw_material }} ?');">
+                        <input class="col-6 col-xl-8" id="input-qtty-{{ loop.index }}" required name="qtty" type="number" value="{{ raw_material_ordered.quantity }}">
+                        <button type="submit" class="link-success btn border-0 btn-validate"><i class="fa-solid fa-square-check fa-lg"></i></button>
                     </form>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">Pas de matériau ajouté à la commande</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <input form="delete-multiple" name="submit" type="submit" value="Supprimer la sélection" class="btn btn-danger">
-    
+                </span>
+            </td>
+            <td class="d-none d-md-table-cell" id="td-price-mat-{{ loop.index }}">{{ raw_material_ordered.totalPriceRawMaterial }}</td>
+            <td class="d-none d-xl-table-cell">{{ raw_material_ordered.createdAt ? raw_material_ordered.createdAt|date('d M Y H:i:s') : '' }}</td>
+            <td>
+                {# <a href="{{ path('app_raw_materials_ordered_edit', {'id': raw_material_ordered.id}) }}">Modifier la quantité</a> #}
+                <form method="post" action="{{ path('app_raw_materials_ordered_delete', {'id': raw_material_ordered.id}) }}" onsubmit="return confirm('Êtes vous sûr de vouloir supprimer ce matériau de votre commande ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ raw_material_ordered.id) }}">
+                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-can"></i></button>
+                </form>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="5">Pas de matériau ajouté à la commande</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<input form="delete-multiple" name="submit" type="submit" value="Supprimer la sélection" class="btn btn-danger">
 {% endblock %}
 
 {% block javascripts %}

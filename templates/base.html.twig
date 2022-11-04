@@ -16,7 +16,7 @@
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row flex-nowrap">
+            <div class="row flex-nowrap position-relative">
                 {% include "sidebar/sidebar.html.twig" %}
                 <div class="col py-4">
                     {% block body %}{% endblock %}
@@ -25,11 +25,11 @@
         </div>
         {% block javascripts %}
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-            {{ encore_entry_script_tags('app') }}
-            <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
-            <script src="https://unpkg.com/bootstrap-table@1.16.0/dist/locale/bootstrap-table-fr-FR.min.js"></script>
-            {% endblock %}
-            <script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
-            <script src="{{ asset('js/sidebar.js') }}"></script>
+        {{ encore_entry_script_tags('app') }}
+        <script src="https://unpkg.com/bootstrap-table@1.21.1/dist/bootstrap-table.min.js"></script>
+        <script src="https://unpkg.com/bootstrap-table@1.21.1/dist/locale/bootstrap-table-fr-FR.min.js"></script>
+        {% endblock %}
+        <script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
+        <script src="{{ asset('js/sidebar.js') }}"></script>
     </body>
 </html>

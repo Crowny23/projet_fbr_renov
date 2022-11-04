@@ -3,20 +3,24 @@
 {% block title %}Catégorie des contacts{% endblock %}
 
 {% block body %}
-    <h1>Catégorie des contacts</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Détails de la catégorie</h1>
+</div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Nom catégorie</th>
-                <td>{{ contacts_category.name }}</td>
-            </tr>
-        </tbody>
-    </table>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Catégorie</th>
+            <td>{{ contacts_category.name }}</td>
+        </tr>
+    </tbody>
+</table>
 
-    <a href="{{ path('app_contacts_categories_index') }}" class="btn btn-primary mb-2"><i class="fa-solid fa-reply"></i> Retour</a>
+<div class="d-flex">
+    <a href="{{ path('app_contacts_categories_index') }}" class="btn btn-primary mb-2 me-2"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_contacts_categories_edit', {'id': contacts_category.id}) }}"class="btn btn-primary mb-2">Modifier</a>
+    <a href="{{ path('app_contacts_categories_edit', {'id': contacts_category.id}) }}"class="btn btn-primary mb-2 me-2">Modifier</a>
 
     {{ include('contacts_categories/_delete_form.html.twig') }}
+</div>
 {% endblock %}
