@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Designation;
 use App\Form\DesignationType;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/designation')]
+#[Route('/admin/designation')]
 class DesignationController extends AbstractController
 {
     #[Route('/', name: 'app_designation_index', methods: ['GET'])]

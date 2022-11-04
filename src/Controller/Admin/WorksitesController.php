@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\WorksiteCategories;
 use App\Entity\Worksites;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/chantiers')]
+#[Route('/admin/chantiers')]
 class WorksitesController extends AbstractController
 {
     #[Route('/', name: 'app_worksites_index', methods: ['GET'])]

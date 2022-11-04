@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Repairs;
 use App\Entity\RepairsImages;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/repairs-images')]
+#[Route('/admin/repairs-images')]
 class RepairsImagesController extends AbstractController
 {
     #[Route('/', name: 'app_repairs_images_index', methods: ['GET'])]
@@ -58,6 +58,7 @@ class RepairsImagesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $repairsImagesRepository->save($repairsImage, true);
+            $repairsImage->setFile($request->files->get('repairs_images')['file']);
 
             return $this->redirectToRoute('app_repairs_images_index', [], Response::HTTP_SEE_OTHER);
         }

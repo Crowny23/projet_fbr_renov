@@ -16,8 +16,7 @@
         </thead>
         <tbody>
         {% for repairs_image in repairs_images %}
-            <tr>
-                <td><img style="max-width: 200px; min-width: 50px; width: 100%;" src="{{ vich_uploader_asset(repairs_image) }}"></td>
+            <tr style="background-color: white;">
                 <td>{{ repairs_image.repair }}</td>
                 <td>{{ repairs_image.imageRepairsImages }}</td>
                 <td>

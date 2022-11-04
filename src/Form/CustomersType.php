@@ -25,7 +25,7 @@ class CustomersType extends AbstractType
             ->add('mail', EmailType::class, ['label' => 'E-mail', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('phone', TelType::class, ['label' => 'Téléphone', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('social_reason', TextType::class, ['label' => 'Raison Sociale', 'label_attr' => ['class' => 'mb-1, mt-2']])
-            ->add('customer_note', TextType::class, ['label' => 'Note', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            // ->add('customer_note', TextType::class, ['label' => 'Note', 'label_attr' => ['class' => 'mb-1, mt-2']])
         ;
     }
 

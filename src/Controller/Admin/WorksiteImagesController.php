@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\WorksiteImages;
 use App\Form\WorksiteImagesType;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/chantiers-images')]
+#[Route('/admin/chantiers-images')]
 class WorksiteImagesController extends AbstractController
 {
     #[Route('/', name: 'app_worksite_images_index', methods: ['GET'])]

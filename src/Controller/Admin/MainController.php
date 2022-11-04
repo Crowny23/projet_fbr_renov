@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Repository\RepairsRepository;
 use App\Repository\WorksitesRepository;
@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/', name: 'app_main')]
+    #[Route('/admin', name: 'app_main')]
     public function index(WorksitesRepository $worksitesRepository, RepairsRepository $repairsRepository): Response
     {
         $worksitesByStatus = $worksitesRepository->findBy(['status_worksite' => 'En cours'], null, 5);

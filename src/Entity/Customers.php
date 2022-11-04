@@ -40,7 +40,7 @@ class Customers
     #[ORM\Column]
     private ?int $phone = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $social_reason = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -53,6 +53,7 @@ class Customers
     private ?\DateTimeInterface $updateAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'customers')]
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
     private ?Users $id_user = null;
 
     #[ORM\OneToMany(mappedBy: 'client_worksite', targetEntity: Worksites::class)]

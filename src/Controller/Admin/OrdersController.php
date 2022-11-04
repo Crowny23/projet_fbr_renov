@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Orders;
 use App\Form\OrdersType;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/commandes')]
+#[Route('/admin/commandes')]
 class OrdersController extends AbstractController
 {
     #[Route('/', name: 'app_orders_index', methods: ['GET'])]

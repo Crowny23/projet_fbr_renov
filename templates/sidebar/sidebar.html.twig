@@ -108,23 +108,17 @@
           </li>
         </ul>
       </li>
-      <li class="nav-item col-8 col-md-12 pb-2">
-        <a href="#submenuRental" data-bs-toggle="collapse" class="nav-link align-middle px-0 d-flex">
-          <i class="col-2 fa fa-truck-moving"></i>
-          <span class="ms-3 lh-1">Locations</span>
+      <li class="nav-item">
+        <a href="#submenuRental" data-bs-toggle="collapse" class="nav-link align-middle px-0">
+          <i class="fa fa-truck-moving"></i>
+          <span class="ms-1 d-none d-sm-inline">Locatiers</span>
         </a>
         <ul class="collapse nav flex-column ms-3 ms-sm-5 ms-md-1" id="submenuRental" data-bs-parent="#menu">
           <li class="w-100 ms-3">
-            <a href="{{path('app_rentals_index')}}" class="nav-link px-0">
-              <i class="fa fa-eye"></i>
-              <span class="ms-1 d-sm-inline">Voir</span>
-            </a>
+            <a href="{{path('app_renter_index')}}" class="nav-link px-0"><i class="fa fa-truck-moving"></i><span class="d-none ms-1 d-sm-inline">Voir</span></a>
           </li>
           <li class="w-100 ms-3">
-            <a href="{{path('app_renter_index')}}" class="nav-link px-0">
-              <i class="fa fa-right-to-bracket"></i>
-              <span class="ms-1 d-sm-inline">Locatiers</span>
-            </a>
+            <a href="{{path('app_rentals_index')}}" class="nav-link px-0"><i class="fa fa-right-to-bracket"></i><span class="d-none ms-1 d-sm-inline">Locations</span></a>
           </li>
           <li class="w-100 ms-3">
             <a href="{{path('app_materials_index')}}" class="nav-link px-0">
@@ -133,10 +127,7 @@
             </a>
           </li>
           <li class="w-100 ms-3">
-            <a href="{{path('app_renter_new')}}" class="nav-link px-0">
-              <i class="fa fa-add"></i>
-              <span class="ms-1 d-sm-inline">Ajouter</span>
-            </a>
+            <a href="{{path('app_renter_new')}}" class="nav-link px-0"><i class="fa fa-add"></i><span class="d-none ms-1 d-sm-inline">Ajouter</span></a>
           </li>
         </ul>
       </li>
@@ -193,57 +184,18 @@
           </li>
         </ul>
       </li>
-
-      <li class="nav-item col-8 col-md-12 pb-2">
-        <a href="{{path('app_chart')}}" class="nav-link align-middle px-0 d-flex">
-          <i class="col-2 fa fa-chart-simple"></i>
-          <span class="ms-3 lh-1">Statistiques</span>
-        </a>
-      </li>
-      <li class="nav-item col-8 col-md-12 pb-2">
-        <a href="{{path('app_calendar')}}" class="nav-link align-middle px-0 d-flex">
-          <i class="col-2 fa fa-calendar-plus"></i>
-          <span class="ms-3 lh-1">Agenda</span>
-        </a>
-      </li>
-      <li class="nav-item col-8 col-md-12 pb-2">
-        <a href="#submenuContacts" data-bs-toggle="collapse" class="nav-link align-middle px-0 d-flex">
-          <i class="col-2 fa fa-address-book"></i>
-          <span class="ms-3 lh-1">Contacts</span>
-        </a>
-        <ul class="collapse nav flex-column ms-3 ms-sm-5 ms-md-1" id="submenuContacts" data-bs-parent="#menu">
-          <li class="w-100 ms-3">
-            <a href="{{path('app_contacts_index')}}" class="nav-link px-0">
-              <i class="fa fa-eye"></i>
-              <span class="ms-1 d-sm-inline">Voir</span>
-            </a>
-          </li>
-          <li class="w-100 ms-3">
-            <a href="{{path('app_contacts_categories_index')}}" class="nav-link px-0">
-              <i class="fa fa-list-alt"></i>
-              <span class="ms-1 d-sm-inline">Catégories</span>
-            </a>
-          </li>
-          <li class="w-100 ms-3">
-            <a href="{{path('app_contacts_new')}}" class="nav-link px-0">
-              <i class="fa fa-add"></i>
-              <span class="ms-1 d-sm-inline">Ajouter</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li class="dropdown pt-2 col-8 col-md-12">
-        <a href="" class="nav-link align-middle px-0 d-flex text-white text-decoration-none dropdown-toggle" id="dropdownUserCo" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fa fa-user col-2"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUserCo">
-        {% if app.user %}
-          <li><a href="{{path('app_logout')}}" class="dropdown-item">Déconnexion</a></li>
-        {% else  %}
-          <li><a href="{{path('app_login')}}" class="dropdown-item">Connexion</a></li>
-        {% endif %}
-        </ul>
-      </li>
     </ul>
+    <div class="dropdown pb-4">
+      <a href="" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUserCo" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa fa-user"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUserCo">
+      {% if app.user %}
+        <li><a href="{{path('app_logout')}}" class="dropdown-item">Déconnexion</a></li>
+      {% else  %}
+        <li><a href="{{path('app_login')}}" class="dropdown-item">Connexion</a></li>
+      {% endif %}
+      </ul>
+    </div>
   </div>
 </nav>
