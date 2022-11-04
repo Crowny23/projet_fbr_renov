@@ -1,34 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Catégorie de contacts{% endblock %}
+{% block title %}Contacts | Catégories{% endblock %}
 
 {% block body %}
-    <h1>Catégorie de contacts</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Liste des catégories</h1>
+</div>
 
-    <a href="{{ path('app_contacts_categories_new') }}" class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
+<a href="{{ path('app_contacts_categories_new') }}" class="btn btn-primary float-sm-end mt-2 col-6 col-sm-4 col-md-3 col-lg-2"><i class="fa fa-plus"></i> Ajouter</a>
 
-    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
-        <thead>
-            <tr>
-                <th data-sortable="true" data-field="name">Nom catégorie</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for contacts_category in contacts_categories %}
-            <tr>
-                <td>{{ contacts_category.name }}</td>
-                <td>
-                    <a href="{{ path('app_contacts_categories_show', {'id': contacts_category.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('app_contacts_categories_edit', {'id': contacts_category.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">Aucun enregistrement enregistré</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+<table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
+    <thead>
+        <tr>
+            <th data-sortable="true" data-field="name">Catégorie</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for contacts_category in contacts_categories %}
+        <tr>
+            <td>{{ contacts_category.name }}</td>
+            <td>
+                <a href="{{ path('app_contacts_categories_show', {'id': contacts_category.id}) }}" class="btn btn-primary btn-sm"><i class="fa-fw fa fa-eye"></i></a>
+                <a href="{{ path('app_contacts_categories_edit', {'id': contacts_category.id}) }}" class="btn btn-success btn-sm"><i class="fa-fw fa-solid fa-pen-to-square"></i></a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="3">Aucun enregistrement enregistré</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

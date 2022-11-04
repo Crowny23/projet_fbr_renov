@@ -1,49 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Commandes{% endblock %}
+{% block title %}Commandes | Liste{% endblock %}
 
 {% block body %}
-    <h1>Commandes</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Liste des commandes</h1>
+</div>
+<a href="{{ path('app_orders_new') }}" class="btn btn-primary float-sm-end mt-2 col-6 col-sm-4 col-md-3 col-lg-2"><i class="fa fa-plus"></i> Ajouter</a>
 
-    <a href="{{ path('app_orders_new') }}" class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
-
-    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
-        <thead>
-            <tr>
-                <th data-sortable="true" data-field="nameOrder">Nom de la commande</th>
-                <th data-sortable="true" data-field="reference">N° de la commande</th>
-                <th data-sortable="true" data-field="supplier">Fournisseur</th>
-                <th data-sortable="true" data-field="worksite">Chantier</th>
-                <th data-sortable="true" data-field="name_order">Prix total HT (A titre indicatif)</th>
-                <th data-sortable="true" data-field="NumberRef"> N° de référence article</th>
-                {# <th>Date de création</th>
-                <th>Date de dernière modification</th> #}
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for order in orders %}
-            <tr>
-                <td>{{ order.nameOrder }}</td>
-                <td>{{ order.reference }}</td>
-                <td>{{ order.supplier }}</td>
-                <td>{{ order.worksite }}</td>
-                <td>{{ order.totalPrice ? order.totalPrice : 0 }} €</td>
-                <td>{% if (order.numberRawMaterialOrdered is same as null) or (order.numberRawMaterialOrdered is same as 0) %}La commande est vide{% else %}{{ order.numberRawMaterialOrdered }}{% endif %}</td>
-                {# <td>{{ order.createdAt ? order.createdAt|date('d M Y H:i:s') : '' }}</td>
-                <td>{{ order.updatedAt ? order.updatedAt|date('d M Y H:i:s') : '' }}</td> #}
-                <td>
-                    <a href="{{ path('app_pdf_generator_order', {'id': order.id}) }}" target="_blank" class="btn btn-primary" target="_blank"><i class="fa fa-file-pdf"></i></a>
-                    <a href="{{ path('app_orders_show', {'id': order.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('app_orders_edit', {'id': order.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">Pas de commande existante</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+<table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
+    <thead>
+        <tr>
+            <th data-sortable="true" data-field="nameOrder">Commande</th>
+            <th data-sortable="true" data-field="reference" class="d-none d-xl-table-cell">Référence</th>
+            <th data-sortable="true" data-field="supplier" class="d-none d-md-table-cell">Fournisseur</th>
+            <th data-sortable="true" data-field="worksite" class="d-none d-sm-table-cell">Chantier</th>
+            <th data-sortable="true" data-field="NumberRef" class="d-none d-xl-table-cell">Nombre de référence</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+        <tr>
+            <td>{{ order.nameOrder }}</td>
+            <td>{{ order.reference }}</td>
+            <td>{{ order.supplier }}</td>
+            <td>{{ order.worksite }}</td>
+            <td>{% if (order.numberRawMaterialOrdered is same as null) or (order.numberRawMaterialOrdered is same as 0) %}Commande vide{% else %}{{ order.numberRawMaterialOrdered }}{% endif %}</td>
+            <td>
+                <a href="{{ path('app_pdf_generator_order', {'id': order.id}) }}" target="_blank" class="btn btn-primary btn-sm" target="_blank"><i class="fa fa-fw fa-file-pdf"></i></a>
+                <a href="{{ path('app_orders_show', {'id': order.id}) }}" class="btn btn-primary btn-sm"><i class="fa-fw fa fa-eye"></i></a>
+                <a href="{{ path('app_orders_edit', {'id': order.id}) }}" class="btn btn-success btn-sm"><i class="fa-fw fa-solid fa-pen-to-square"></i></a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7">Aucune commmande existante</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

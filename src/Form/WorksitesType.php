@@ -3,15 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Customers;
-use App\Entity\Quotation;
 use App\Entity\WorksiteCategories;
 use App\Entity\Worksites;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -26,8 +23,8 @@ class WorksitesType extends AbstractType
     {
         $builder
             ->add('name_worksite', TextType::class, ['label' => 'Nom du chantier', 'label_attr' => ['class' => 'mb-1, mt-2']])
-            ->add('city_worksite', TextType::class, ['label' => 'Ville', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('client_worksite', EntityType::class, ['class' => Customers::class, 'label' => 'Client', 'label_attr' => ['class' => 'mb-1, mt-2']])
+            ->add('city_worksite', TextType::class, ['label' => 'Ville', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('cp_worksite', IntegerType::class, ['label' => 'Code Postal', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('adress_worksite', TextType::class, ['label' => 'Adresse', 'label_attr' => ['class' => 'mb-1, mt-2']])
             ->add('start_at', DateType::class, ['label' => 'Date de début', 'input' => 'datetime', 'widget' => 'choice', 'format' => 'ddMMMyyyy', 'label_attr' => ['class' => 'mb-1, mt-2']])

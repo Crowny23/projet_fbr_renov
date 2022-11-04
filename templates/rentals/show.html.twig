@@ -1,38 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Location{% endblock %}
+{% block title %}Location | Détails{% endblock %}
 
 {% block body %}
-    <h1>Location</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Détails de la location</h1>
+</div>
+
 
     <table class="table">
         <tbody>
             <tr>
                 <th>Matériel</th>
-                <td>{{ rental.getMaterialsRental().nameMaterial }}</td>
+                <td>{{ rental.getMaterialsRental.nameMaterial|capitalize }}</td>
             </tr>
             <tr>
                 <th>Quantité</th>
                 <td>{{ rental.quantityRental }}</td>
             </tr>
             <tr>
-                <th>Prix Unitaire</th>
+                <th>Prix Unitaire(€)</th>
                 <td>{{ rental.unitPrice }}</td>
             </tr>
             <tr>
                 <th>Date de création</th>
-                <td>{{ rental.createdAt ? rental.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ rental.createdAt ? rental.createdAt|date('d M Y H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Date de modification</th>
-                <td>{{ rental.updatedAt ? rental.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ rental.updatedAt ? rental.updatedAt|date('d M Y H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_rentals_index') }}" class="btn btn-primary mb-3"><i class="fa-solid fa-reply"></i> Retour</a>
+<div class="d-flex">
+    <a href="{{ path('app_rentals_index') }}" class="btn btn-primary mb-3 me-2"><i class="fa-solid fa-reply"></i> Retour</a>
 
-    <a href="{{ path('app_rentals_edit', {'id': rental.id}) }}" class="btn btn-primary mb-3">Modifier</a>
+    <a href="{{ path('app_rentals_edit', {'id': rental.id}) }}" class="btn btn-primary mb-3 me-2">Modifier</a>
 
     {{ include('rentals/_delete_form.html.twig') }}
+</div>
 {% endblock %}

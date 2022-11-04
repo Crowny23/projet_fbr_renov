@@ -1,43 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Locatiers{% endblock %}
+{% block title %}Location | Locatiers{% endblock %}
 
 {% block body %}
-    <h1>Locatiers</h1>
-    <a href="{{ path('app_renter_new') }}" class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
-    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
-        <thead>
-            <tr>
-                <th data-sortable="true" data-field="renter">Nom Locatiers</th>
-                <th data-sortable="true" data-field="address">Adresse complète</th>
-                <th data-sortable="true" data-field="site">Site Internet</th>
-                <th data-sortable="true" data-field="mail">E-mail</th>
-                <th data-sortable="true" data-field="phone">Téléphone</th>
-                <th data-sortable="true" data-field="note">Note</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for renter in renters %}
-            <tr>
-                <td>{{ renter.nameRenter }}</td>
-                <td>{{ renter.adressRenter }} {{ renter.cpRenter }} {{ renter.cityRenter }}</td>
-                <td>{{ renter.websiteRenter }}</td>
-                <td>{{ renter.emailRenter }}</td>
-                <td>0{{ renter.phoneRenter }}</td>
-                <td>{{ renter.noteAdminRenter }}</td>
-                <td>
-                    <a href="{{ path('app_renter_show', {'id': renter.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('app_renter_edit', {'id': renter.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="12">Aucun locatier enregistré</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Liste des locatiers</h1>
+</div>
 
-    
+<a href="{{ path('app_renter_new') }}" class="btn btn-primary float-sm-end mt-2 col-6 col-sm-4 col-md-3 col-lg-2"><i class="fa fa-plus"></i> Ajouter</a>
+
+<table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
+    <thead>
+        <tr>
+            <th data-sortable="true" data-field="renter">Locatiers</th>
+            <th data-sortable="true" data-field="address"  class="d-none d-lg-table-cell">Adresse</th>
+            <th data-sortable="true" data-field="site" class="d-none d-xl-table-cell">Site Internet</th>
+            <th data-sortable="true" data-field="mail" class="d-none d-sm-table-cell">E-mail</th>
+            <th data-sortable="true" data-field="phone" class="d-none d-sm-table-cell">Téléphone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for renter in renters %}
+        <tr>
+            <td>{{ renter.nameRenter }}</td>
+            <td>{{ renter.adressRenter }}, {% if (renter.cpRenter|length is same as 4) %}0{{ renter.cpRenter }}{% else %}{{renter.cpRenter }}{% endif %} {{ renter.cityRenter }}</td>
+            <td>{{ renter.websiteRenter }}</td>
+            <td>{{ renter.emailRenter }}</td>
+            <td>0{{ renter.phoneRenter }}</td>
+            <td>
+                <a href="{{ path('app_renter_show', {'id': renter.id}) }}" class="btn btn-primary btn-sm"><i class="fa-fw fa fa-eye"></i></a>
+                <a href="{{ path('app_renter_edit', {'id': renter.id}) }}" class="btn btn-success btn-sm"><i class="fa-fw fa-solid fa-pen-to-square"></i></a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="12">Aucun locatier existant</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

@@ -1,8 +1,14 @@
-<div class="row mb-3 justify-content-center">
+<div class="row mb-3">
     {{ form_start(form) }}
-    <div class="col-sm-12">
-        {{ form_widget(form) }}
+    <div class="col-12">
+        {{ form_row(form.quantity_rental) }}
+        {{ form_row(form.unit_price) }}
+        {{ form_row(form.renter_rentals) }}
+        {{ form_row(form.materials_rental) }}
+        {{ form_row(form.worksite_rental) }}
+        <p class="mt-2 mb-1">OU</p>
+        {{ form_row(form.repair_rental) }}
     </div>
-        <button class="btn btn-success mt-3">{{ button_label|default('Enregistrer') }}</button>
+        <button class="btn btn-success mt-5">{{ button_label|default('Enregistrer') }}</button>
     {{ form_end(form) }}    
 </div>

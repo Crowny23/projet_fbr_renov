@@ -3,46 +3,39 @@
 {% block title %}Fournisseur{% endblock %}
 
 {% block body %}
-    <h1>Fournisseur</h1>
+<div class="d-flex justify-content-center">
+    <h1 class="col-12 col-sm-9 text-center fs-2">Liste des fournisseurs</h1>
+</div>
 
-    <a href="{{ path('app_supplier_new') }}" class="btn btn-primary float-end mt-2 col-2"><i class="fa fa-plus"></i> Ajouter</a>
+<a href="{{ path('app_supplier_new') }}" class="btn btn-primary float-sm-end mt-2 col-6 col-sm-4 col-md-3 col-lg-2"><i class="fa fa-plus"></i> Ajouter</a>
 
-    <table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
-        <thead>
-            <tr>
-                <th data-sortable="true" data-field="name">Nom du fournisseur</th>
-                <th data-sortable="true" data-field="mail">Email</th>
-                <th data-sortable="true" data-field="tel">Téléphone</th>
-                <th data-sortable="true" data-field="address">Adresse</th>
-                {# <th>City</th>
-                <th>Cp</th>
-                <th>Adress</th> #}
-                <th data-sortable="true" data-field="created_at">Date de création</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for supplier in suppliers %}
-            <tr>
-                <td>{{ supplier.nameSupplier }}</td>
-                <td>{{ supplier.email }}</td>
-                <td>0{{ supplier.phone }}</td>
-                <td>{{ supplier.address }}, {{ supplier.cp }} {{ supplier.city }}</td>
-                {# <td>{{ supplier.city }}</td>
-                <td>{{ supplier.cp }}</td>
-                <td>{{ supplier.adress }}</td> #}
-                <td>{{ supplier.createdAt ? supplier.createdAt|date('d M Y H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_supplier_show', {'id': supplier.id}) }}" class="btn btn-primary"><i class="fa fa-eye"></i></a>
-                    <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">Aucun fournisseur enregistré</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+<table class="table table-hover" id="table" data-toggle="table" data-search="true" data-locale="fr-FR" data-pagination="true">
+    <thead>
+        <tr>
+            <th data-sortable="true" data-field="name">Fournisseur</th>
+            <th data-sortable="true" data-field="mail" class="d-none d-md-table-cell">E-mail</th>
+            <th data-sortable="true" data-field="tel" class="d-none d-md-table-cell">Téléphone</th>
+            <th data-sortable="true" data-field="address" class="d-none d-xl-table-cell">Adresse</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for supplier in suppliers %}
+        <tr>
+            <td>{{ supplier.nameSupplier }}</td>
+            <td>{{ supplier.email }}</td>
+            <td>0{{ supplier.phone }}</td>
+            <td>{{ supplier.address }}, {% if (supplier.cp|length is same as 4) %}0{{ supplier.cp }}{% else %}{{supplier.cp }}{% endif %} {{ supplier.city }}</td>
+            <td>
+                <a href="{{ path('app_supplier_show', {'id': supplier.id}) }}" class="btn btn-primary btn-sm"><i class="fa-fw fa fa-eye"></i></a>
+                <a href="{{ path('app_supplier_edit', {'id': supplier.id}) }}" class="btn btn-success btn-sm"><i class="fa-fw fa-solid fa-pen-to-square"></i></a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="9">Aucun fournisseur existant</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
